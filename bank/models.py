@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 class Location(models.Model):
@@ -23,6 +24,12 @@ class Branch(models.Model):
     contact=models.CharField(max_length=300)
     bank=models.ForeignKey(Bank)
     location=models.ForeignKey(Location)
+    slug=models.SlugField(unique=True)
+    
+    def save(self,**kwargs):
+        if not self.slug:
+            self.slug=slugify(self.bank,self.branch_name)
+        super(Branch,self).save(**kwargs)
     
     def __unicode__(self):
         return "{0}, {1}, {2}".format(self.bank,self.branch_name,self.location)
