@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+import datetime
 
 # Create your models here.
 
@@ -11,6 +12,12 @@ class Location(models.Model):
     
     def __unicode__(self):
         return "{0}, {1}".format(self.city,self.state)
+    
+    def __str__(self):
+        return self.city
+    
+    def __eq__(self,other):
+        return self.city==other.city
         
 class Bank(models.Model):
     bank_name=models.CharField(max_length=300)
@@ -27,8 +34,7 @@ class Branch(models.Model):
     bank=models.ForeignKey(Bank)
     location=models.ForeignKey(Location)
     slug=models.SlugField()
-    last_accessed=models.DateTimeField(auto_now_add=True) #We need to display the recently accessed Branch. So, we need a DatetimeField to keep track of last accessed.
-    
+    last_accessed=models.DateTimeField(auto_now=True,default=datetime.datetime.now) #We need to display the recently accessed Branch. So, we need a DatetimeField to keep track of last accessed.
     
     def save(self,**kwargs):
         if not self.slug:
