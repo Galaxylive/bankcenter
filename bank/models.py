@@ -13,8 +13,6 @@ class Location(models.Model):
     def __unicode__(self):
         return "{0}, {1}".format(self.city,self.state)
     
-    def __str__(self):
-        return self.city
     
     def __eq__(self,other):
         return self.city==other.city
@@ -33,11 +31,13 @@ class Branch(models.Model):
     contact=models.CharField(max_length=300)
     bank=models.ForeignKey(Bank)
     location=models.ForeignKey(Location)
-    slug=models.SlugField()
+    slug=models.SlugField(max_length=200)
     last_accessed=models.DateTimeField(auto_now=True,default=datetime.datetime.now) #We need to display the recently accessed Branch. So, we need a DatetimeField to keep track of last accessed.
     
     def save(self,**kwargs):
         if not self.slug:
+            self.branch_name=self.branch_name.decode('utf-8')
+            self.branch_name=self.branch_name.encode('ascii','ignore')
             self.slug=slugify(self.branch_name)
         super(Branch,self).save(**kwargs)
     
