@@ -2,6 +2,8 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 # Create your models here.
+
+    
 class Location(models.Model):
     city=models.CharField(max_length=200)
     district=models.CharField(max_length=200)
@@ -24,11 +26,13 @@ class Branch(models.Model):
     contact=models.CharField(max_length=300)
     bank=models.ForeignKey(Bank)
     location=models.ForeignKey(Location)
-    slug=models.SlugField(unique=True)
+    slug=models.SlugField()
+    last_accessed=models.DateTimeField(auto_now_add=True) #We need to display the recently accessed Branch. So, we need a DatetimeField to keep track of last accessed.
+    
     
     def save(self,**kwargs):
         if not self.slug:
-            self.slug=slugify(self.bank,self.branch_name)
+            self.slug=slugify(self.branch_name)
         super(Branch,self).save(**kwargs)
     
     def __unicode__(self):
@@ -36,6 +40,7 @@ class Branch(models.Model):
         
     class Meta:
         verbose_name_plural='Branches'
+        ordering=['-last_accessed']
         
 
     
