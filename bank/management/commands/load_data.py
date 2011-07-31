@@ -24,7 +24,7 @@ def fill_database(file_name):
         line_reader=csv.reader(bank_reader)
         line_reader.next() #We don't want to read the first row, since entries in first row contains description about the corresponding column.
         for row in line_reader:
-            branch_bank_name=encode_decode(row[0])
+            branch_bank_name=encode_decode(row[0]).title()
             if branch_bank_name=='':
                 break
             branch_ifsc_code=encode_decode(row[1])
@@ -36,12 +36,12 @@ def fill_database(file_name):
                 int(branch_micr_code)
             except (ValueError,TypeError):
                 branch_micr_code=None
-            branch_branch_name=encode_decode(row[3])
-            branch_address=encode_decode(row[4])
-            branch_contact=encode_decode(row[5])
-            branch_city=encode_decode(row[6])
-            branch_district=encode_decode(row[7])
-            branch_state=encode_decode(row[9])
+            branch_branch_name=encode_decode(row[3]).title()
+            branch_address=encode_decode(row[4]).title()
+            branch_contact=encode_decode(row[5]).title()
+            branch_city=encode_decode(row[6]).title()
+            branch_district=encode_decode(row[7]).title()
+            branch_state=encode_decode(row[8]).title()
             branch_location,location_created=Location.objects.get_or_create(city=branch_city,district=branch_district,state=branch_state)
             branch_bank,bank_created=Bank.objects.get_or_create(bank_name=branch_bank_name)
             branch,branch_created=Branch.objects.get_or_create(branch_name=branch_branch_name,ifsc=branch_ifsc_code,micr=branch_micr_code,address=branch_address,contact=branch_contact,bank=branch_bank,location=branch_location)

@@ -9,6 +9,12 @@ class Location(models.Model):
     city=models.CharField(max_length=200)
     district=models.CharField(max_length=200)
     state=models.CharField(max_length=200)
+    slug=models.SlugField(null=True,max_length=200)
+    
+    def save(self,**kwargs):
+        if not self.slug:
+            self.slug=slugify(city)
+        super(Location,self).save(**kwargs)
     
     def __unicode__(self):
         return "{0}, {1}".format(self.city,self.state)
@@ -19,6 +25,12 @@ class Location(models.Model):
         
 class Bank(models.Model):
     bank_name=models.CharField(max_length=300)
+    slug=models.SlugField(null=True,max_length=300)
+    
+    def save(self,**kwargs):
+        if not self.slug:
+            self.slug=slugify(bank_name)
+        super(Bank,self).save(**kwargs)
     
     def __unicode__(self):
         return self.bank_name
@@ -36,8 +48,8 @@ class Branch(models.Model):
     
     def save(self,**kwargs):
         if not self.slug:
-            self.branch_name=self.branch_name.decode('utf-8')
-            self.branch_name=self.branch_name.encode('ascii','ignore')
+            """self.branch_name=self.branch_name.decode('utf-8')
+            self.branch_name=self.branch_name.encode('ascii','ignore')"""
             self.slug=slugify(self.branch_name)
         super(Branch,self).save(**kwargs)
     
