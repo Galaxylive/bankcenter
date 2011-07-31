@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>
+            {% block title %}bankcenter.in{% endblock %}
+        </title>
+        {% block extra_head %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block main_content %}
+            <div id="sidebar" style="height:auto;width:20%;background:grey">
+                {% for bank in bank_list %}
+                    <a href="/{{bank.slug}}/">{{bank.bank_name}}</a>
+                    <br/>
+                {% endfor %}
+            </div>
+        {% endblock %}
+    </body>
+</html>
+        
+        

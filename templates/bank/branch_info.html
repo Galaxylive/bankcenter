@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}
+    {{block.super}}&nbsp&nbsp{{branch.bank}}&nbsp&nbsp{{branch.branch_name}}
+{% endblock %}
+{% block main_content %}
+    <table>
+        <tr>
+            <td>
+                Bank name:
+            </td>
+            <td>
+                <a href="">{{branch.bank}}</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Branch
+            </td>
+            <td>
+                <a href="">{{branch.branch_name}}</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ifsc Code
+            </td>
+            <td>
+                <a href="">{{branch.ifsc}}</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Micr Code
+            </td>
+            {% if bank.micr %}
+            <td>
+                <a href=""></a>
+            </td>
+            {% else %}
+            <td>
+                MICR code does not exist
+            </td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>
+                Address
+            </td>
+            <td>
+                <a href="">{{branch.address}}</a>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
