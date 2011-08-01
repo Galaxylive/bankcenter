@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from models import Branch,Bank,Location
+from models import Branch,Bank,Location,State
 
 """ifsc code of Branch should be of fixed length i.e of 11 characters.
     This can not be done with models.CharField, so we create
@@ -20,4 +20,5 @@ class BranchAdmin(admin.ModelAdmin):
 admin.site.register(Branch,BranchAdmin)
 admin.site.register(Bank)
 admin.site.register(Location)
+admin.site.register(State)
     

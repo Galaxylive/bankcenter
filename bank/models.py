@@ -4,12 +4,23 @@ import datetime
 
 # Create your models here.
 
+class State(models.Model):
+    state=models.CharField(max_length=200)
+    slug=models.SlugField(null=False,max_length=200)
+    
+    def save(self,**kwargs):
+        self.slug=slugify(self.state)
+        super(State,self).save(**kwargs)
+        
+    def __unicode__(self):
+        return self.state
     
 class Location(models.Model):
     city=models.CharField(max_length=200)
     district=models.CharField(max_length=200)
     state=models.CharField(max_length=200)
     slug=models.SlugField(null=True,max_length=200)
+    state_fk=models.ForeignKey(State,null=True)
     
     def save(self,**kwargs):
         if not self.slug:
