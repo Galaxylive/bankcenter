@@ -9,7 +9,7 @@
                 Bank name
             </td>
             <td>
-                <a href="{% url bank_branches branch.bank.slug %}">{{branch.bank}}</a>
+                <a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a>
             </td>
         </tr>
         <tr>
@@ -55,7 +55,7 @@
                 City
             </td>
             <td>
-                <a href="">{{branch.location.city}}</a>
+                <a href="{% url bank_city_branches branch.location.slug %}">{{branch.location.city}}</a>
             </td>
         </tr>
         <tr>
@@ -71,7 +71,7 @@
                 State
             </td>
             <td>
-                <a href="">{{branch.location.state}}</a>
+                <a href="{% url bank_state_branches branch.location.state_fk.slug %}">{{branch.location.state}}</a>
             </td>
         </tr>
     </table>
