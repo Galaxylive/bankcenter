@@ -6,10 +6,10 @@
     <table>
         <tr>
             <td>
-                Bank name:
+                Bank name
             </td>
             <td>
-                <a href="">{{branch.bank}}</a>
+                <a href="{% url bank_branches branch.bank.slug %}">{{branch.bank}}</a>
             </td>
         </tr>
         <tr>
@@ -17,7 +17,7 @@
                 Branch
             </td>
             <td>
-                <a href="">{{branch.branch_name}}</a>
+                {{branch.branch_name}}
             </td>
         </tr>
         <tr>
@@ -25,7 +25,7 @@
                 Ifsc Code
             </td>
             <td>
-                <a href="">{{branch.ifsc}}</a>
+                {{branch.ifsc}}
             </td>
         </tr>
         <tr>
@@ -47,7 +47,31 @@
                 Address
             </td>
             <td>
-                <a href="">{{branch.address}}</a>
+                {{branch.address}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                City
+            </td>
+            <td>
+                <a href="">{{branch.location.city}}</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                District
+            </td>
+            <td>
+                {{branch.location.district}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                State
+            </td>
+            <td>
+                <a href="">{{branch.location.state}}</a>
             </td>
         </tr>
     </table>

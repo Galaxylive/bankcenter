@@ -1,5 +1,6 @@
 # Django settings for bank_center project.
 
+import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -7,6 +8,8 @@ ADMINS = (
      ('shabda raaj', 'shabda@agiliq.com'),
      ('akshar raaj', 'akshar@agiliq.com' ),
 )
+
+PROJECT_DIR=os.path.dirname(__file__)
 
 MANAGERS = ADMINS
 
@@ -93,6 +96,8 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS=('bank.context_processors.required_context','django.contrib.auth.context_processors.auth')
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -107,6 +112,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_DIR,'templates')
 )
 
 INSTALLED_APPS = (
@@ -118,7 +124,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
      'django.contrib.admin',
-     'bank'
+     'bank',
+     'south',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

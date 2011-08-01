@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+    {{block.super}}&nbsp&nbsp{{bank.bank_name}}
+{% endblock %}
+{% block main_content %}
+    {% for branch in branch_list %}
+        <a href="/{{bank.slug}}/{{branch.slug}}">{{branch.branch_name}}</a>
+        <br/>
+        {{branch.address}}
+        <br/>
+        {{branch.location}}
+        <hr/>
+    {% endfor %}
+{% endblock %}
