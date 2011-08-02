@@ -16,6 +16,7 @@ class BranchForm(forms.ModelForm):
 class BranchAdmin(admin.ModelAdmin):
     prepopulated_fields={'slug':('branch_name',)}
     form=BranchForm
+    search_fields=['bank__bank_name']
     
 admin.site.register(Branch,BranchAdmin)
 admin.site.register(Bank)
