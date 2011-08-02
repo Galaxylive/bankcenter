@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 {% block main_content %}
     {{block.super}}
-    <!--{% for bank in bank_list %}
-        <a href="">{{bank.bank_name}}</a>
+    {% for branch in branch_list %}
+        <a href="">{{branch.bank}}</a>
         <br/>
-    {% endfor %}-->
+        <a href="">{{branch.branch_name}}</a>
+        <br/>
+        {{branch.ifsc}}
+        <br/>
+        {{branch.micr}}
+        <br/>
+        {{branch.last_accessed}}
+        <br/>
+    {% endfor %}
 {% endblock %}

@@ -32,9 +32,9 @@
             <td>
                 Micr Code
             </td>
-            {% if bank.micr %}
+            {% if branch.micr %}
             <td>
-                <a href=""></a>
+                <a href="">{{branch.micr}}</a>
             </td>
             {% else %}
             <td>
@@ -72,6 +72,14 @@
             </td>
             <td>
                 <a href="{% url bank_state_branches branch.location.state_fk.slug %}">{{branch.location.state}}</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Last accessed
+            </td>
+            <td>
+                {{branch.last_accessed}}
             </td>
         </tr>
     </table>
