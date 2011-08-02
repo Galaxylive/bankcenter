@@ -7,7 +7,8 @@ from django.template import RequestContext
 
 def home(request):
     bank_list=Bank.objects.select_related().all()
-    return render(request,"bank/home.html")
+    branch_accessed_recently=Branch.objects.all()[:10]
+    return render(request,"bank/home.html",{'branch_list':branch_accessed_recently})
     
 def bank_branches(request,bank_slug):
     #return HttpResponse("You are at {0}".format(bank_slug))
@@ -19,6 +20,7 @@ def bank_branches(request,bank_slug):
 def branch_info(request,bank_slug,branch_slug):
     #return HttpResponse("")
     branch=Branch.objects.select_related().get(slug=branch_slug,bank__slug=bank_slug)
+    branch.save() #Each time this branch gets accessed, we call save() so that last_accessed field gets updated for this branch.
     return render_to_response("bank/branch_info.html",{'branch':branch},context_instance=RequestContext(request))
     
 def city_branches(request,location_slug):
