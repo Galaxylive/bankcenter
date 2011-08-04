@@ -8,6 +8,9 @@
     </head>
     <body>
         {% block main_content %}
+            <div>
+                <a href="{% url bank_cities %}">Search by city</a>
+            </div>
             <div id="sidebar" style="height:auto;width:20%;background:grey">
                 {% for bank in bank_list %}
                     <a href="/{{bank.slug}}/">{{bank.bank_name}}</a>

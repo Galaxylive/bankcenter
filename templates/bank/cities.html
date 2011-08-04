@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}
+    {{block.super}} Search by City
+{% endblock %}
+{% block main_content %}
+    {% for loc in location_list %}
+        <a href="/banks/city/{{loc.slug}}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
+        <br/>
+    {% endfor %}
+{% endblock %}

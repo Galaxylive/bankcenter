@@ -34,3 +34,8 @@ def state_branches(request,state_slug):
     branch_list=Branch.objects.select_related().filter(location__state_fk__slug=state_slug)
     #return HttpResponse('You are at {0}'.format(state_slug))
     return render(request,'bank/state_branches.html',{'location_slug':state_slug,'branch_list':branch_list})
+    
+def cities(request):
+    #return HttpResponse("Cities page")
+    location_list=Location.objects.select_related().all()
+    return render(request,"bank/cities.html",{'location_list':location_list})
