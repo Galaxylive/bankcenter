@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block main_content %}
     {{block.super}}
+    <p>Recently accessed branches</p>
     {% for branch in branch_list %}
         <a href="">{{branch.bank}}</a>
         <br/>
@@ -8,9 +9,11 @@
         <br/>
         {{branch.ifsc}}
         <br/>
-        {{branch.micr}}
-        <br/>
-        {{branch.last_accessed}}
+        {% if branch.micr %}
+            {{branch.micr}}
+        {% else %}
+            MICR does not exist
+        {% endif %}
         <br/>
     {% endfor %}
 {% endblock %}

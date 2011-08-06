@@ -4,11 +4,23 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.shortcuts import render
 from django.template import RequestContext
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 
 def home(request):
-    bank_list=Bank.objects.select_related().all()
+    #bank_list=Bank.objects.select_related().all()
     branch_accessed_recently=Branch.objects.all()[:10]
     return render(request,"bank/home.html",{'branch_list':branch_accessed_recently})
+    """bank_list=Bank.objects.select_related().all()
+    paginator=Paginator(bank_list,20)
+    pag=int(request.GET.get('page','1'))
+    try:
+        bank_list=paginator.page(pag)
+    except PageNotAnInteger:
+        bank_list=paginator.page(1)
+    except EmptyPage:
+        bank_list=paginator.page(paginator.num_pages)
+    branch_accessed_recently=Branch.objects.all()[:10]
+    return render(request,"bank/home.html",{'branch_list':branch_accessed_recently})"""
     
 def bank_branches(request,bank_slug):
     #return HttpResponse("You are at {0}".format(bank_slug))
@@ -39,3 +51,8 @@ def cities(request):
     #return HttpResponse("Cities page")
     location_list=Location.objects.select_related().all()
     return render(request,"bank/cities.html",{'location_list':location_list})
+    
+def banks(request):
+    #return HttpResponse("You are at banks page")
+    bank_list=Bank.objects.select_related().all()
+    return render(request,"bank/banks.html",{'bank_list':bank_list})
