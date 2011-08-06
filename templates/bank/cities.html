@@ -2,10 +2,26 @@
 {% block title %}
     {{block.super}} Search by City
 {% endblock %}
+{% block extra_head %}
+    <style type="text/css">
+        #leftcolumn { width: 300px; float: left}
+        #rightcolumn { width: 300px; float: right}
+    </style>
+{% endblock %}
 {% block main_content %}
     {{block.super}}
-    {% for loc in location_list %}
-        <a href="/banks/city/{{loc.slug}}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
+    <div id="rightcolumn">
+        Filter city by first letter
         <br/>
-    {% endfor %}
+        {% for letter in letters %}
+            <a href="?letter={{letter}}">{{letter}}</a>
+            <br/>
+        {% endfor %}
+    </div>
+    <div id="leftcolumn">
+        {% for loc in location_list %}
+            <a href="/banks/city/{{loc.slug}}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
+            <br/>
+        {% endfor %}
+    </div>
 {% endblock %}
