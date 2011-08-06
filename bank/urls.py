@@ -3,6 +3,7 @@ from bank import views
 
 urlpatterns = patterns('',
     url(r'^$',views.home,name='bank_home'),
+    url(r'^banks/$',views.banks,name='bank_banks'),
     url(r'cities/$',views.cities,name='bank_cities'),
     url(r'^(?P<bank_slug>[a-zA-Z0-9_-]+)/$',views.bank_branches,name='bank_bank_branches'),
     url(r'^banks/city/(?P<location_slug>[a-zA-Z0-9_-]+)/$',views.city_branches,name='bank_city_branches'),

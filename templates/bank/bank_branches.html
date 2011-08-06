@@ -3,6 +3,7 @@
     {{block.super}}&nbsp&nbsp{{bank.bank_name}}
 {% endblock %}
 {% block main_content %}
+    {{block.super}}
     {% for branch in branch_list %}
         <a href="{% url bank_branch_info branch.bank.slug branch.slug %}">{{branch.branch_name}}</a>
         <br/>
