@@ -7,9 +7,9 @@
     {% for branch in branch_list %}
         <a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a>
         <br/>
-        <a href="{% url bank_branch_info branch.bank.slug branch.slug %}">{{branch.branch_name}}</a>
+        {{branch.branch_name}}
         <br/>
-        {{branch.address}}
+        <strong><a href="{% url bank_branch_info branch.bank.slug branch.slug %}">{{branch.address}}</a></strong>
         <br/>
         {{branch.location}}
         <hr/>

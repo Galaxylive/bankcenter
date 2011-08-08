@@ -10,7 +10,9 @@ from utils import get_letters
 def home(request):
     #bank_list=Bank.objects.select_related().all()
     branch_accessed_recently=Branch.objects.all()[:10]
-    return render(request,"bank/home.html",{'branch_list':branch_accessed_recently})
+    most_visited_banks=Bank.objects.select_related().all().order_by('-num_times_accessed')[:20]
+    most_visited_locations=Location.objects.select_related().all().order_by('-num_times_accessed')[:20]
+    return render(request,"bank/home.html",{'branch_list':branch_accessed_recently,'bank_list':most_visited_banks,'location_list':most_visited_locations})
     """bank_list=Bank.objects.select_related().all()
     paginator=Paginator(bank_list,20)
     pag=int(request.GET.get('page','1'))
@@ -33,6 +35,12 @@ def bank_branches(request,bank_slug):
 def branch_info(request,bank_slug,branch_slug):
     #return HttpResponse("")
     branch=Branch.objects.select_related().get(slug=branch_slug,bank__slug=bank_slug)
+    bank=Bank.objects.get(slug=bank_slug)
+    bank.num_times_accessed += 1
+    bank.save()
+    loc=branch.location
+    loc.num_times_accessed += 1
+    loc.save()
     branch.save() #Each time this branch gets accessed, we call save() so that last_accessed field gets updated for this branch.
     return render_to_response("bank/branch_info.html",{'branch':branch},context_instance=RequestContext(request))
     
