@@ -23,7 +23,10 @@
     </div>
     <div class="one_third_last">
         <h3>Most visited cities</h3>
-        <p>
-        </p>
+        {% for loc in location_list %}
+            <p>
+                <a href="">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
+            </p>
+        {% endfor %}
     </div>
 {% endblock %}
