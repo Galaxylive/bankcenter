@@ -32,7 +32,7 @@
         <div class="content">
             <h3>Clicking on a city gets branches in that city</h3>
             {% for loc in location_list %}
-                <a href="/banks/city/{{loc.slug}}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
+                <a href="{% url bank_city_branches loc.slug %}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
                 <br/>
             {% endfor %}
         </div>

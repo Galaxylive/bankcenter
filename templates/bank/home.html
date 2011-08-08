@@ -10,7 +10,6 @@
             <br/>
             {{branch.location.city}}, {{branch.location.state}}
             <br/>
-            {{branch.last_accessed}}
         </p>
     {% endfor %}
     </div>
@@ -26,7 +25,7 @@
         <h3>Most visited cities</h3>
         {% for loc in location_list %}
             <p>
-                <a href="">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
+                <a href="{% url bank_city_branches loc.slug %}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
             </p>
         {% endfor %}
     </div>
