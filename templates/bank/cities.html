@@ -2,29 +2,17 @@
 {% block title %}
     {{block.super}} Search by City
 {% endblock %}
-{% block extra_head %}
-    <style type="text/css">
-        #leftcolumn { width: 300px; float: left}
-        #rightcolumn { width: 300px; float: right}
-    </style>
-{% endblock %}
 {% block main_content %}
-    {{block.super}}
-    <div id="rightcolumn">
-        Filter city by first letter
+        <!--Filter city by first letter
         <br/>
         {% for letter in letters %}
             <a href="?letter={{letter}}">{{letter}}</a>
             <br/>
         {% endfor %}
-    </div>
-    <div id="leftcolumn">
         {% for loc in location_list %}
             <a href="/banks/city/{{loc.slug}}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
             <br/>
-        {% endfor %}
-    </div>
-    
+        {% endfor %}-->
     <!--<div class="pagination">
     <span class="step-links">
         {% if location_list.has_previous %}
@@ -40,4 +28,24 @@
         {% endif %}
     </span>
     </div>-->
+    <div class="inner custom_content">
+        <div class="content">
+            <h3>Clicking on a city gets branches in that city</h3>
+            {% for loc in location_list %}
+                <a href="/banks/city/{{loc.slug}}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
+                <br/>
+            {% endfor %}
+        </div>
+        <div class="sidebar">
+            <div class="sidebar_item">
+                <h5>Filter by first letter</h5> 
+                    <ul> 
+                        {% for letter in letters %}
+                            <strong><a href="?letter={{letter}}">{{letter}}</a></strong>
+                            <br/>
+                        {% endfor %}
+                    </ul> 
+            </div>
+        </div>
+    </div>
 {% endblock %}

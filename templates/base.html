@@ -1,23 +1,130 @@
-<html>
+<!--<html>
     <head>
         <title>
-            {% block title %}bankcenter.in{% endblock %}
+            {% block titl %}bankcenter.in{% endblock %}
         </title>
         {% block extra_head %}
         {% endblock %}
     </head>
     <body>
-        {% block main_content %}
+        {% block mai_content %}
             <a href="{% url bank_home %}">Home</a>
             <a href="{% url bank_cities %}">Filter by city</a>
             <a href="{% url bank_banks %}">Filter by bank</a>
             <hr/>
-            <!--{% for bank in bank_list %}
-                <a href="{% url bank_bank_branches bank.slug%}">{{bank.bank_name}}</a>
-                <br/>
-            {% endfor %}  -->  
         {% endblock %}
     </body>
-</html>
+</html>-->
+
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    
+    <title>
+        {% block title %}
+            bankcenter.in
+        {% endblock %}
+    </title>
+   
+	<!-- Website Styles --> 
+	<link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css" media="screen">     
+    
+    <!-- Scripts Styles --> 
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/scripts/nivo-slider.css" type="text/css" media="screen">  
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/scripts/prettyPhoto.css" type="text/css" media="screen">    
+    
+    <!-- Custom Stylesheet --> 
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/custom.css" type="text/css" media="screen">
+    
+    <!--[if IE 7]>
+    <link rel="stylesheet" media="screen" href="{{ MEDIA_URL }}css/ie7.css"/>
+  	<![endif]-->
+</head> 
+ 
+<body>
+        {% block navigation_content %}
+	<div id="wrapper">  
+    
+    	<!-- HEADER START --> 
+		<div id="header"> 
+        	<div class="inner">
+            	<!--<div class="logo"> 
+            		<a href="index.html"><img src="img/logo.png" alt="Purity"></a> 
+                </div> -->               
+           
+           		<div class="nav"> 
+                    <ul> 
+                        <li class="selected"><a href="{% url bank_home %}">Home</a></li> 
+                        <li><a href="{% url bank_cities %}">Filter by City</a></li> 
+                        <li><a href="{% url bank_banks %}">Filter by bank</a></li>                        
+                        <!--<li><a href="#">Services</a> 
+                        	<ul> 
+                                <li><a href="#">Submenu 1</a></li> 
+                                <li><a href="#">Submenu 2</a></li> 
+                                <li><a href="#">Submenu 3</a></li> 
+                            </ul> 
+                        </li> -->
+                        <!--<li><a href="#">Portfolio</a></li> 
+                        <li><a href="contact.html">Contact</a></li> -->
+                    </ul>                     
+            	</div>  
+                <div class="clear"></div>           
+            </div><!-- .inner end --> 
+        </div><!-- #header end -->
+        {% endblock %}
+        <!-- HEADER END -->     	
+                
+        <!-- MAIN CONTENT START -->
+        <div id="main">
+                
+        	<div class="inner custom_content"> 
+                    {% block main_content %}
+                    {% endblock %}
+                            
+                <!--<p>Main content goes here</p>-->
+                
+             
+            </div><!-- .inner End --> 
+        </div><!-- #main End -->
+        <!-- MAIN CONTENT END --> 
         
-        
+		<!-- FOOTER START --> 
+        <!--<div id="footer"> 
+        	<div class="inner">       
+            	                 
+                <p>Footer content goes here</p>                
+       
+            </div>--><!-- .inner End -->  
+          
+            <!--<div class="footer_small">             
+            	<div class="copyright">
+            		© 2011 <a href="#">Purity</a> - All rights reserved.
+            	</div>
+                
+                <div class="social"> 
+            		<a href="#"><img src="img/social/twitter.png" alt></a>
+                    <a href="#"><img src="img/social/facebook.png" alt></a>
+                    <a href="#"><img src="img/social/dribbble.png" alt></a>
+                    <a href="#"><img src="img/social/rss.png" alt></a>
+                </div> 
+            </div>--> <!-- #footer_small End -->
+            
+        <!--</div>--><!-- #footer End -->   
+        <!-- FOOTER END -->        
+    <!--</div>--><!-- #holder End --> 
+    <!-- PAGE END --> 
+    
+    
+    <!-- jQuery Scripts -->     
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.6.2.min.js"></script> 
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/contact-form.js"></script>  
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/custom.js"></script>  
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.nivo.slider.pack.js"></script> 
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-ui-personalized-1.5.2.packed.js"></script>   
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/twitter.js"></script>     
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.quicksand.min.js"></script> 
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.easing.js"></script>  
+</body> 
+</html>      
