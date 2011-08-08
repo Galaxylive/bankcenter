@@ -3,17 +3,11 @@
     {{block.super}}
     <p>Recently accessed branches</p>
     {% for branch in branch_list %}
-        <a href="">{{branch.bank}}</a>
+        <a href="{% url bank_branch_info branch.bank.slug branch.slug %}">{{branch.bank}}</a>
         <br/>
-        <a href="">{{branch.branch_name}}</a>
+        {{branch.branch_name}}
         <br/>
-        {{branch.ifsc}}
-        <br/>
-        {% if branch.micr %}
-            {{branch.micr}}
-        {% else %}
-            MICR does not exist
-        {% endif %}
+        {{branch.location.city}}, {{branch.location.state}}
         <br/>
     {% endfor %}
 {% endblock %}

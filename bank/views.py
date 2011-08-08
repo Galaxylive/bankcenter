@@ -52,10 +52,23 @@ def cities(request):
     #return HttpResponse("Cities page")
     """location_list=Location.objects.select_related().all()
     return render(request,"bank/cities.html",{'location_list':location_list})"""
+    
     letter=request.GET.get('letter','A')
     location_list=Location.objects.select_related().filter(city__startswith=letter)
     letters=get_letters()
     return render(request,'bank/cities.html',{'location_list':location_list,'letters':letters})
+    """letter=request.GET.get('letter','A')
+    location_list=Location.objects.select_related().filter(city__startswith=letter)
+    letters=get_letters()
+    paginator=Paginator(location_list,25)
+    page=int(request.GET.get('page','1'))
+    try:
+        location_list=paginator.page(page)
+    except PageNotAnInteger:
+        location_list=paginator.page(1)
+    except EmptyPage:
+        location_list=paginator.page(paginator.num_pages)
+    return render(request,'bank/cities.html',{'location_list':location_list,'letters':letters})"""
     
 def banks(request):
     #return HttpResponse("You are at banks page")
