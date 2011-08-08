@@ -3,8 +3,8 @@
     {{block.super}}&nbsp&nbsp{{branch.bank}}&nbsp&nbsp{{branch.branch_name}}
 {% endblock %}
 {% block main_content %}
-    {{block.super}}
-    <table>
+    <h3>Branch details</h3>
+    <table cellspacing="3px" cellpadding="5px">
         <tr>
             <td>
                 Bank name
@@ -35,7 +35,7 @@
             </td>
             {% if branch.micr %}
             <td>
-                <a href="">{{branch.micr}}</a>
+                {{branch.micr}}
             </td>
             {% else %}
             <td>
@@ -49,6 +49,14 @@
             </td>
             <td>
                 {{branch.address}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Contact
+            </td>
+            <td>
+                {{branch.contact}}
             </td>
         </tr>
         <tr>
@@ -73,14 +81,6 @@
             </td>
             <td>
                 <a href="{% url bank_state_branches branch.location.state_fk.slug %}">{{branch.location.state}}</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Last accessed
-            </td>
-            <td>
-                {{branch.last_accessed}}
             </td>
         </tr>
     </table>

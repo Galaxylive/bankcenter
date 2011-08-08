@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block main_content %}
-    {{block.super}}
-    <p>Recently accessed branches</p>
+    <h3>Recently accessed branches</h3>
     {% for branch in branch_list %}
-        <a href="{% url bank_branch_info branch.bank.slug branch.slug %}">{{branch.bank}}</a>
-        <br/>
-        {{branch.branch_name}}
-        <br/>
-        {{branch.location.city}}, {{branch.location.state}}
-        <br/>
+        <p>
+            <a href="{% url bank_branch_info branch.bank.slug branch.slug %}">{{branch.bank}}</a>
+            <br/>
+            {{branch.branch_name}}
+            <br/>
+            {{branch.location.city}}, {{branch.location.state}}
+            <br/>
+        </p>
     {% endfor %}
 {% endblock %}
