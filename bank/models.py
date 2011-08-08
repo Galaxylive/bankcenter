@@ -33,6 +33,9 @@ class Location(models.Model):
     
     def __eq__(self,other):
         return self.city==other.city
+    
+    class Meta:
+        ordering=['city','district']
         
 class Bank(models.Model):
     bank_name=models.CharField(max_length=300)
