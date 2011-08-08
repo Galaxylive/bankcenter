@@ -10,7 +10,8 @@ from utils import get_letters
 def home(request):
     #bank_list=Bank.objects.select_related().all()
     branch_accessed_recently=Branch.objects.all()[:10]
-    return render(request,"bank/home.html",{'branch_list':branch_accessed_recently})
+    most_visited_banks=Bank.objects.select_related().all().order_by('-num_times_accessed')[:20]
+    return render(request,"bank/home.html",{'branch_list':branch_accessed_recently,'bank_list':most_visited_banks})
     """bank_list=Bank.objects.select_related().all()
     paginator=Paginator(bank_list,20)
     pag=int(request.GET.get('page','1'))
@@ -34,6 +35,9 @@ def branch_info(request,bank_slug,branch_slug):
     #return HttpResponse("")
     branch=Branch.objects.select_related().get(slug=branch_slug,bank__slug=bank_slug)
     branch.save() #Each time this branch gets accessed, we call save() so that last_accessed field gets updated for this branch.
+    bank=Bank.objects.get(slug=bank_slug)
+    bank.num_times_accessed += 1
+    bank.save()
     return render_to_response("bank/branch_info.html",{'branch':branch},context_instance=RequestContext(request))
     
 def city_branches(request,location_slug):

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block main_content %}
+    <div class="one_third">
     <h3>Recently accessed branches</h3>
     {% for branch in branch_list %}
         <p>
@@ -11,4 +12,18 @@
             <br/>
         </p>
     {% endfor %}
+    </div>
+    <div class="one_third">
+        <h3>Most visited banks</h3>
+            {% for bank in bank_list %}
+                <p>
+                    <a href="{% url bank_bank_branches bank.slug %}">{{bank.bank_name}}</a>
+                </p>
+            {% endfor %}
+    </div>
+    <div class="one_third_last">
+        <h3>Most visited cities</h3>
+        <p>
+        </p>
+    </div>
 {% endblock %}

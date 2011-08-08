@@ -40,6 +40,7 @@ class Location(models.Model):
 class Bank(models.Model):
     bank_name=models.CharField(max_length=300)
     slug=models.SlugField(null=True,max_length=300)
+    num_times_accessed=models.IntegerField(default=0)
     
     def save(self,**kwargs):
         if not self.slug:
@@ -48,6 +49,14 @@ class Bank(models.Model):
     
     def __unicode__(self):
         return self.bank_name
+    
+    def __cmp__(self,other):
+        if self.num_times_accessed>other.num_times_accessed:
+            return 1
+        elif self.num_times_accessed<other.num_times_accessed:
+            return -1
+        else:
+            return 0
     
 class Branch(models.Model):
     branch_name=models.CharField(max_length=300)
