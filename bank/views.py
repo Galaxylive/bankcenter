@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from utils import get_letters
+from django.http import Http404
 
 def home(request):
     #bank_list=Bank.objects.select_related().all()
@@ -82,4 +83,12 @@ def banks(request):
     #return HttpResponse("You are at banks page")
     bank_list=Bank.objects.select_related().all()
     return render(request,"bank/banks.html",{'bank_list':bank_list})
+    
+def branch_with_ifsc(request,branch_ifsc):
+    try:
+        branch=Branch.objects.select_related().get(ifsc=branch_ifsc)
+        branch.save()
+    except Branch.DoesNotExist:
+        raise Http404
+    return render(request,'bank/branch_info.html',{'branch':branch})
     

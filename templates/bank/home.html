@@ -14,19 +14,25 @@
     {% endfor %}
     </div>
     <div class="one_third">
-        <h3>Most visited banks</h3>
+        <h3>Most popular banks</h3>
             {% for bank in bank_list %}
                 <p>
                     <a href="{% url bank_bank_branches bank.slug %}">{{bank.bank_name}}</a>
                 </p>
             {% endfor %}
+            <p>
+                <a href="">see all</a>
+            </p>
     </div>
     <div class="one_third_last">
-        <h3>Most visited cities</h3>
+        <h3>Most popular cities</h3>
         {% for loc in location_list %}
             <p>
                 <a href="{% url bank_city_branches loc.slug %}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
             </p>
         {% endfor %}
+        <p>
+                <a href="">see all</a>
+        </p>
     </div>
 {% endblock %}
