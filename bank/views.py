@@ -92,3 +92,11 @@ def branch_with_ifsc(request,branch_ifsc):
         raise Http404
     return render(request,'bank/branch_info.html',{'branch':branch})
     
+def branch_with_micr(request,branch_micr):
+    try:
+        branch=Branch.objects.select_related().get(micr=branch_micr)
+        branch.save()
+    except Branch.DoesNotExist:
+        raise Http404
+    return render(request,'bank/branch_info.html',{'branch':branch})
+    
