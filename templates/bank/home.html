@@ -1,38 +1,41 @@
 {% extends "base.html" %}
 {% block main_content %}
     <div class="one_third">
-    <h3>Recently accessed branches</h3>
-    {% for branch in branch_list %}
-        <p>
-            <a href="{% url bank_branch_info branch.bank.slug branch.slug %}">{{branch.bank}}</a>
-            <br/>
-            {{branch.branch_name}}
-            <br/>
-            {{branch.location.city}}, {{branch.location.state}}
-            <br/>
-        </p>
-    {% endfor %}
+        <h3>Recently accessed branches</h3>
+        <h5>78,056 total branches</h5>
+        {% for branch in branch_list %}
+            <p>
+                <a href="{% url bank_branch_info branch.bank.slug branch.slug %}">{{branch.bank}}</a>
+                <br/>
+                {{branch.branch_name}}
+                <br/>
+                {{branch.location.city}}, {{branch.location.state}}
+                <br/>
+            </p>
+        {% endfor %}
     </div>
     <div class="one_third">
         <h3>Most popular banks</h3>
+        <h5>102 total banks</h5>
             {% for bank in bank_list %}
                 <p>
                     <a href="{% url bank_bank_branches bank.slug %}">{{bank.bank_name}}</a>
                 </p>
             {% endfor %}
             <p>
-                <a href="">see all</a>
+                <a href="{% url bank_banks %}">see all --></a>
             </p>
     </div>
     <div class="one_third_last">
         <h3>Most popular cities</h3>
+        <h5>26,006 total cities</h5>
         {% for loc in location_list %}
             <p>
                 <a href="{% url bank_city_branches loc.slug %}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
             </p>
         {% endfor %}
         <p>
-                <a href="">see all</a>
+                <a href="{% url bank_cities %}">see all --></a>
         </p>
     </div>
 {% endblock %}
