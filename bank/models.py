@@ -22,6 +22,7 @@ class Location(models.Model):
     slug=models.SlugField(null=True,max_length=200)
     state_fk=models.ForeignKey(State,null=True)
     num_times_accessed=models.IntegerField(default=0)
+    num_branches=models.IntegerField(default=0)
     
     def save(self,**kwargs):
         if not self.slug:
@@ -33,7 +34,13 @@ class Location(models.Model):
     
     
     def __eq__(self,other):
-        return self.city==other.city
+        if (self.city==other.city and self.district==other.district and self.state==other.state):
+            return True
+        else:
+            return False
+        
+    def __hash__(self):
+        return len(self.city)+len(self.district)+len(self.state)
     
     class Meta:
         ordering=['city','district']
@@ -42,6 +49,7 @@ class Bank(models.Model):
     bank_name=models.CharField(max_length=300)
     slug=models.SlugField(null=True,max_length=300)
     num_times_accessed=models.IntegerField(default=0)
+    num_branches=models.IntegerField(default=0)
     
     def save(self,**kwargs):
         if not self.slug:
