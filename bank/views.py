@@ -11,9 +11,9 @@ from django.http import Http404
 def home(request):
     #bank_list=Bank.objects.select_related().all()
     branch_accessed_recently=Branch.objects.all()[:10]
-    most_visited_banks=Bank.objects.select_related().all().order_by('-num_times_accessed')[:20]
+    banks_most_branches=Bank.objects.select_related().all().order_by('-num_branches')[:20]
     most_visited_locations=Location.objects.select_related().all().order_by('-num_times_accessed')[:20]
-    return render(request,"bank/home.html",{'branch_list':branch_accessed_recently,'bank_list':most_visited_banks,'location_list':most_visited_locations})
+    return render(request,"bank/home.html",{'branch_list':branch_accessed_recently,'bank_list':banks_most_branches,'location_list':most_visited_locations})
     """bank_list=Bank.objects.select_related().all()
     paginator=Paginator(bank_list,20)
     pag=int(request.GET.get('page','1'))
