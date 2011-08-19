@@ -1,0 +1,18 @@
+
+{% if obj.count == 0 %}
+  <p> No matching Query </p>
+  {% else %}
+    {% for i  in obj %} 
+        {{i.post_office_name }}
+        <br>
+        {{i.pin_code }}
+        <br>
+        {{i.district_name }}
+        <br>
+        {{i.city_name }}
+        <br>
+        {{i.state }}
+        <br>
+        <br>
+    {% endfor %}
+{% endif %}
