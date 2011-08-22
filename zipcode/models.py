@@ -8,6 +8,9 @@ class Zip_code(models.Model):
     state=models.CharField(max_length=50)
     def __unicode__(self):
         return self.post_office_name
+
+    def get_absolute_url(self):
+        return "pincode/city/%s/" % self.city_name
 # Create your models here.
 
 # Create your models here.

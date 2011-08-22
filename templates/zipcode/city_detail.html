@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block pincode_content %}
+{% for i in obj.object_list %}
+  {{i.post_office_name }}
+    <br>
+    {{i.pin_code }}
+    <br>
+    {{i.district_name }}
+    <br>
+    {{i.state }}
+    <br><br><br>
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if obj.has_previous %}
+            <a href="?page={{ obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ obj.number }} of {{ obj.paginator.num_pages }}.
+        </span>
+
+        {% if obj.has_next %}
+            <a href="?page={{ obj.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}
+
+
+

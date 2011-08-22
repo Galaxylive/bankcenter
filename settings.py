@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'bank',
     'south',
     'zipcode',
+#    'haystack',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -157,4 +158,7 @@ LOGGING = {
     }
 }
 
+#HAYSTACK_SITECONF = 'bank_center.search_sites'
+#HAYSTACK_SEARCH_ENGINE = 'whoosh'
+#HAYSTACK_WHOOSH_PATH = os.path.join(os.path.dirname(__file__),'mysite_index'
 from local_settings import *

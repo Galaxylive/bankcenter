@@ -15,17 +15,29 @@ def render(request, template, context):
 def pincode(request):
     return render(request, 'zipcode/formpage.html', {})
     #
+def city(request, city_id=None):
+    p = Zip_code.objects.filter(city_name__iexact = city_id)
+    if p.count() == 0:
+        raise Http404
+    paginator = Paginator(p,5)#show 20 recipes per page
+    page = request.GET.get('page', 1)
+    try:
+        contents = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contents = paginator.page(1)
+    except EmptyPage:
+      #If page is out of range, deliver last page of results.
+        contents = paginator.page(paginator.num_pages)
+    return render(request, 'zipcode/city_detail.html', {'obj' : contents})
+    
+    
 
 def detail(request):
-   # return HttpResponse(request.GET['place'])
-#  #   try:
     p = Zip_code.objects.filter(pin_code__iexact=request.GET['pincode'])
-   # # except MultipleObjectsReturned:
     if p.count() > 0: 
-        print "i am here"
         return render(request, 'zipcode/detail.html', {'obj':p})
     else:
-       
         p = Zip_code.objects.filter(\
             Q(post_office_name__iexact=request.GET['place']) |\
             Q(district_name__iexact=request.GET['place']) |\
@@ -35,17 +47,4 @@ def detail(request):
         if p.count() > 0: return render(request, 'zipcode/detail.html', {'obj':p})
         else: return render(request, 'zipcode/research.html', {})
 
-        # r = Zip_code.objects.filter(post_office_name__iexact=request.GET['place'])
-        # if r.count() > 0: return render(request, 'zipcode/detail.html', {'obj':r})
-        # else:
-        #     s = Zip_code.objects.filter(district_name__iexact=request.GET['place'])
-        #     if s.count() > 0: return render(request, 'zipcode/detail.html', {'obj':s})
-        #     else:
-        #         t = Zip_code.objects.filter(city_name__iexact=request.GET['palce'])
-        #         if t.count() > 0: return render(request, 'zipcode/detail.html', {'obj':t})
-        #         else:
-        #             u = Zip_code.objects.filter(state__iexact=request.GET['place'])
-        #             if u.count() > 0: return render(request, 'zipcode/detail.html', {'obj':u})
-        #             else: return render(request, 'zipcode/research.html', {})
-                    
-           
+    
