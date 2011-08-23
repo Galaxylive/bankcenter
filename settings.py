@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'bank',
     'south',
     'zipcode',
+    'atm',
 #    'haystack',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
