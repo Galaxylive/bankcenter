@@ -22,3 +22,6 @@ for line in reader:
             p.save()
    ...:     p = Atm(address = get_digit_or_chars(line[3]))
             p.save()
+
+
+today modified the previous xls file and used csv.DictReader, the database in its initial form was not customised for dictreading.
