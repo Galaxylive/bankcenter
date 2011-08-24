@@ -8,7 +8,6 @@ from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import Http404
 from django.db.models import Q
 
-
 obj = Zip_code.objects.all()
 def render(request, template, context):
     return render_to_response(template,context,context_instance = RequestContext(request))

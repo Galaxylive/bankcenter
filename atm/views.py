@@ -30,7 +30,7 @@ def bank(request, bank_id=None):
 
 
 def city(request, city_id=None):
-    p = Atm.objects.filter(name_of_city__iexact = city_id)
+    p = Atm.objects.filter(city_slug__iexact = city_id)
     if p.count() == 0:
         raise Http404
     paginator = Paginator(p,5)#show 20 recipes per page
