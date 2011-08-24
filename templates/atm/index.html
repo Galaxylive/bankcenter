@@ -3,7 +3,7 @@
         <div class="content">
          
          {% if obj.object_list %} 
- <a href="{{ i.get_absolute_url }}"><i>{{i.city_name }} </i></a>       
+
             {% for i in obj.object_list %}
                 <a href="{{i.get_bank_url }}"><i>{{i.name_of_bank }} </i></a>
                 <br>

@@ -12,8 +12,8 @@ def render(request, template, context):
     return render_to_response(template,context,context_instance = RequestContext(request))
 
 
-def bank(request, city_id=None):
-    p = Atm.objects.filter(name_of_bank__iexact = bank_id)
+def bank(request, bank_id=None):
+    p = Atm.objects.filter(bank_slug = bank_id)
     if p.count() == 0:
         raise Http404
     paginator = Paginator(p,5)#show 20 recipes per page
@@ -47,8 +47,11 @@ def city(request, city_id=None):
 
 
 def atms(request):
-    letter=request.GET.get('letter','A')
-    obj = Atm.objects.select_related().filter(name_of_bank__startswith=letter)
+    letter=request.GET.get('letter','')
+    if not letter:
+        obj = Atm.objects.all().order_by("?")
+    else:
+        obj = Atm.objects.select_related().filter(name_of_bank__startswith=letter)
     paginator = Paginator(obj,10)#show 20 recipes per page
     page = request.GET.get('page', 1)
     try:
