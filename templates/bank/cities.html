@@ -3,32 +3,6 @@
     {{block.super}} Search by City
 {% endblock %}
 {% block main_content %}
-        <!--Filter city by first letter
-        <br/>
-        {% for letter in letters %}
-            <a href="?letter={{letter}}">{{letter}}</a>
-            <br/>
-        {% endfor %}
-        {% for loc in location_list %}
-            <a href="/banks/city/{{loc.slug}}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a>
-            <br/>
-        {% endfor %}-->
-    <!--<div class="pagination">
-    <span class="step-links">
-        {% if location_list.has_previous %}
-            <a href="?page={{ location_list.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ location_list.number }} of {{ location_list.paginator.num_pages }}.
-        </span>
-
-        {% if location_list.has_next %}
-            <a href="?page={{ location_list.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-    </div>-->
-    <!--<div class="inner custom_content">-->
         <div class="content">
             <h3>Clicking on a city gets branches in that city</h3>
             {% for loc in location_list %}

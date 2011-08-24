@@ -1,2 +1,7 @@
 #Ignore .pyc files
 *.pyc
+localsettings.py
+mysite_index/
+*.pyc
+*~
+*#*

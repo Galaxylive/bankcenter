@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block pincode_content %}
+
+{% if obj.count == 0 %}
+<p> No matching Query </p>
+{% else %}
+ {{block.super}}
+{% for i  in obj %} 
+    {{i.post_office_name }}
+    <br>
+    {{i.pin_code }}
+    <br>
+    {{i.district_name }}
+    <br>
+     <a href="{{ i.get_absolute_url }}"><i>{{i.city_name }} </i></a>       
+    <br>
+    {{i.state }}
+    <br><br><br>
+{% endfor %}
+{% endif %}
+{% endblock %}
