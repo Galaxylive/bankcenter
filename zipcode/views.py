@@ -8,13 +8,14 @@ from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import Http404
 from django.db.models import Q
 
+
 obj = Zip_code.objects.all()
 def render(request, template, context):
     return render_to_response(template,context,context_instance = RequestContext(request))
 
 def pincode(request):
     return render(request, 'zipcode/formpage.html', {})
-    #
+    
 def city(request, city_id=None):
     p = Zip_code.objects.filter(city_name__iexact = city_id)
     if p.count() == 0:
@@ -31,8 +32,6 @@ def city(request, city_id=None):
         contents = paginator.page(paginator.num_pages)
     return render(request, 'zipcode/city_detail.html', {'obj' : contents})
     
-    
-
 def detail(request):
     p = Zip_code.objects.filter(pin_code__iexact=request.GET['pincode'])
     if p.count() > 0: 

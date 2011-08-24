@@ -7,4 +7,3 @@ class Atm(models.Model):
     address = models.CharField(max_length=500)
 
 
-

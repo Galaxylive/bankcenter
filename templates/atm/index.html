@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block main_content %}
+        <div class="content">
+          {{ current_letter }}
+         {% if obj.object_list %} 
+            {% for i in obj.object_list %}
+                {{i.name_of_city }} <br> 
+                {{i.name_of_bank }} <br>
+                {{ i.address }} 
+                <br><br>
+            {% endfor %}
+           {% else %}
+           <h3> sorry no matching query </h3>     
+         {% endif %}
+         
+        </div>
+        
+        <div class="sidebar">
+            <div class="sidebar_item">
+                <h5>Filter by first letter of Banks</h5> 
+                    <ul> 
+                        {% for letter in letters %}
+                            <strong><a href="?letter={{letter}}">{{letter}}</a></strong>
+                            <br/>
+                        {% endfor %}
+                    </ul> 
+            </div>
+       
+        </div>
+    <!--</div>-->
+    <div class="pagination">
+          <span class="step-links">
+            {% if obj.has_previous %}
+            <a href="?letter={{current_letter}}&page={{ obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+              Page {{ obj.number }} of {{ obj.paginator.num_pages }}.
+            </span>
+
+            {% if obj.has_next %}
+            <a href="?letter={{current_letter}}&page={{ obj.next_page_number }}">next</a>
+            {% endif %}
+          </span>
+        </div>
+
+{% endblock %}
