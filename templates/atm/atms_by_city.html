@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% block title %}
+    {{block.super}}&nbsp&nbsp  Listing all the atms in {{name}}
+{% endblock %}
+
 {% block main_content %}
 
-<h4> Listing all the atms in the {{name}} </h4>
+<h4> Listing all the atms in {{name}} </h4>
 {% for i in obj.object_list %}
   {{i.post_office_name }}
     <p> Bank:  {{i.name_of_bank }} </p>
