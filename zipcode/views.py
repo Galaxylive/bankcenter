@@ -16,7 +16,7 @@ def pincode(request):
     return render(request, 'zipcode/formpage.html', {})
     
 def city(request, city_id=None):
-    p = Zip_code.objects.filter(city_name__iexact = city_id)
+    p = Zip_code.objects.filter(city_slug__iexact = city_id)
     if p.count() == 0:
         raise Http404
     paginator = Paginator(p,5)#show 20 recipes per page

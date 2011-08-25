@@ -5,7 +5,10 @@ urlpatterns = patterns('',
     url(r'^atms$', views.atms, name='atm_home'),
     url(r'^atms/city/(?P<city_id>[\w-]+)/$', views.city, name='city'),                                         
     url(r'^atms/bank/(?P<bank_id>[\w-]+)/$', views.bank, name='bank'),                                         
+    url(r'^atms/(?P<detail_id>[a-zA-Z0-9-/]+)/$', views.detail, name='detail'),                                                                
     #url(r'^detail$', views.detail, name='detail'),
     #url(r'^pincode/city/(?P<city_id>[\w]+)/$', views.city, name='city'),                      
 )
                           
+
+

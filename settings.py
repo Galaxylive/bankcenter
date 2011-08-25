@@ -1,8 +1,6 @@
 # Django settings for bank_center project.
 
 import os
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
      ('shabda raaj', 'shabda@agiliq.com'),
@@ -163,3 +161,5 @@ LOGGING = {
 #HAYSTACK_SEARCH_ENGINE = 'whoosh'
 #HAYSTACK_WHOOSH_PATH = os.path.join(os.path.dirname(__file__),'mysite_index'
 from local_settings import *
+TEMPLATE_DEBUG = DEBUG
+
