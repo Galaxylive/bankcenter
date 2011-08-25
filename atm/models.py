@@ -15,3 +15,6 @@ class Atm(models.Model):
     def get_bank_url(self):
         return "atms/bank/%s" % self.bank_slug
 
+    def get_detail_url(self):
+        return "atms/%s/%s/%i" % (self.city_slug, self.bank_slug, self.id)
+

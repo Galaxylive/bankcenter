@@ -13,7 +13,8 @@
                 <br>
                 <a href="{{i.get_city_url }}"> <i>{{i.name_of_city }} </i></a>  
                 <br>
-                {{ i.address }} 
+                {{ i.address|slice:":15" }}   
+                <a href="{{ i.get_detail_url }}"><i>{{"go to details ..."}}</i></a> 
                 <br><br>
             {% endfor %}
            {% else %}
@@ -52,3 +53,4 @@
         </div>
 
 {% endblock %}
+

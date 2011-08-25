@@ -12,6 +12,13 @@ def render(request, template, context):
     return render_to_response(template,context,context_instance = RequestContext(request))
 
 
+def detail(request, detail_id=None):
+    id =  detail_id.split("/")
+    print id[2]
+    #return HttpResponse(id[2])
+    p = Atm.objects.filter(pk = id[2])
+    return render(request, 'atm/atm_detail.html', {'obj':p})
+
 def bank(request, bank_id=None):
     p = Atm.objects.filter(bank_slug = bank_id)
     if p.count() == 0:

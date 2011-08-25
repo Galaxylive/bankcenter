@@ -1,0 +1,20 @@
+
+
+{% extends "base.html" %}
+{% block title %}
+    {{block.super}}&nbsp&nbsp Showing ATM Details
+{% endblock %}
+{% block main_content %}
+        <div class="content">
+        
+            {% for i in obj %}
+                <a href="{{i.get_bank_url }}"><i>{{i.name_of_bank }} </i></a>
+                <br>
+                <a href="{{i.get_city_url }}"> <i>{{i.name_of_city }} </i></a>  
+                <br>
+                <em> {{ i.address }} </em>
+                <br><br>
+            {% endfor %}
+        
+        </div>
+{% endblock %}
