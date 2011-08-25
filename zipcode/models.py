@@ -11,12 +11,13 @@ class Zip_code(models.Model):
     state=models.CharField(max_length=50)
     latitude = models.FloatField()
     longitude = models.FloatField() 
+    city_slug = models.SlugField(max_length=100)
     
     def __unicode__(self):
         return self.post_office_name
 
     def get_absolute_url(self):
-        return "pincode/city/%s/" % self.city_name
+        return "pincode/city/%s/" % self.city_slug
 # Create your models here.
 
 # Create your models here.
