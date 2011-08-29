@@ -1,6 +1,6 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
-# Create your models here.
 class Atm(models.Model):
     name_of_city = models.CharField(max_length=100)
     name_of_bank = models.CharField(max_length=200)
@@ -10,11 +10,12 @@ class Atm(models.Model):
 
 
     def get_city_url(self):
-        return "atms/city/%s" % self.city_slug
+        return reverse("atms_in_city", args=[self.city_slug])
     
     def get_bank_url(self):
-        return "atms/bank/%s" % self.bank_slug
+        return reverse("atms_for_bank", args=[self.bank_slug])
 
     def get_detail_url(self):
-        return "atms/%s/%s/%i" % (self.city_slug, self.bank_slug, self.id)
+        url = reverse("atm_detail", args=[self.city_slug, self.bank_slug, self.pk])
+        return url
 
