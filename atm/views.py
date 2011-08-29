@@ -5,8 +5,8 @@ from django.template import RequestContext
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import Http404
 
-from models import Atm
-from utils import get_letters
+from atm.models import Atm
+from atm.utils import get_letters
 
 def render(request, template, context):
     return render_to_response(template,context,context_instance = RequestContext(request))
