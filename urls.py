@@ -7,8 +7,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
      url(r'^admin/', include(admin.site.urls)),
+     url(r'^atms/',include('atm.urls')),                      
      (r'^',include('zipcode.urls')),
-     (r'^',include('atm.urls')),                      
+     
      (r'^',include('bank.urls')),
                        
      
