@@ -29,12 +29,12 @@ def city(request, city_id=None):
     except EmptyPage:
       #If page is out of range, deliver last page of results.
         contents = paginator.page(paginator.num_pages)
-    return render(request, 'zipcode/city_detail.html', {'obj' : contents})
+    return render(request, 'zipcode/city_detail.html', {'cities' : contents})
     
 def detail(request):
-    p = Zip_code.objects.filter(pin_code__iexact=request.GET['pincode'])
+    p = Zip_code.objects.filter(pin_code=request.GET['pincode'])
     if p.count() > 0: 
-        return render(request, 'zipcode/detail.html', {'obj':p})
+        return render(request, 'zipcode/detail.html', {'cities':p})
     else:
         p = Zip_code.objects.filter(\
             Q(post_office_name__iexact=request.GET['place']) |\
@@ -42,7 +42,7 @@ def detail(request):
             Q(city_name__iexact=request.GET['place']) |\
             Q(state__iexact=request.GET['place'])\
             )             
-        if p.count() > 0: return render(request, 'zipcode/detail.html', {'obj':p})
+        if p.count() > 0: return render(request, 'zipcode/detail.html', {'cities':p})
         else: return render(request, 'zipcode/research.html', {})
 
     

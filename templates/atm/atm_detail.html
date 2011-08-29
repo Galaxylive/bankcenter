@@ -1,18 +1,14 @@
-
-
 {% extends "base.html" %}
 {% block title %}
     {{block.super}}&nbsp&nbsp Showing ATM Details
 {% endblock %}
 {% block main_content %}
         <div class="content">
-        
                 <a href="{{ atm.get_bank_url }}"><i>{{ atm.name_of_bank }} </i></a>
                 <br>
                 <a href="{{ atm.get_city_url }}"> <i>{{ atm.name_of_city }} </i></a>  
                 <br>
                 <em> {{ atm.address }} </em>
                 <br><br>
-        
         </div>
 {% endblock %}
