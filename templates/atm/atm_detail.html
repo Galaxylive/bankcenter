@@ -7,14 +7,12 @@
 {% block main_content %}
         <div class="content">
         
-            {% for i in obj %}
-                <a href="{{i.get_bank_url }}"><i>{{i.name_of_bank }} </i></a>
+                <a href="{{ atm.get_bank_url }}"><i>{{ atm.name_of_bank }} </i></a>
                 <br>
-                <a href="{{i.get_city_url }}"> <i>{{i.name_of_city }} </i></a>  
+                <a href="{{ atm.get_city_url }}"> <i>{{ atm.name_of_city }} </i></a>  
                 <br>
-                <em> {{ i.address }} </em>
+                <em> {{ atm.address }} </em>
                 <br><br>
-            {% endfor %}
         
         </div>
 {% endblock %}
