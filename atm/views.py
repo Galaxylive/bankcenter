@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import Http404
@@ -13,7 +13,8 @@ def render(request, template, context):
 
 
 def detail(request, city_id, bank_id, detail_id=None):
-    atm = Atm.objects.get(pk = detail_id)
+    atm = get_object_or_404(Atm, city_slug=city_id, 
+                            bank_slug=bank_id, pk = detail_id)
     return render(request, 'atm/atm_detail.html', {'atm': atm})
 
 def bank(request, bank_id=None):
