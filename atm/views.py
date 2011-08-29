@@ -8,9 +8,6 @@ from django.http import Http404
 from atm.models import Atm
 from atm.utils import get_letters
 
-def render(request, template, context):
-    return render_to_response(template,context,context_instance = RequestContext(request))
-
 
 def detail(request, city_id, bank_id, detail_id=None):
     atm = get_object_or_404(Atm, city_slug=city_id, 
@@ -54,7 +51,7 @@ def city(request, city_id=None):
 def atms(request):
     letter=request.GET.get('letter','')
     if not letter:
-        obj = Atm.objects.all().order_by("?")
+        obj = Atm.objects.all().order_by("bank_slug")
     else:
         obj = Atm.objects.select_related().filter(name_of_bank__startswith=letter)
     paginator = Paginator(obj,10)#show 20 recipes per page
