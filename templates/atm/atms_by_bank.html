@@ -6,25 +6,26 @@
 {% block main_content %}
 
 <h4> Listing all the atms of {{name}} </h4>
-{% for i in obj.object_list %}
+{% for bank in banks.object_list %}
  
-    <p> City:  {{i.name_of_bank }} </p>
-    {{i.address }}
+    <p> City:  {{bank.name_of_bank }} </p>
+    <a href="{{ bank.get_detail_url }}"><i>{{bank.address}}</i></a> 
+
     <br><br>
 {% endfor %}
 
 <div class="pagination">
     <span class="step-links">
-        {% if obj.has_previous %}
-            <a href="?page={{ obj.previous_page_number }}">previous</a>
+        {% if banks.has_previous %}
+            <a href="?page={{ banks.previous_page_number }}">previous</a>
         {% endif %}
 
         <span class="current">
-            Page {{ obj.number }} of {{ obj.paginator.num_pages }}.
+            Page {{ banks.number }} of {{ banks.paginator.num_pages }}.
         </span>
 
-        {% if obj.has_next %}
-            <a href="?page={{ obj.next_page_number }}">next</a>
+        {% if banks.has_next %}
+            <a href="?page={{ banks.next_page_number }}">next</a>
         {% endif %}
     </span>
 </div>

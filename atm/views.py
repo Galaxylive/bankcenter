@@ -28,7 +28,7 @@ def bank(request, bank_id=None):
     except EmptyPage:
       #If page is out of range, deliver last page of results.
         contents = paginator.page(paginator.num_pages)
-    return render(request, 'atm/atms_by_bank.html', {'obj' : contents, 'name':bank_id})
+    return render(request, 'atm/atms_by_bank.html', {'banks' : contents, 'name':bank_id})
 
 
 def city(request, city_id=None):
@@ -45,7 +45,7 @@ def city(request, city_id=None):
     except EmptyPage:
       #If page is out of range, deliver last page of results.
         contents = paginator.page(paginator.num_pages)
-    return render(request, 'atm/atms_by_city.html', {'obj' : contents, 'name':city_id})
+    return render(request, 'atm/atms_by_city.html', {'cities' : contents, 'name':city_id})
 
 
 def atms(request):
@@ -65,6 +65,6 @@ def atms(request):
       #If page is out of range, deliver last page of results.
         contents = paginator.page(paginator.num_pages)
     letters=get_letters()
-    return render(request, 'atm/index.html', {'obj':contents, 'letters':letters, 'current_letter':letter})
+    return render(request, 'atm/index.html', {'atms':contents, 'letters':letters, 'current_letter':letter})
 
 

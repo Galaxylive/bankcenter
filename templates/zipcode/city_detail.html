@@ -4,29 +4,29 @@
 {% endblock %}
 
 {% block pincode_content %}
-{% for i in obj.object_list %}
-  {{i.post_office_name }}
+{% for city in cities.object_list %}
+  {{city.post_office_name }}
     <br>
-    {{i.pin_code }}
+    {{city.pin_code }}
     <br>
-    {{i.district_name }}
+    {{city.district_name }}
     <br>
-    {{i.state }}
+    {{city.state }}
     <br><br><br>
 {% endfor %}
 
 <div class="pagination">
     <span class="step-links">
-        {% if obj.has_previous %}
-            <a href="?page={{ obj.previous_page_number }}">previous</a>
+        {% if cities.has_previous %}
+            <a href="?page={{ cities.previous_page_number }}">previous</a>
         {% endif %}
 
         <span class="current">
-            Page {{ obj.number }} of {{ obj.paginator.num_pages }}.
+            Page {{ cities.number }} of {{ cities.paginator.num_pages }}.
         </span>
 
-        {% if obj.has_next %}
-            <a href="?page={{ obj.next_page_number }}">next</a>
+        {% if cities.has_next %}
+            <a href="?page={{ cities.next_page_number }}">next</a>
         {% endif %}
     </span>
 </div>

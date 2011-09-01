@@ -6,15 +6,15 @@
 {% block main_content %}
         <div class="content">
          
-         {% if obj.object_list %} 
+         {% if atms.object_list %} 
 
-            {% for i in obj.object_list %}
-                <a href="{{i.get_bank_url }}"><i>{{i.name_of_bank }} </i></a>
+            {% for atm in atms.object_list %}
+                <a href="{{atm.get_bank_url }}"><i>{{atm.name_of_bank }} </i></a>
                 <br>
-                <a href="{{i.get_city_url }}"> <i>{{i.name_of_city }} </i></a>  
+                <a href="{{atm.get_city_url }}"> <i>{{atm.name_of_city }} </i></a>  
                 <br>
-                {{ i.address|slice:":15" }}   
-                <a href="{{ i.get_detail_url }}"><i>{{"go to details ..."}}</i></a> 
+                {{ atm.address|slice:":15" }}   
+                <a href="{{ atm.get_detail_url }}"><i>{{"go to details ..."}}</i></a> 
                 <br><br>
             {% endfor %}
            {% else %}
@@ -38,16 +38,16 @@
     <!--</div>-->
     <div class="pagination">
           <span class="step-links">
-            {% if obj.has_previous %}
-            <a href="?letter={{current_letter}}&page={{ obj.previous_page_number }}">previous</a>
+            {% if atms.has_previous %}
+            <a href="?letter={{current_letter}}&page={{ atms.previous_page_number }}">previous</a>
             {% endif %}
 
             <span class="current">
-              Page {{ obj.number }} of {{ obj.paginator.num_pages }}.
+              Page {{ atms.number }} of {{ atms.paginator.num_pages }}.
             </span>
 
-            {% if obj.has_next %}
-            <a href="?letter={{current_letter}}&page={{ obj.next_page_number }}">next</a>
+            {% if atms.has_next %}
+            <a href="?letter={{current_letter}}&page={{ atms.next_page_number }}">next</a>
             {% endif %}
           </span>
         </div>
