@@ -9,7 +9,7 @@
 {% for city in cities.object_list %}
   {{city.post_office_name }}
     <p> Bank:  {{city.name_of_bank }} </p>
-    {{city.address }}
+    <a href="{{ city.get_detail_url }}"><i>{{city.address}}</i></a> 
     <br><br>
 {% endfor %}
 
