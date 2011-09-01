@@ -9,7 +9,8 @@
 {% for bank in banks.object_list %}
  
     <p> City:  {{bank.name_of_bank }} </p>
-    {{bank.address }}
+    <a href="{{ bank.get_detail_url }}"><i>{{bank.address}}</i></a> 
+
     <br><br>
 {% endfor %}
 
