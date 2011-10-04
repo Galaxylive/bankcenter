@@ -26,7 +26,7 @@ class Location(models.Model):
     
     def save(self,**kwargs):
         if not self.slug:
-            self.slug=slugify(city)
+            self.slug=slugify(self.city)
         super(Location,self).save(**kwargs)
     
     def __unicode__(self):
@@ -53,7 +53,7 @@ class Bank(models.Model):
     
     def save(self,**kwargs):
         if not self.slug:
-            self.slug=slugify(bank_name)
+            self.slug=slugify(self.bank_name)
         super(Bank,self).save(**kwargs)
     
     def __unicode__(self):
