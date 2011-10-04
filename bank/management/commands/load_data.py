@@ -12,8 +12,8 @@ class Command(NoArgsCommand):
         load_database()
     
 def load_database():
-    file1='/home/akshar/bank_center/data/bank-info.csv'
-    file2='/home/akshar/bank_center/data/bank-info-2.csv'
+    file1='/home/agiliq/recipehq/bank_center/data/bank-info.csv'
+    file2='/home/agiliq/recipehq/bank_center/bank-info-2.csv'
     fill_database(file1)
     fill_database(file2)
     
