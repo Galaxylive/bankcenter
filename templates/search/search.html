@@ -20,17 +20,19 @@
              <div id="inner-content">
             {% for result in page.object_list %}
                 <p>
-                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                  {{ result.object.branch_name }}
                 </p>
                 <div class="text">
-                {{ result.object.instructions|safe|slice:":280" }}   <a href="{{ result.object.get_absolute_url }}">{{"read more..."}}</a>
+                  <p>
+                {{ result.object.address }}
+                </p>
                 </div>
                 <br>
             {% empty %}
                 <p>No results found.</p>
             {% endfor %}
             
-          
+            
             {% if page.has_previous or page.has_next %}
                 <div>
                     {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
