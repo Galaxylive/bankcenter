@@ -36,34 +36,42 @@
             		<a href="index.html"><img src="img/logo.png" alt="Purity"></a> 
                 </div> -->               
            
-           		<div class="nav"> 
+           	    <div class="nav"> 
                     <ul> 
+                        <!-- <form id="myform"  action="" method="GET" > -->
+                        <!-- <li class="selected">  -->
+                        <!-- <input type="text" name ="search"> -->
+                        <!-- <br> &nbsp -->
+                        <!-- <input type="submit"> -->
+                        <!-- </li> -->
                         <li class="selected"><a href="{% url bank_home %}">Home</a></li> 
                         <li class="selected"><a href="{% url pincode_home %}">Pincode</a></li> 
                         <li class="selected"><a href="{% url atm_home %}">Atms</a></li> 
                         <li><a href="{% url bank_cities %}">Filter by City</a></li> 
                         <li><a href="{% url bank_banks %}">Filter by bank</a></li>                        
-                        <!--<li><a href="#">Services</a> 
-                        	<ul> 
-                                <li><a href="#">Submenu 1</a></li> 
-                                <li><a href="#">Submenu 2</a></li> 
-                                <li><a href="#">Submenu 3</a></li> 
-                            </ul> 
-                        </li> -->
-                        <!--<li><a href="#">Portfolio</a></li> 
-                        <li><a href="contact.html">Contact</a></li> -->
+                        <div id="search">
+                          <form method="get" id="searchform"  action="/search/">
+                            <input type="text" value="" name="q" id="s" size="15" />
+                            <input type="submit" id="searchsubmit" value="" />
+                          </form>
+                        </div>
+           
                     </ul>                     
             	</div>  
                 <div class="clear"></div>           
             </div><!-- .inner end --> 
         </div><!-- #header end -->
         {% endblock %}
+        
         <!-- HEADER END -->     	
                 
         <!-- MAIN CONTENT START -->
         <div id="main">
                 
         	<div class="inner custom_content"> 
+                    {% block search %}
+                    {% endblock %}
+
                     {% block main_content %}
                     {% endblock %}
                     
