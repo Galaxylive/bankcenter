@@ -1,0 +1,153 @@
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210] mod_wsgi (pid=20497): Exception occurred processing WSGI script '/home/akshar/bankcenter/bank_center/apache/django.wsgi'.
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210] Traceback (most recent call last):
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/wsgi.py", line 273, in __call__
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     response = self.get_response(request)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 169, in get_response
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     response = self.handle_uncaught_exception(request, resolver, sys.exc_info())
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 203, in handle_uncaught_exception
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     return debug.technical_500_response(request, *exc_info)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/views/debug.py", line 59, in technical_500_response
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     html = reporter.get_traceback_html()
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/views/debug.py", line 151, in get_traceback_html
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     return t.render(c)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 123, in render
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     return self._render(context)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 117, in _render
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     return self.nodelist.render(context)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 744, in render
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     bits.append(self.render_node(node, context))
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 73, in render_node
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     result = node.render(context)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 90, in render
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     output = self.filter_expression.resolve(context)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 536, in resolve
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     new_obj = func(obj, *arg_vals)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/defaultfilters.py", line 695, in date
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     return format(value, arg)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 285, in format
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     return df.format(format_string)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 30, in format
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     pieces.append(force_unicode(getattr(self, piece)()))
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 191, in r
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     return self.format('D, j M Y H:i:s O')
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 30, in format
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     pieces.append(force_unicode(getattr(self, piece)()))
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/encoding.py", line 71, in force_unicode
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     s = unicode(s)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/functional.py", line 206, in __unicode_cast
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     return self.__func(*self.__args, **self.__kw)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/__init__.py", line 81, in ugettext
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     return _trans.ugettext(message)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 286, in ugettext
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     return do_translate(message, 'ugettext')
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 276, in do_translate
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     _default = translation(settings.LANGUAGE_CODE)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 185, in translation
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     default_translation = _fetch(settings.LANGUAGE_CODE)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 162, in _fetch
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     app = import_module(appname)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/importlib.py", line 35, in import_module
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210]     __import__(name)
+[Fri Aug 05 07:52:09 2011] [error] [client 183.83.24.210] TemplateSyntaxError: Caught ImportError while rendering: No module named south
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210] mod_wsgi (pid=20593): Exception occurred processing WSGI script '/home/akshar/bankcenter/bank_center/apache/django.wsgi'.
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210] Traceback (most recent call last):
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/wsgi.py", line 273, in __call__
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     response = self.get_response(request)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 169, in get_response
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     response = self.handle_uncaught_exception(request, resolver, sys.exc_info())
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 203, in handle_uncaught_exception
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     return debug.technical_500_response(request, *exc_info)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/views/debug.py", line 59, in technical_500_response
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     html = reporter.get_traceback_html()
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/views/debug.py", line 151, in get_traceback_html
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     return t.render(c)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 123, in render
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     return self._render(context)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 117, in _render
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     return self.nodelist.render(context)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 744, in render
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     bits.append(self.render_node(node, context))
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 73, in render_node
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     result = node.render(context)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 90, in render
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     output = self.filter_expression.resolve(context)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 536, in resolve
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     new_obj = func(obj, *arg_vals)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/defaultfilters.py", line 695, in date
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     return format(value, arg)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 285, in format
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     return df.format(format_string)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 30, in format
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     pieces.append(force_unicode(getattr(self, piece)()))
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 191, in r
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     return self.format('D, j M Y H:i:s O')
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 30, in format
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     pieces.append(force_unicode(getattr(self, piece)()))
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/encoding.py", line 71, in force_unicode
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     s = unicode(s)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/functional.py", line 206, in __unicode_cast
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     return self.__func(*self.__args, **self.__kw)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/__init__.py", line 81, in ugettext
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     return _trans.ugettext(message)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 286, in ugettext
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     return do_translate(message, 'ugettext')
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 276, in do_translate
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     _default = translation(settings.LANGUAGE_CODE)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 185, in translation
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     default_translation = _fetch(settings.LANGUAGE_CODE)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 162, in _fetch
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     app = import_module(appname)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/importlib.py", line 35, in import_module
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210]     __import__(name)
+[Fri Aug 05 07:54:35 2011] [error] [client 183.83.24.210] TemplateSyntaxError: Caught ImportError while rendering: No module named bank
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210] mod_wsgi (pid=20621): Exception occurred processing WSGI script '/home/akshar/bankcenter/bank_center/apache/django.wsgi'.
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210] Traceback (most recent call last):
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/wsgi.py", line 273, in __call__
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     response = self.get_response(request)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 169, in get_response
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     response = self.handle_uncaught_exception(request, resolver, sys.exc_info())
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 203, in handle_uncaught_exception
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     return debug.technical_500_response(request, *exc_info)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/views/debug.py", line 59, in technical_500_response
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     html = reporter.get_traceback_html()
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/views/debug.py", line 151, in get_traceback_html
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     return t.render(c)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 123, in render
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     return self._render(context)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 117, in _render
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     return self.nodelist.render(context)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 744, in render
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     bits.append(self.render_node(node, context))
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 73, in render_node
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     result = node.render(context)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 90, in render
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     output = self.filter_expression.resolve(context)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 536, in resolve
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     new_obj = func(obj, *arg_vals)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/template/defaultfilters.py", line 695, in date
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     return format(value, arg)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 285, in format
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     return df.format(format_string)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 30, in format
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     pieces.append(force_unicode(getattr(self, piece)()))
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 191, in r
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     return self.format('D, j M Y H:i:s O')
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py", line 30, in format
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     pieces.append(force_unicode(getattr(self, piece)()))
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/encoding.py", line 71, in force_unicode
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     s = unicode(s)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/functional.py", line 206, in __unicode_cast
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     return self.__func(*self.__args, **self.__kw)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/__init__.py", line 81, in ugettext
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     return _trans.ugettext(message)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 286, in ugettext
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     return do_translate(message, 'ugettext')
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 276, in do_translate
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     _default = translation(settings.LANGUAGE_CODE)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 185, in translation
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     default_translation = _fetch(settings.LANGUAGE_CODE)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py", line 162, in _fetch
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     app = import_module(appname)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]   File "/usr/local/lib/python2.7/dist-packages/django/utils/importlib.py", line 35, in import_module
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210]     __import__(name)
+[Fri Aug 05 07:54:43 2011] [error] [client 183.83.24.210] TemplateSyntaxError: Caught ImportError while rendering: No module named bank
