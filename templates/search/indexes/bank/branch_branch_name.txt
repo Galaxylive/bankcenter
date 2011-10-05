@@ -1,4 +1,3 @@
-{{ object.title }}
-{{ object }}
-{{ object.body }}
-
+{{ object.branch_name }}
+{{ object.address }}
+{{ object.slug }}
