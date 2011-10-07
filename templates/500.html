@@ -1,8 +1,11 @@
-<html>
-<head> 
-<title> 500 Error Page </title>
-</head> 
-<body>
-<p> Sorry we are not able to meet your needs now. Welcome to 500 Internal Server Error Page </p>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}
+{{block.super}}&nbsp&nbsp 500 Page
+{% endblock %}
+{% block 500 %}
+<div class = "inner custom_content">
+
+  <h4> Oops, something seems to have went wrong! Please visit some time later. </h4>
+
+</div>
+{% endblock %}

@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% block title %}
-    {{block.super}}&nbsp&nbsp 404 Page
+{{block.super}}&nbsp&nbsp 404 Page
 {% endblock %}
+{% block 404 %}
+<div class = "inner custom_content">
 
+  <h4> Sorry, The page you were looking for has not been found. </h4>
+
+</div>
+{% endblock %}
