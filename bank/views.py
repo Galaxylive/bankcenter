@@ -14,24 +14,38 @@ def home(request):
     locations_most_branches=Location.objects.select_related().all().order_by('-num_branches')[:20]
     return render(request,"bank/home.html",{'branch_list':branch_accessed_recently,'bank_list':banks_most_branches,'location_list':locations_most_branches})
     
-def bank_branches(request,bank_slug):
-    given_bank=Bank.objects.select_related().get(slug=bank_slug)
-    branch_list=Branch.objects.select_related().filter(bank=given_bank)
+def bank_branches(request, bank_slug):
+    #print bank_slug, "\n"
+    try:
+        given_bank=Bank.objects.select_related().get(slug=bank_slug)
+        #print "here", given_bank.count(), "\n"
+    except Bank.DoesNotExist:
+        raise Http404
+    try:
+        branch_list=Branch.objects.select_related().filter(bank=given_bank)
+    except Branch.DoesNotExist:
+        raise Http404
     return render(request,"bank/bank_branches.html",{'bank':given_bank,'branch_list':branch_list})
     
 def branch_info(request,bank_slug,branch_slug):
-    branch=Branch.objects.select_related().get(slug=branch_slug,bank__slug=bank_slug)
-    bank=Bank.objects.get(slug=bank_slug)
-    bank.num_times_accessed += 1
-    bank.save()
-    loc=branch.location
-    loc.num_times_accessed += 1
-    loc.save()
-    branch.save() #Each time this branch gets accessed, we call save() so that last_accessed field gets updated for this branch.
+    try:
+        branch=Branch.objects.select_related().get(slug=branch_slug,bank__slug=bank_slug)
+        bank=Bank.objects.get(slug=bank_slug)
+        bank.num_times_accessed += 1
+        bank.save()
+        loc=branch.location
+        loc.num_times_accessed += 1
+        loc.save()
+        branch.save() #Each time this branch gets accessed, we call save() so that last_accessed field gets updated for this branch.
+    except Branch.DoesNotExist, Bank.DoesNotExist:
+        raise Http404
     return render_to_response("bank/branch_info.html",{'branch':branch},context_instance=RequestContext(request))
     
 def city_branches(request,location_slug):
-    branch_list=Branch.objects.select_related().filter(location__slug=location_slug)
+    try:
+        branch_list=Branch.objects.select_related().filter(location__slug=location_slug)
+    except Branch.DoesNotExist:
+        raise Http404
     return render(request,'bank/city_branches.html',{'location_slug':location_slug,'branch_list':branch_list})
     
 def state_branches(request,state_slug):
