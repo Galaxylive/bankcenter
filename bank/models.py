@@ -83,6 +83,3 @@ class Branch(models.Model):
     class Meta:
         verbose_name_plural='Branches'
         ordering=['-last_accessed']
-        
-
-    
