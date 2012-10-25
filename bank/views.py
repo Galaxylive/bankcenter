@@ -70,14 +70,14 @@ def cities(request):
 def banks(request):
     banks = Bank.objects.select_related().all()
     return render(request, "bank/banks.html", {'bank_list': banks})
-    
+
 def branch_with_ifsc(request,branch_ifsc):
     try:
-        branch=Branch.objects.select_related().get(ifsc=branch_ifsc)
+        branch = Branch.objects.select_related().get(ifsc=branch_ifsc)
         branch.save()
     except Branch.DoesNotExist:
         raise Http404
-    return render(request,'bank/branch_info.html',{'branch':branch})
+    return render(request, 'bank/branch_info.html', {'branch': branch})
     
 def branch_with_micr(request,branch_micr):
     try:
