@@ -86,4 +86,3 @@ def branch_with_micr(request, branch_micr):
     except Branch.DoesNotExist:
         raise Http404
     return render(request, 'bank/branch_info.html', {'branch': branch})
-    
