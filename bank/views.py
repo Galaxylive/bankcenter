@@ -57,12 +57,15 @@ def city_branches(request,location_slug):
 def state_branches(request,state_slug):
     branch_list=Branch.objects.select_related().filter(location__state_fk__slug=state_slug)
     return render(request,'bank/state_branches.html',{'location_slug':state_slug,'branch_list':branch_list})
-    
+
 def cities(request):
-    letter=request.GET.get('letter','A')
-    location_list=Location.objects.select_related().filter(city__startswith=letter)
-    letters=get_letters()
-    return render(request,'bank/cities.html',{'location_list':location_list,'letters':letters})
+    letter = request.GET.get('letter', 'A')
+    location_list = Location.objects.select_related().filter(
+        city__startswith=letter)
+    letters = get_letters()
+    return render(
+        request, 'bank/cities.html',
+        {'location_list': location_list, 'letters': letters})
     
 def banks(request):
     banks = Bank.objects.select_related().all()
