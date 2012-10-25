@@ -65,8 +65,8 @@ def cities(request):
     return render(request,'bank/cities.html',{'location_list':location_list,'letters':letters})
     
 def banks(request):
-    bank_list=Bank.objects.select_related().all()
-    return render(request,"bank/banks.html",{'bank_list':bank_list})
+    banks = Bank.objects.select_related().all()
+    return render(request, "bank/banks.html", {'bank_list': banks})
     
 def branch_with_ifsc(request,branch_ifsc):
     try:
