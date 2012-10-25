@@ -1,19 +1,25 @@
-# Create your views here.
-from models import Bank,Branch,Location,State
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.shortcuts import render
 from django.template import RequestContext
-from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
-from utils import get_letters
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 
+from models import Bank, Branch, Location, State
+from utils import get_letters
+
+
 def home(request):
-    branch_accessed_recently=Branch.objects.all()[:10]
-    banks_most_branches=Bank.objects.select_related().all().order_by('-num_branches')[:20]
-    locations_most_branches=Location.objects.select_related().all().order_by('-num_branches')[:20]
-    return render(request,"bank/home.html",{'branch_list':branch_accessed_recently,'bank_list':banks_most_branches,'location_list':locations_most_branches})
-    
+    branches = Branch.objects.all()[:10]
+    banks = Bank.objects.select_related().all().order_by(
+        '-num_branches')[:20]
+    locations = Location.objects.select_related().all().\
+        order_by('-num_branches')[:20]
+    return render(
+        request, "bank/home.html",
+        {'branch_list': branches, 'bank_list': banks,
+            'location_list': locations})
+
 def bank_branches(request, bank_slug):
     #print bank_slug, "\n"
     try:
