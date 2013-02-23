@@ -64,7 +64,7 @@
                 City
             </td>
             <td>
-                <a href="{% url bank_city_branches branch.location.slug %}">{{branch.location.city}}</a>
+                <a href="{% if branch.location.city %}{% url bank_city_branches branch.location.slug %}{% endif %}">{{branch.location.city}}</a>
             </td>
         </tr>
         <tr>

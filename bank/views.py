@@ -21,10 +21,8 @@ def home(request):
             'location_list': locations})
 
 def bank_branches(request, bank_slug):
-    #print bank_slug, "\n"
     try:
         given_bank=Bank.objects.select_related().get(slug=bank_slug)
-        #print "here", given_bank.count(), "\n"
     except Bank.DoesNotExist:
         raise Http404
     try:
