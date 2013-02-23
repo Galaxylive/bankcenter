@@ -80,7 +80,7 @@
                 State
             </td>
             <td>
-                <a href="{% url bank_state_branches branch.location.state_fk.slug %}">{{branch.location.state}}</a>
+                <a href="{% if branch.location.state %}{% url bank_state_branches branch.location.state_fk.slug %}">{{branch.location.state}}{% endif %}</a>
             </td>
         </tr>
     </table>

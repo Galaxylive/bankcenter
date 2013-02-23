@@ -76,8 +76,6 @@ class Branch(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            """self.branch_name=self.branch_name.decode('utf-8')
-            self.branch_name=self.branch_name.encode('ascii','ignore')"""
             self.slug = slugify(self.branch_name)
         super(Branch, self).save(*args, **kwargs)
 

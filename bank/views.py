@@ -31,9 +31,9 @@ def bank_branches(request, bank_slug):
         raise Http404
     return render(request,"bank/bank_branches.html",{'bank':given_bank,'branch_list':branch_list})
     
-def branch_info(request,bank_slug,branch_slug):
+def branch_info(request, bank_slug, branch_slug):
     try:
-        branch=Branch.objects.select_related().get(slug=branch_slug,bank__slug=bank_slug)
+        branch=Branch.objects.select_related().get(slug=branch_slug, bank__slug=bank_slug)
         bank=Bank.objects.get(slug=bank_slug)
         bank.num_times_accessed += 1
         bank.save()
