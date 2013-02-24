@@ -157,6 +157,8 @@ LOGGING = {
     }
 }
 
+DEFAULT_FROM_EMAIL = 'Agiliq.com <webmaster@agiliq.com>'
+
 HAYSTACK_SITECONF = 'bank_center.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(os.path.dirname(__file__),'mysite_index')
