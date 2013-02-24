@@ -1,7 +1,5 @@
 from django.core.urlresolvers import reverse
 from django.db import models
-from django import forms
-
 
 
 class Zip_code(models.Model):
@@ -18,8 +16,4 @@ class Zip_code(models.Model):
         return self.post_office_name
 
     def get_absolute_url(self):
-        #return "pincode/city/%s/" % self.city_slug
         return reverse("city", args=[self.city_slug])
-# Create your models here.
-
-# Create your models here.
