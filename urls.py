@@ -5,15 +5,13 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-
      url(r'^admin/', include(admin.site.urls)),
-     url(r'^atms/',include('atm.urls')),                      
-     (r'^',include('zipcode.urls')),
+     url(r'^atms/', include('atm.urls')),
+     (r'^', include('zipcode.urls')),
      (r'^search/', include('haystack.urls')),
-     (r'^',include('bank.urls')),
-                       
-     
+     (r'^', include('bank.urls')),
 )
+
 urlpatterns += staticfiles_urlpatterns()
 from bank_center.settings import DEBUG
 from bank_center import settings
@@ -23,4 +21,3 @@ if DEBUG:
         'django.views.static.serve',
         {'document_root': settings.STATIC_ROOT}
     ))
-    
