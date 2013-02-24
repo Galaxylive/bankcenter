@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block meta %}
+    <meta name="keywords" content="{{bank.slug}}"/>
+{% endblock %}
 {% block title %}
     {{block.super}}&nbsp&nbsp{{bank.bank_name}}
 {% endblock %}

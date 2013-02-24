@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block meta %}
+    <meta name="keywords" content="{{branch.ifsc}},{{branch.micr}},{{branch.branch_name}},{{branch.address}}" />
+{% endblock %}
 {% block title %}
     {{block.super}}&nbsp&nbsp{{branch.bank}}&nbsp&nbsp{{branch.branch_name}}
 {% endblock %}
