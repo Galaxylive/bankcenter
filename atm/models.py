@@ -18,4 +18,3 @@ class Atm(models.Model):
     def get_detail_url(self):
         url = reverse("atm_detail", args=[self.city_slug, self.bank_slug, self.pk])
         return url
-

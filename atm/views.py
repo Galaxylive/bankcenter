@@ -1,7 +1,4 @@
-from django.http import HttpResponse
-from django.shortcuts import render_to_response
 from django.shortcuts import render, get_object_or_404
-from django.template import RequestContext
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import Http404
 
@@ -15,10 +12,10 @@ def detail(request, city_id, bank_id, detail_id=None):
     return render(request, 'atm/atm_detail.html', {'atm': atm})
 
 def bank(request, bank_id=None):
-    p = Atm.objects.filter(bank_slug = bank_id)
+    p = Atm.objects.filter(bank_slug=bank_id)
     if p.count() == 0:
         raise Http404
-    paginator = Paginator(p,5)#show 20 recipes per page
+    paginator = Paginator(p, 5)#show 5 atms per page
     page = request.GET.get('page', 1)
     try:
         contents = paginator.page(page)
@@ -32,10 +29,10 @@ def bank(request, bank_id=None):
 
 
 def city(request, city_id=None):
-    p = Atm.objects.filter(city_slug__iexact = city_id)
+    p = Atm.objects.filter(city_slug__iexact=city_id)
     if p.count() == 0:
         raise Http404
-    paginator = Paginator(p,5)#show 20 recipes per page
+    paginator = Paginator(p, 5)#show 5 atms per page
     page = request.GET.get('page', 1)
     try:
         contents = paginator.page(page)
@@ -49,12 +46,12 @@ def city(request, city_id=None):
 
 
 def atms(request):
-    letter=request.GET.get('letter','')
+    letter=request.GET.get('letter', '')
     if not letter:
         obj = Atm.objects.all().order_by("bank_slug")
     else:
         obj = Atm.objects.select_related().filter(name_of_bank__startswith=letter)
-    paginator = Paginator(obj,10)#show 20 recipes per page
+    paginator = Paginator(obj, 10)#show 20 recipes per page
     page = request.GET.get('page', 1)
     try:
         contents = paginator.page(page)
@@ -66,5 +63,3 @@ def atms(request):
         contents = paginator.page(paginator.num_pages)
     letters=get_letters()
     return render(request, 'atm/index.html', {'atms':contents, 'letters':letters, 'current_letter':letter})
-
-
