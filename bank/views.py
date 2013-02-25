@@ -1,11 +1,9 @@
-from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.shortcuts import render
 from django.template import RequestContext
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 
-from models import Bank, Branch, Location, State
+from models import Bank, Branch, Location
 from utils import get_letters
 
 
@@ -22,14 +20,11 @@ def home(request):
 
 def bank_branches(request, bank_slug):
     try:
-        given_bank=Bank.objects.select_related().get(slug=bank_slug)
+        given_bank = Bank.objects.select_related().get(slug=bank_slug)
     except Bank.DoesNotExist:
         raise Http404
-    try:
-        branch_list=Branch.objects.select_related().filter(bank=given_bank)
-    except Branch.DoesNotExist:
-        raise Http404
-    return render(request,"bank/bank_branches.html",{'bank':given_bank,'branch_list':branch_list})
+    branch_list = Branch.objects.select_related().filter(bank=given_bank)
+    return render(request, "bank/bank_branches.html", {'bank':given_bank, 'branch_list':branch_list})
     
 def branch_info(request, bank_slug, branch_slug):
     try:
@@ -45,16 +40,13 @@ def branch_info(request, bank_slug, branch_slug):
         raise Http404
     return render_to_response("bank/branch_info.html",{'branch':branch},context_instance=RequestContext(request))
     
-def city_branches(request,location_slug):
-    try:
-        branch_list=Branch.objects.select_related().filter(location__slug=location_slug)
-    except Branch.DoesNotExist:
-        raise Http404
-    return render(request,'bank/city_branches.html',{'location_slug':location_slug,'branch_list':branch_list})
+def city_branches(request, location_slug):
+    branch_list = Branch.objects.select_related().filter(location__slug=location_slug)
+    return render(request, 'bank/city_branches.html', {'location_slug':location_slug, 'branch_list':branch_list})
     
-def state_branches(request,state_slug):
-    branch_list=Branch.objects.select_related().filter(location__state_fk__slug=state_slug)
-    return render(request,'bank/state_branches.html',{'location_slug':state_slug,'branch_list':branch_list})
+def state_branches(request, state_slug):
+    branch_list = Branch.objects.select_related().filter(location__state_fk__slug=state_slug)
+    return render(request, 'bank/state_branches.html', {'location_slug':state_slug, 'branch_list':branch_list})
 
 def cities(request):
     letter = request.GET.get('letter', 'A')
