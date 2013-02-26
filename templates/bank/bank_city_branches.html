@@ -12,13 +12,6 @@
     <br/>
     <br/>
     {% for branch in branch_list %}
-        <a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a>
-        <br/>
-        {{branch.branch_name}}
-        <br/>
-        <strong><a href="{% url bank_branch_info branch.bank.slug branch.slug branch.ifsc %}">{{branch.address}}</a></strong>
-        <br/>
-        {{branch.location}}
-        <hr/>
+        {% include "bank/branch_snippet.html" %}
     {% endfor %}
 {% endblock %}

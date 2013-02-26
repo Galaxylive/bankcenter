@@ -8,11 +8,6 @@
 {% block main_content %}
     {{block.super}}
     {% for branch in branch_list %}
-        <a href="{% url bank_branch_info branch.bank.slug branch.slug branch.ifsc %}">{{branch.branch_name}}</a>
-        <br/>
-        {{branch.address}}
-        <br/>
-        {{branch.location}}
-        <br/>
+        {% include "bank/branch_snippet.html" %}
     {% endfor %}
 {% endblock %}
