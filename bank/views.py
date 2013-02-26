@@ -47,8 +47,7 @@ def city_branches(request, location_slug):
     
 def state_branches(request, state_slug):
     state = State.objects.get(slug=state_slug)
-    banks_list = Branch.objects.filter(location__state_fk=state).values('bank__bank_name').annotate(dcount=Count('bank__bank_name'))
-    banks = [each['bank__bank_name'] for each in banks_list]
+    banks = Branch.objects.filter(location__state_fk=state).values('bank__bank_name', 'bank__slug').annotate(dcount=Count('bank__bank_name'))
     return render(request, 'bank/state_branches.html', {'banks':banks, 'state':state})
 
 def cities(request):
@@ -98,6 +97,16 @@ def bank_city_branches(request, bank_slug, location_slug):
         bank = Bank.objects.get(slug=bank_slug)
         bank.num_times_accessed += 1
         bank.save()
-    except Branch.DoesNotExist:
+    except Bank.DoesNotExist:
         raise Http404
     return render(request, 'bank/bank_city_branches.html', {'branch_list':branch_list, 'bank': bank})
+
+def bank_state_branches(request, state_slug, bank_slug):
+    try:
+        branch_list = Branch.objects.select_related().filter(bank__slug=bank_slug, location__state_fk__slug=state_slug)
+        bank = Bank.objects.get(slug=bank_slug)
+        bank.num_times_accessed += 1
+        bank.save()
+    except Bank.DoesNotExist:
+        raise Http404
+    return render(request, 'bank/bank_state_branches.html', {'branch_list':branch_list, 'bank': bank})

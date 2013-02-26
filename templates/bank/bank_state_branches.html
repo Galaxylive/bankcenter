@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+{{block.super}}&nbsp&nbspBranches for {{bank}} in {{branch_list.0.location.state_fk}}
+{% endblock %}
+{% block main_content %}
+    {{block.super}}
+    <ul id="breadcrumbs">
+        <li><a href="{% url bank_home %}">Home</a></li>
+        <li><a href="{% url bank_state_branches branch_list.0.location.state_fk.slug %}">{{branch_list.0.location.state_fk}}</a></li>
+        <li>{{bank}}</li>
+    </ul>
+    <br/>
+    <br/>
+    {% for branch in branch_list %}
+        {% include "bank/branch_snippet.html" %}
+    {% endfor %}
+{% endblock %}

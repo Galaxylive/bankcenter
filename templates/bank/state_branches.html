@@ -4,8 +4,9 @@
 {% endblock %}
 {% block main_content %}
     {{block.super}}
+    <h3>Banks having branches in {{state}}</h3>
     {% for bank in banks %}
-        <a href="">{{bank}}</a>
+    <a href="{% url bank_bank_state_branches state.slug bank.bank__slug %}">{{bank.bank__bank_name}}</a>
         <br/>
     {% endfor %}
 {% endblock %}
