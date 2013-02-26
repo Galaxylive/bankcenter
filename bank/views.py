@@ -67,6 +67,12 @@ def banks(request):
 def branch_with_ifsc(request, branch_ifsc):
     try:
         branch = Branch.objects.select_related().get(ifsc=branch_ifsc)
+        bank = branch.bank
+        bank.num_times_accessed += 1
+        bank.save()
+        loc = branch.location
+        loc.num_times_accessed += 1
+        loc.save()
         branch.save()
     except Branch.DoesNotExist:
         raise Http404
@@ -75,6 +81,12 @@ def branch_with_ifsc(request, branch_ifsc):
 def branch_with_micr(request, branch_micr):
     try:
         branch = Branch.objects.select_related().get(micr=branch_micr)
+        bank = branch.bank
+        bank.num_times_accessed += 1
+        bank.save()
+        loc = branch.location
+        loc.num_times_accessed += 1
+        loc.save()
         branch.save()
     except Branch.DoesNotExist:
         raise Http404
