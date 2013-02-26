@@ -29,7 +29,7 @@
                 Ifsc Code
             </td>
             <td>
-                {{branch.ifsc}}
+                <a href="{% url bank_branch_with_ifsc branch.ifsc %}">{{branch.ifsc}}</a>
             </td>
         </tr>
         <tr>
@@ -38,7 +38,7 @@
             </td>
             {% if branch.micr %}
             <td>
-                {{branch.micr}}
+                <a href="{% url bank_branch_with_micr branch.micr %}">{{branch.micr}}</a>
             </td>
             {% else %}
             <td>
