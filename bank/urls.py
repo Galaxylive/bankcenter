@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^state/(?P<state_slug>[a-zA-Z0-9_-]+)/$', views.state_branches, name = 'bank_state_branches'),
     url(r'^(?P<bank_slug>[a-zA-Z0-9_-]+)/$', views.bank_branches, name = 'bank_bank_branches'),
     # The regex below catches everything, come here in case of doubt.
-    url(r'^(?P<bank_slug>[a-zA-Z0-9_-]+)/(?P<branch_slug>[a-zA-Z0-9_-]+)/$', views.branch_info, name = 'bank_branch_info'),                       
+    url(r'^(?P<bank_slug>[a-zA-Z0-9_-]+)/(?P<branch_slug>[a-zA-Z0-9_-]+)/(?P<branch_ifsc>[A-Z0-9]+)/$', views.branch_info, name = 'bank_branch_info'),                       
 )
 
 

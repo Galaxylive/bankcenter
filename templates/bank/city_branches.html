@@ -9,7 +9,7 @@
         <br/>
         {{branch.branch_name}}
         <br/>
-        <strong><a href="{% url bank_branch_info branch.bank.slug branch.slug %}">{{branch.address}}</a></strong>
+        <strong><a href="{% url bank_branch_info branch.bank.slug branch.slug branch.ifsc %}">{{branch.address}}</a></strong>
         <br/>
         {{branch.location}}
         <hr/>

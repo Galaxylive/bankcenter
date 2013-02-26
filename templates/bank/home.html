@@ -5,7 +5,7 @@
         <h5>78,056 total branches</h5>
         {% for branch in branch_list %}
             <p>
-                <a href="{% url bank_branch_info branch.bank.slug branch.slug %}">{{branch.bank}}</a>
+                <a href="{% url bank_branch_info branch.bank.slug branch.slug branch.ifsc %}">{{branch.bank}}</a>
                 <br/>
                 {{branch.branch_name}}
                 <br/>
