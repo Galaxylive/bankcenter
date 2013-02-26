@@ -2,8 +2,9 @@ from django.shortcuts import render_to_response
 from django.shortcuts import render
 from django.template import RequestContext
 from django.http import Http404
+from django.db.models import Count
 
-from models import Bank, Branch, Location
+from models import Bank, Branch, Location, State
 from utils import get_letters
 
 
@@ -45,8 +46,10 @@ def city_branches(request, location_slug):
     return render(request, 'bank/city_branches.html', {'location_slug':location_slug, 'branch_list':branch_list})
     
 def state_branches(request, state_slug):
-    branch_list = Branch.objects.select_related().filter(location__state_fk__slug=state_slug)
-    return render(request, 'bank/state_branches.html', {'location_slug':state_slug, 'branch_list':branch_list})
+    state = State.objects.get(slug=state_slug)
+    banks_list = Branch.objects.filter(location__state_fk=state).values('bank__bank_name').annotate(dcount=Count('bank__bank_name'))
+    banks = [each['bank__bank_name'] for each in banks_list]
+    return render(request, 'bank/state_branches.html', {'banks':banks, 'state':state})
 
 def cities(request):
     letter = request.GET.get('letter', 'A')
