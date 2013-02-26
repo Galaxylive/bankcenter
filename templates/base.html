@@ -26,6 +26,15 @@
     <!--[if IE 7]>
         <link rel="stylesheet" media="screen" href="{{ MEDIA_URL }}css/ie7.css"/>
   	<![endif]-->
+    {% block extra_css %}
+        <style type="text/css">
+            #breadcrumbs li{
+                display: inline;
+                list-style-type: none;
+                padding-right: 20px;
+            }
+        </style>
+    {% endblock %}
   </head> 
   
   <body>

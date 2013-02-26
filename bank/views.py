@@ -76,3 +76,13 @@ def branch_with_micr(request, branch_micr):
     except Branch.DoesNotExist:
         raise Http404
     return render(request, 'bank/branch_info.html', {'branch': branch})
+
+def bank_city_branches(request, bank_slug, location_slug):
+    try:
+        branch_list = Branch.objects.select_related().filter(bank__slug=bank_slug, location__slug=location_slug)
+        bank = Bank.objects.get(slug=bank_slug)
+        bank.num_times_accessed += 1
+        bank.save()
+    except Branch.DoesNotExist:
+        raise Http404
+    return render(request, 'bank/bank_city_branches.html', {'branch_list':branch_list, 'bank': bank})

@@ -6,6 +6,16 @@
     {{block.super}}&nbsp&nbsp{{branch.bank}}&nbsp&nbsp{{branch.branch_name}}
 {% endblock %}
 {% block main_content %}
+    <ul id="breadcrumbs">
+        <li><a href="{% url bank_home %}">Home</a></li>
+        <li><a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a></li>
+        {% if branch.location.city %}
+        <li><a href="{% url bank_bank_city_branches branch.bank.slug branch.location.slug %}">{{branch.location.city}}</a></li>
+        {% endif %}
+        <li>{{branch.branch_name}}</li>
+    </ul>
+    <br/>
+    <br/>
     <h3>Branch details</h3>
     <table cellspacing="3px" cellpadding="5px">
         <tr>
