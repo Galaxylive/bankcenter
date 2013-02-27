@@ -123,15 +123,13 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
+    'django.contrib.sitemaps',
     'django.contrib.admin',
     'bank',
     #'south',
     'zipcode',
     'atm',
     'haystack',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
 )
 
 # A sample logging configuration. The only tangible logging
