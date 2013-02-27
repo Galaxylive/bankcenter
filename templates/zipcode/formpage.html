@@ -1,13 +1,10 @@
 {% extends "base.html" %}
-{% block pincode_content %}
-
-
-<form id="myform"  action="detail" method="GET" >
-<br><br><br><br><br>
-Name of the place: <input type="text" name ="place">
-<br><br>
-Pin Code of the place: <input type="text" name="pincode">
-<br> <br>
-<input type="submit" name="submit" value="submit">
-</form>
+{% block main_content %}
+<form id="myform"  action="{% url detail %}" method="GET" class="big_form">
+        Name of the place: <input type="text" class="text" name ="place">
+        <br><br>
+        Pin Code of the place: <input type="text" class="text" name="pincode">
+        <br> <br>
+        <input type="submit" name="submit" value="submit" class="button light">
+    </form>
 {% endblock %}
