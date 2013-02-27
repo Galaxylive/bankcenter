@@ -26,13 +26,3 @@ urlpatterns = patterns('',
 urlpatterns += patterns('',
     (r'^sitemap\.xml/$', 'django.contrib.sitemaps.views.sitemap',  {'sitemaps': sitemaps}),
 )
-
-urlpatterns += staticfiles_urlpatterns()
-from bank_center.settings import DEBUG
-from bank_center import settings
-if DEBUG:
-    urlpatterns += patterns('', (
-        r'^static/(?P<path>.*)$',
-        'django.views.static.serve',
-        {'document_root': settings.STATIC_ROOT}
-    ))

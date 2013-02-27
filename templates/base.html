@@ -13,18 +13,18 @@
     </title>
     
     <!-- Website Styles --> 
-    <link rel="SHORTCUT ICON" href="{{ MEDIA_URL }}img/favicon__1_.ico"  media="screen">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css" media="screen">     
+    <link rel="SHORTCUT ICON" href="{{ STATIC_URL }}img/favicon__1_.ico"  media="screen">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" type="text/css" media="screen">     
     
     <!-- Scripts Styles --> 
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/scripts/nivo-slider.css" type="text/css" media="screen">  
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/scripts/prettyPhoto.css" type="text/css" media="screen">    
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/scripts/nivo-slider.css" type="text/css" media="screen">  
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/scripts/prettyPhoto.css" type="text/css" media="screen">    
     
     <!-- Custom Stylesheet --> 
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/custom.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css" type="text/css" media="screen">
     
     <!--[if IE 7]>
-        <link rel="stylesheet" media="screen" href="{{ MEDIA_URL }}css/ie7.css"/>
+        <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/ie7.css"/>
   	<![endif]-->
     {% block extra_css %}
         <style type="text/css">
@@ -42,7 +42,7 @@
     <div class="logo">
       <br>
       &nbsp
-      <a href="#"><img src="{{ MEDIA_URL }}img/logo.png" alt="Bank Center"></a>
+      <a href="#"><img src="{{ STATIC_URL }}img/logo.png" alt="Bank Center"></a>
     </div>
     {% block navigation_content %}
     <div id="wrapper">  
@@ -138,14 +138,14 @@
       
       
       <!-- jQuery Scripts -->     
-      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.6.2.min.js"></script> 
-      <script type="text/javascript" src="{{ MEDIA_URL }}js/contact-form.js"></script>  
-      <script type="text/javascript" src="{{ MEDIA_URL }}js/custom.js"></script>  
-      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.nivo.slider.pack.js"></script> 
-      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.prettyPhoto.js"></script>
-      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-ui-personalized-1.5.2.packed.js"></script>   
-      <script type="text/javascript" src="{{ MEDIA_URL }}js/twitter.js"></script>     
-      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.quicksand.min.js"></script> 
-      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.easing.js"></script>  
+      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script> 
+      <script type="text/javascript" src="{{ STATIC_URL }}js/contact-form.js"></script>  
+      <script type="text/javascript" src="{{ STATIC_URL }}js/custom.js"></script>  
+      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.nivo.slider.pack.js"></script> 
+      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.prettyPhoto.js"></script>
+      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-personalized-1.5.2.packed.js"></script>   
+      <script type="text/javascript" src="{{ STATIC_URL }}js/twitter.js"></script>     
+      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.quicksand.min.js"></script> 
+      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.js"></script>  
   </body> 
 </html>      
