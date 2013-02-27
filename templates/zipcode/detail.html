@@ -1,21 +1,19 @@
 {% extends "base.html" %}
-{% block pincode_content %}
-
-{% if cities.count == 0 %}
-<p> No matching Query </p>
+{% block main_content %}
+{% if cities %}
+    {% for city  in cities %} 
+        {{city.post_office_name }}
+        <br>
+        {{city.pin_code }}
+        <br>
+        {{city.district_name }}
+        <br>
+         <a href="{{ city.get_absolute_url }}"><i>{{city.city_name }} </i></a>       
+        <br>
+        {{city.state }}
+        <br><br><br>
+    {% endfor %}
 {% else %}
- {{block.super}}
-{% for city  in cities %} 
-    {{city.post_office_name }}
-    <br>
-    {{city.pin_code }}
-    <br>
-    {{city.district_name }}
-    <br>
-     <a href="{{ city.get_absolute_url }}"><i>{{city.city_name }} </i></a>       
-    <br>
-    {{city.state }}
-    <br><br><br>
-{% endfor %}
+    <h5> No matching Query </h5>
 {% endif %}
 {% endblock %}

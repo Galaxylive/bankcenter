@@ -34,7 +34,7 @@ def detail(request):
     pincode = request.GET.get('pincode', '')
     place = request.GET.get('place', '')
     p = Zip_code.objects.filter(pin_code=pincode)
-    if p.count() > 0: 
+    if p.count(): 
         return render(request, 'zipcode/detail.html', {'cities':p})
     else:
         p = Zip_code.objects.filter(\
@@ -43,7 +43,7 @@ def detail(request):
             Q(city_name__iexact=place) |\
             Q(state__iexact=place)\
             )             
-    if p.count() > 0:
+    if p.count():
         return render(request, 'zipcode/detail.html', {'cities':p})
     else:
-        return render(request, 'zipcode/research.html', {})
+        return render(request, 'zipcode/formpage.html', {"no_result": True})
