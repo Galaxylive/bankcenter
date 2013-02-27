@@ -7,7 +7,7 @@ admin.autodiscover()
 
 from bank.models import Branch
 branch_dict = {
-    'queryset': Branch.objects.all()[:10],
+    'queryset': Branch.objects.all(),
     'date_field': 'last_accessed' 
 }
 
