@@ -24,5 +24,5 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
-    (r'^sitemap\.xml/$', 'django.contrib.sitemaps.views.sitemap',  {'sitemaps': sitemaps}),
+    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',  {'sitemaps': sitemaps}),
 )
