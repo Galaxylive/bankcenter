@@ -47,3 +47,7 @@ def detail(request):
         return render(request, 'zipcode/detail.html', {'cities':p})
     else:
         return render(request, 'zipcode/formpage.html', {"no_result": True})
+
+def pin_detail(request, pin):
+    places = Zip_code.objects.filter(pin_code=pin)
+    return render(request, 'zipcode/pin_detail.html', {'places': places})

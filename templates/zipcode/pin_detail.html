@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block main_content %}
+{% if places %}
+    {% for place  in places %} 
+        {{place.post_office_name }}
+        <br>
+        {{place.pin_code }}
+        <br>
+         {{place.city_name }}
+        <br><br><br>
+    {% endfor %}
+{% else %}
+    <h5>No matching Query</h5>
+{% endif %}
+{% endblock %}
