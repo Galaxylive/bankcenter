@@ -16,6 +16,7 @@ sitemaps = {
 }
 
 urlpatterns = patterns('',
+     url(r'^$', 'bank.views.home', name='home'),
      url(r'^admin/', include(admin.site.urls)),
      url(r'^atms/', include('atm.urls')),
      (r'^pincode/', include('zipcode.urls')),
