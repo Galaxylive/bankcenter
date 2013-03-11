@@ -12,27 +12,21 @@
      {% if query %}       
          <h3>Results</h3>          
          <div id="inner-content">
-         {% for result in page.object_list %}
-             <p>
-               {{ result.object.branch_name }}
-             </p>
-             <div class="text">
-                 <p>
-                 {{ result.object.address }}
-                 </p>
-             </div>
-             <br>
-         {% empty %}
-             <p>No results found.</p>
-         {% endfor %}
-         {% if page.has_previous or page.has_next %}
-             <div>
-                 {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                 |
-                 {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-             </div>
-         {% endif %}
+             {% for result in page.object_list %}
+                {% with branch=result.object %}
+                    {% include "bank/branch_snippet.html" %}
+                {% endwith %}
+             {% empty %}
+                 <p>No results found.</p>
+             {% endfor %}
+             {% if page.has_previous or page.has_next %}
+                 <div>
+                     {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                     |
+                     {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                 </div>
+             {% endif %}
          </div>
      {% else %}
      {% endif %}
-  {% endblock %}
+{% endblock %}
