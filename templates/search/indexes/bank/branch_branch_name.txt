@@ -1,2 +1,4 @@
 {{ object.branch_name }}
 {{ object.address }}
+{{ object.bank.bank_name }}
+{{ object.location.city }}
