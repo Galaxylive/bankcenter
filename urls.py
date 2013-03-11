@@ -17,7 +17,7 @@ sitemaps = {
 
 urlpatterns = patterns('',
      url(r'^$', 'bank.views.home', name='home'),
-     url(r'^robots\.txt/$', direct_to_template, {'template': 'robots.txt', 'mimetype': 'text/plain'}),
+     url(r'^robots\.txt$', direct_to_template, {'template': 'robots.txt', 'mimetype': 'text/plain'}),
      url(r'^admin/', include(admin.site.urls)),
      url(r'^atms/', include('atm.urls')),
      (r'^pincode/', include('zipcode.urls')),
