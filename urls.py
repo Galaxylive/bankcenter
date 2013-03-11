@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.sitemaps import GenericSitemap
+from django.views.generic.simple import direct_to_template
 
 from django.contrib import admin
 admin.autodiscover()
@@ -17,6 +18,7 @@ sitemaps = {
 
 urlpatterns = patterns('',
      url(r'^$', 'bank.views.home', name='home'),
+     url(r'^robots\.txt$', direct_to_template, {'template': 'robots.txt', 'mimetype': 'text/plain'}),
      url(r'^admin/', include(admin.site.urls)),
      url(r'^atms/', include('atm.urls')),
      (r'^pincode/', include('zipcode.urls')),
