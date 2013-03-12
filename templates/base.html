@@ -46,94 +46,43 @@
     {% block navigation_content %}
     <div id="wrapper">  
       
-      <!-- HEADER START --> 
       <div id="header"> 
         <div class="inner">
           
           <div class="nav"> 
             <ul> 
-              <!-- <form id="myform"  action="" method="GET" > -->
-              <!-- <li class="selected">  -->
-              <!-- <input type="text" name ="search"> -->
-              <!-- <br> &nbsp -->
-              <!-- <input type="submit"> -->
-              <!-- </li> -->
               <li class="selected"><a href="{% url bank_home %}">Home</a></li> 
-              <li class="selected"><a href="{% url pincode_home %}">Pincode</a></li> 
-              <li class="selected"><a href="{% url atm_home %}">Atms</a></li> 
               <li><a href="{% url bank_cities %}">Filter by City</a></li> 
               <li><a href="{% url bank_banks %}">Filter by bank</a></li>                        
-              <div id="search">
-                <form method="get" id="searchform"  action="/search/">
-                  <input type="text" value="" name="q" id="s" size="15" />
-                  <input type="submit" id="searchsubmit" value="" />
-                </form>
-              </div>
-              
+              <li><a href="{% url haystack_search %}">Search Branch</a></li>                        
+              <li class="selected"><a href="{% url pincode_home %}">Pincode</a></li> 
+              <li class="selected"><a href="{% url atm_home %}">Atms</a></li> 
             </ul>                     
           </div>  
           <div class="clear"></div>           
-        </div><!-- .inner end --> 
-      </div><!-- #header end -->
+        </div>
+      </div>
       {% endblock %}
       
-      <!-- HEADER END -->     	
-      
-      <!-- MAIN CONTENT START -->
       <div id="main">
-        
-        <div class="inner custom_content"> 
-          {% block search %}
-          {% endblock %}
+          <div class="inner custom_content"> 
+              {% block search %}
+              {% endblock %}
 
-	  {% block 404 %}
-	  {% endblock %}
+              {% block 404 %}
+              {% endblock %}
 
+              {% block 500 %}
+              {% endblock %}
 
-	  {% block 500 %}
-	  {% endblock %}
-
-
-          {% block main_content %}
-          {% endblock %}
-          
-          {% block pincode_content %}
-          {% endblock %}
-          <!--<p>Main content goes here</p>-->
-          
-          
-        </div><!-- .inner End --> 
-      </div><!-- #main End -->
-      <!-- MAIN CONTENT END --> 
-      
-      <!-- FOOTER START --> 
-      <!--<div id="footer"> 
-          <div class="inner">       
-            
-            <p>Footer content goes here</p>                
-            
-          </div>--><!-- .inner End -->  
-      
-      <!--<div class="footer_small">             
-          <div class="copyright">
-            © 2011 <a href="#">Purity</a> - All rights reserved.
+              {% block main_content %}
+              {% endblock %}
+              
+              {% block pincode_content %}
+              {% endblock %}
           </div>
-          
-          <div class="social"> 
-            <a href="#"><img src="img/social/twitter.png" alt></a>
-            <a href="#"><img src="img/social/facebook.png" alt></a>
-            <a href="#"><img src="img/social/dribbble.png" alt></a>
-            <a href="#"><img src="img/social/rss.png" alt></a>
-          </div> 
-      </div>--> <!-- #footer_small End -->
+      </div>
       
-      <!--</div>--><!-- #footer End -->   
-      <!-- FOOTER END -->        
-      <!--</div>--><!-- #holder End --> 
-      <!-- PAGE END --> 
-      
-      
-      <!-- jQuery Scripts -->     
       <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script> 
       <script type="text/javascript" src="{{ STATIC_URL }}js/contact-form.js"></script>  
       <script type="text/javascript" src="{{ STATIC_URL }}js/custom.js"></script>  
