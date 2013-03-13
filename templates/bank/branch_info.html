@@ -99,5 +99,24 @@
             </td>
         </tr>
     </table>
-    <img src="http://maps.googleapis.com/maps/api/staticmap?markers={{branch.address}}&zoom=14&size=600x300&sensor=false" class="heading-img">
+{% endblock %}
+{% block extra_script %}
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var start_geocoding = function (){
+                var geocoder = new google.maps.Geocoder();
+                var address = '{{branch.address}}';
+                geocoder.geocode({'address': address}, function(results, status){
+                    if(status=="OK")
+                    {
+                        var encoded_address = '{{branch.address|urlencode}}';
+                        var $img = $('<img src="http://maps.googleapis.com/maps/api/staticmap?markers='+ encoded_address +'&zoom=14&size=600x300&sensor=false" class="heading-img">')
+                        $("table").after($img);
+                    }
+                });
+            };
+            start_geocoding();
+        });
+    </script>
 {% endblock %}
