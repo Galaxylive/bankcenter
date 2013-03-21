@@ -1,9 +1,24 @@
 {% extends "base.html" %}
-{% block main_content %}
+{% block content %}
     {{block.super}}
-    <h3>Clicking on a bank gets branches for that bank</h3>
-    {% for bank in bank_list %}
-        <a href="{% url bank_bank_branches bank.slug %}">{{bank}}</a>
-        <br/>
-    {% endfor %}
-{% endblock %}
+<div class="container">
+    <div class="row">
+        <div class="span12">
+			<table class="table table-bordered table-striped whiteBg">
+		        <thead>
+		          <tr>
+		            <th colspan="2" class="table_header"><h2>MOST POPULAR BANKS  <span></span></h2></th>
+		          </tr>
+		        </thead>
+		        <tbody>
+				  	{% for bank in bank_list %}
+		          	{% if not forloop.counter|divisibleby:2 %} <tr> {% endif %}
+		            <td><a href="{% url bank_bank_branches bank.slug %}">{{bank}}</a> </td>
+		          	{% if forloop.counter|divisibleby:2 %} </tr> {% endif %} 
+				  	{% endfor %}
+				</tbody>
+			</table>			
+		</div>
+	</div>
+</div>
+{% endblock content %}

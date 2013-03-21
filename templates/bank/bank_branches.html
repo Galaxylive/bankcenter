@@ -5,9 +5,19 @@
 {% block title %}
     {{block.super}}&nbsp&nbsp{{bank.bank_name}}
 {% endblock %}
-{% block main_content %}
+{% block content %}
     {{block.super}}
-    {% for branch in branch_list %}
-        {% include "bank/branch_snippet.html" %}
-    {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="span12">
+			<table class="table table-bordered table-striped whiteBg">		        
+		        <tbody>
+				{% for branch in branch_list %}				 
+					{% include "bank/branch_snippet.html" %}
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>		
+	</div>
+</div>
 {% endblock %}

@@ -2,9 +2,21 @@
 {% block title %}
     {{block.super}}&nbsp&nbspBanks in {{location_slug}}
 {% endblock %}
-{% block main_content %}
-    {{block.super}}
-    {% for branch in branch_list %}
-        {% include "bank/branch_snippet.html" %}
-    {% endfor %}
+{% block content %}
+{{block.super}}
+<div class="container">
+    <div class="row">
+        <div class="span12">
+			<table class="table table-bordered table-striped whiteBg branch-list">		        
+		        <tbody>
+
+			    	{% for branch in branch_list %}
+	        		{% include "bank/branch_snippet.html" %}
+					{% endfor %}
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>
 {% endblock %}

@@ -11,9 +11,9 @@ from utils import get_letters
 def home(request):
     branches = Branch.objects.all()[:10]
     banks = Bank.objects.select_related().all().order_by(
-        '-num_branches')[:20]
+        '-num_branches')[:21]
     locations = Location.objects.select_related().all().\
-        order_by('-num_branches')[:20]
+        order_by('-num_branches')[:21]
     return render(
         request, "bank/home.html",
         {'branch_list': branches, 'bank_list': banks,
@@ -25,7 +25,12 @@ def bank_branches(request, bank_slug):
     except Bank.DoesNotExist:
         raise Http404
     branch_list = Branch.objects.select_related().filter(bank=given_bank)
-    return render(request, "bank/bank_branches.html", {'bank':given_bank, 'branch_list':branch_list})
+    count = branch_list.count()
+    if count % 2 == 0:
+        evencount = "yes"
+    else:
+        evencount = "no"
+    return render(request, "bank/bank_branches.html", {'evencount': evencount, 'bank':given_bank, 'branch_list':branch_list})
     
 def branch_info(request, bank_slug, branch_slug, branch_ifsc):
     try:
@@ -43,7 +48,12 @@ def branch_info(request, bank_slug, branch_slug, branch_ifsc):
     
 def city_branches(request, location_slug):
     branch_list = Branch.objects.select_related().filter(location__slug=location_slug)
-    return render(request, 'bank/city_branches.html', {'location_slug':location_slug, 'branch_list':branch_list})
+    count = branch_list.count()
+    if count % 2 == 0:
+        evencount = "yes"
+    else:
+        evencount = "no"
+    return render(request, 'bank/city_branches.html', {'location_slug':location_slug, 'branch_list':branch_list, 'evencount': evencount})
     
 def state_branches(request, state_slug):
     state = State.objects.get(slug=state_slug)

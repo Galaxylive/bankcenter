@@ -3,7 +3,28 @@
     {{block.super}}&nbsp&nbsp Showing Post-Office Details
 {% endblock %}
 
-{% block pincode_content %}
+{% block content %}
+<div class="container"><!--Content Starts-->
+    <div class="row">
+        <div class="span12">
+			<table class="table table-bordered table-striped whiteBg">
+            <!--<thead>
+              <tr>
+                <th colspan="2" class="table_header"><h2>  <span></span></h2></th>
+              </tr>
+            </thead>-->
+            <tbody>
+			  {% for city in cities.object_list %}
+              {% if not forloop.counter|divisibleby:2 %} <tr> {% endif %}
+                <td width="50%">{{city.post_office_name }} <br />
+					{{city.pin_code }} <br />
+					{{city.district_name }} <br />
+					{{city.state }}</td>
+              {% if forloop.counter|divisibleby:2 %} </tr> {% endif %} 
+			  {% endfor %}
+			</tbody>
+			</table>			
+<!--
 {% for city in cities.object_list %}
   {{city.post_office_name }}
     <br>
@@ -14,21 +35,36 @@
     {{city.state }}
     <br><br><br>
 {% endfor %}
+-->
+			<div class="pagination pagination-right"><!--pagination Starts-->
+						  <ul>
+						    <li><a href="#">«</a></li>
+						    <li><a href="#">1</a></li>
+						    <li><a href="#">2</a></li>
+						    <li><a href="#">3</a></li>
+						    <li><a href="#">4</a></li>
+						    <li><a href="#">5</a></li>
+						    <li><a href="#">»</a></li>
+						  </ul>
+						</div><!--pagination Ends-->
 
-<div class="pagination">
-    <span class="step-links">
-        {% if cities.has_previous %}
-            <a href="?page={{ cities.previous_page_number }}">previous</a>
-        {% endif %}
+			<div class="pagination">
+				<span class="step-links">
+					{% if cities.has_previous %}
+						<a href="?page={{ cities.previous_page_number }}">previous</a>
+					{% endif %}
 
-        <span class="current">
-            Page {{ cities.number }} of {{ cities.paginator.num_pages }}.
-        </span>
+					<span class="current">
+						Page {{ cities.number }} of {{ cities.paginator.num_pages }}.
+					</span>
 
-        {% if cities.has_next %}
-            <a href="?page={{ cities.next_page_number }}">next</a>
-        {% endif %}
-    </span>
+					{% if cities.has_next %}
+						<a href="?page={{ cities.next_page_number }}">next</a>
+					{% endif %}
+				</span>
+			</div>
+		</div>
+	</div>
 </div>
 
 {% endblock %}

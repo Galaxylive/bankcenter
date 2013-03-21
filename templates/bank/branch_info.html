@@ -5,18 +5,78 @@
 {% block title %}
     {{block.super}}&nbsp&nbsp{{branch.bank}}&nbsp&nbsp{{branch.branch_name}}
 {% endblock %}
-{% block main_content %}
-    <ul id="breadcrumbs">
-        <li><a href="{% url bank_home %}">Home</a></li>
-        <li><a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a></li>
-        {% if branch.location.city %}
-        <li><a href="{% url bank_bank_city_branches branch.bank.slug branch.location.slug %}">{{branch.location.city}}</a></li>
-        {% endif %}
-        <li>{{branch.branch_name}}</li>
-    </ul>
-    <br/>
-    <br/>
-    <h3>Branch details</h3>
+{% block content %}
+<div class="container">
+    <div class="row">
+		<div class="span12">
+			<ul class="breadcrumb">
+				<li><a href="{% url bank_home %}">Home</a> <span class="divider">/</span></li>
+				<li><a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a> <span class="divider">/</span></li>
+				{% if branch.location.city %}
+				<li><a href="{% url bank_bank_city_branches branch.bank.slug branch.location.slug %}">{{branch.location.city}}</a></li>
+				{% endif %}
+				<li><span class="divider">/</span> {{branch.branch_name}}</li>
+			</ul>
+		</div>
+        <div class="span12">			
+			<table class="table table-bordered table-condensed whiteBg">
+            <thead>
+              <tr>
+                <th colspan="2" class="table_header"><h2>BANK DETAILS : <span>{{branch.bank}}</span></h2></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td width="30%">Bank name </td>
+                <td class="noleft_border">: <a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a></td>
+              </tr>
+              <tr>
+                <td>Branch</td>
+                <td class="noleft_border">: {{branch.branch_name}}</td>
+              </tr>
+              <tr>
+                <td>IFSC Code</td>
+                <td class="noleft_border">: <a href="{% url bank_branch_with_ifsc branch.ifsc %}">{{branch.ifsc}}</a></td>
+              </tr>
+              <tr>
+                <td>MICR Code</td>
+                {% if branch.micr %}
+		        <td class="noleft_border">: <a href="{% url bank_branch_with_micr branch.micr %}">{{branch.micr}}</a> </td>
+		        {% else %}
+		        <td class="noleft_border">: MICR code does not exist </td>
+		        {% endif %}
+              </tr>
+              <tr>
+                <td>Address</td>
+                <td class="noleft_border">: {{branch.address}}</td>
+              </tr>
+              <tr>
+                <td>Contact</td>
+                <td class="noleft_border">: {{branch.contact}}</td>
+              </tr>
+              <tr>
+                <td>City</td>
+                <td class="noleft_border">: <a href="{% if branch.location.city %}{% url bank_city_branches branch.location.slug %}{% endif %}">{{branch.location.city}}</a></td>
+              </tr>
+              <tr>
+                <td>District</td>
+                <td class="noleft_border">: {{branch.location.district}}</td>
+              </tr>
+              <tr>
+                <td>State</td>
+                <td class="noleft_border">
+					{% if branch.location.state %}: 
+		            <a href="{% url bank_state_branches branch.location.state_fk.slug %}">{{branch.location.state}}</a>
+		            {% endif %}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+	</div>
+</div>
+
+
+    <!--<h3>Branch details</h3>
     <table cellspacing="3px" cellpadding="5px">
         <tr>
             <td>
@@ -98,7 +158,7 @@
                 {% endif %}
             </td>
         </tr>
-    </table>
+    </table>-->
 {% endblock %}
 {% block extra_script %}
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
@@ -119,4 +179,5 @@
             start_geocoding();
         });
     </script>
+</div>
 {% endblock %}

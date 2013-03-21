@@ -1,6 +1,31 @@
 {% extends "base.html" %}
-{% block main_content %}
-{% if cities %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="span12">
+			<table class="table table-bordered table-condensed whiteBg">
+            <tbody>
+				{% if cities %}
+				{% for city in cities %}
+              	{% if not forloop.counter|divisibleby:2 %} <tr> {% endif %}
+                <td width="50%">{{city.post_office_name }}<br />
+					{{city.pin_code }}	<br />
+					{{city.district_name }}<br />
+					 <a href="{{ city.get_absolute_url }}"><i>{{city.city_name }} </i></a> <br />
+					{{city.state }}
+				</td>
+              	{% if forloop.counter|divisibleby:2 %} </tr> {% endif %} 
+			  	{% endfor %}
+				{% else %}
+    			<h5 class="error_txt"> No matching Query </h5>
+				{% endif %}
+
+			</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!--{% if cities %}
     {% for city  in cities %} 
         {{city.post_office_name }}
         <br>
@@ -15,5 +40,5 @@
     {% endfor %}
 {% else %}
     <h5> No matching Query </h5>
-{% endif %}
+{% endif %}-->
 {% endblock %}

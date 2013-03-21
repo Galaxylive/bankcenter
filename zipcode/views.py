@@ -18,7 +18,7 @@ def city(request, city_slug=None):
     p = Zip_code.objects.filter(city_slug__iexact=city_slug)
     if not p.count():
         raise Http404
-    paginator = Paginator(p, 5)#show 20 recipes per page
+    paginator = Paginator(p, 10)#show 20 recipes per page
     page = request.GET.get('page', 1)
     try:
         contents = paginator.page(page)

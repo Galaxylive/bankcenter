@@ -1,5 +1,29 @@
 {% extends "base.html" %}
-{% block main_content %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="span12">
+			<table class="table table-bordered table-condensed whiteBg">
+            <tbody>
+				{% if places %}
+				{% for place  in places %}
+              	{% if not forloop.counter|divisibleby:2 %} <tr> {% endif %}
+                <td width="50%">{{place.post_office_name }} <br />
+			        {{place.pin_code }} <br />
+					{{place.city_name }}
+				</td>
+              	{% if forloop.counter|divisibleby:2 %} </tr> {% endif %} 
+			  	{% endfor %}
+				{% else %}
+    			<h5 class="error_txt"> No matching Query </h5>
+				{% endif %}
+
+			</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!--
 {% if places %}
     {% for place  in places %} 
         {{place.post_office_name }}
@@ -11,5 +35,5 @@
     {% endfor %}
 {% else %}
     <h5>No matching Query</h5>
-{% endif %}
+{% endif %}-->
 {% endblock %}

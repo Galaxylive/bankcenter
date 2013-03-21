@@ -3,33 +3,55 @@
     {{block.super}}&nbsp&nbsp Showing all  the atms of  {{name}}
 {% endblock %}
 
-{% block main_content %}
+{% block content %}
+<div class="container">
+   	<div class="row">
+	   <div class="span12">
+		<table class="table table-bordered table-striped whiteBg">   
+			<thead>
+              <tr>
+                <th colspan="2" class="table_header"><h2> Listing all the atms of <span>{{name}}</span> </h2></th>
+              </tr>
+            </thead>         
+            <tbody>
+				{% for bank in banks.object_list %}
+				{% if not forloop.counter|divisibleby:2 %} <tr> {% endif %}
+              		<td width="50%"><p> Bank:  {{bank.name_of_bank }} </p>
+						<a href="{{ bank.get_detail_url }}"><em>{{bank.address}}</em></a>  </td>
+              	{% if forloop.counter|divisibleby:2 %} </tr> {% endif %} 
+			  	{% endfor %}
+			</tbody>
+			</table>
+		<!--{% for bank in banks.object_list %}
+		<p> City:  {{bank.name_of_bank }} </p>
+		<a href="{{ bank.get_detail_url }}"><em>{{bank.address}}</em></a> 
+		{% endfor %}-->
+		<div class="pagination pagination-right"><!--pagination Starts-->
+              <ul>
+                <li><a href="#">«</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">»</a></li>
+              </ul>
+		</div><!--pagination Ends-->
 
-<h4> Listing all the atms of {{name}} </h4>
-{% for bank in banks.object_list %}
- 
-    <p> City:  {{bank.name_of_bank }} </p>
-    <a href="{{ bank.get_detail_url }}"><i>{{bank.address}}</i></a> 
-
-    <br><br>
-{% endfor %}
-
-<div class="pagination">
-    <span class="step-links">
-        {% if banks.has_previous %}
-            <a href="?page={{ banks.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ banks.number }} of {{ banks.paginator.num_pages }}.
-        </span>
-
-        {% if banks.has_next %}
-            <a href="?page={{ banks.next_page_number }}">next</a>
-        {% endif %}
-    </span>
+		<div class="pagination">
+			<span class="step-links">
+			    {% if banks.has_previous %}
+		        <a href="?page={{ banks.previous_page_number }}">previous</a>
+			    {% endif %}
+		    <span class="current"> Page {{ banks.number }} of {{ banks.paginator.num_pages }}.</span>
+			    {% if banks.has_next %}
+		        <a href="?page={{ banks.next_page_number }}">next</a>
+			    {% endif %}
+			</span>
+		</div>
+		</div>
+	</div>
 </div>
-
 {% endblock %}
 
 

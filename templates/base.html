@@ -1,96 +1,93 @@
-<!DOCTYPE html> 
-<html xmlns="http://www.w3.org/1999/xhtml"> 
-  <head> 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
     {% block meta %}
     {% endblock %}
     
-    <title>
+<title>
       {% block title %}
       bankcenter.in
       {% endblock %}
-    </title>
+</title>
     
-    <!-- Website Styles --> 
-    <link rel="SHORTCUT ICON" href="{{ STATIC_URL }}img/favicon__1_.ico"  media="screen">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" type="text/css" media="screen">     
     
-    <!-- Scripts Styles --> 
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/scripts/nivo-slider.css" type="text/css" media="screen">  
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/scripts/prettyPhoto.css" type="text/css" media="screen">    
-    
-    <!-- Custom Stylesheet --> 
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css" type="text/css" media="screen">
-    
-    <!--[if IE 7]>
-        <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/ie7.css"/>
-  	<![endif]-->
-    {% block extra_css %}
-        <style type="text/css">
-            #breadcrumbs li{
-                display: inline;
-                list-style-type: none;
-                padding-right: 20px;
-            }
-        </style>
-    {% endblock %}
+<link rel="SHORTCUT ICON" href="{{ STATIC_URL }}img/favicon__1_.ico"  media="screen">
+<!-- Website Styles 
+<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" type="text/css" media="screen"> -->     
 
-  </head> 
+<!-- Scripts Styles
+<link rel="stylesheet" href="{{ STATIC_URL }}css/scripts/nivo-slider.css" type="text/css" media="screen">  
+<link rel="stylesheet" href="{{ STATIC_URL }}css/scripts/prettyPhoto.css" type="text/css" media="screen"> -->     
+
+<!-- Custom Stylesheet
+<link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css" type="text/css" media="screen"> --> 
+
+<!--[if IE 7]>
+    <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/ie7.css"/>
+<![endif]-->
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css" type="text/css" media="screen">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css" type="text/css" media="screen">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bankcenter.css" type="text/css" media="screen">
+{% block extra_css %}
+    
+{% endblock %}
+
+</head> 
   
-  <body>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top"><!--Top Navigation-->
+	<div class="navbar-inner">
+    	<div class="container">
+        	<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          	</button>
+		<div class="nav-collapse collapse">
+        	<ul class="nav">
+            	<li class="active"><a href="{% url bank_home %}">Home </a></li>
+				<li><a href="{% url pincode_home %}">pincode </a></li>
+				<li><a href="{% url atm_home %}">ATMS </a></li>
+                <li><a href="{% url bank_cities %}">Filter by City </a></li>
+                <li><a href="{% url bank_banks %}">Filter by Bank</a></li>
+			</ul>
+		</div>
+		</div>
+	</div>
+</div><!--Top Navigation Ends-->
     
-    <div class="logo">
-      <br>
-      &nbsp
-      <a href="#"><img src="{{ STATIC_URL }}img/logo.png" alt="Bank Center"></a>
-    </div>
-    {% block navigation_content %}
-    <div id="wrapper">  
-      
-      <div id="header"> 
-        <div class="inner">
-          
-          <div class="nav"> 
-            <ul> 
-              <li class="selected"><a href="{% url bank_home %}">Home</a></li> 
-              <li><a href="{% url bank_cities %}">Filter by City</a></li> 
-              <li><a href="{% url bank_banks %}">Filter by bank</a></li>                        
-              <li><a href="{% url haystack_search %}">Search Branch</a></li>                        
-              <li class="selected"><a href="{% url pincode_home %}">Pincode</a></li> 
-              <li class="selected"><a href="{% url atm_home %}">Atms</a></li> 
-            </ul>                     
-          </div>  
-          <div class="clear"></div>           
+
+<header class="header"><!--Header Starts-->
+	<div class="container">
+    	<div class="logo"><a href="{% url home %}"><img src="{{STATIC_URL}}img/logo.png" alt="Bank Center"></a> </div>
+      	<div class="banner"><h3>Enter an Address or Pincode or City and State to begin your search:</h3>
+        	<p>For example, Banjara Hills Plot No.9, J R House, Road No.2, or 5000034 or Hyderabad. Andhra Pradesh<br></p>
+			<div class="input-append">
+              <input class="span6" id="appendedInputButtons" type="text" style="height:25px;">
+              <button class="btn btn-inverse" type="button">Search</button>
+              <button class="btn btn-inverse" type="button">Reset</button>
+            </div>
         </div>
-      </div>
-      {% endblock %}
-      
-      <div id="main">
-          <div class="inner custom_content"> 
-              {% block 404 %}
-              {% endblock %}
+	</div>
+</header><!--Header Ends-->
+{% block content %}
 
-              {% block 500 %}
-              {% endblock %}
+{% endblock content %}
+<script type='text/javascript' src='{{ STATIC_URL }}js/jquery-1.6.2.min.js' ></script>
+<script type='text/javascript'>
+{% if evencount %}
+ {% if evencount == "no" %}
+     $(document).ready(function(){
+     e = document.createElement("td"); 
+     $(".branch-list tr:last-child").append(e);
+});
+{% endif %}
+{% else %}
+ {% endif %}     
 
-              {% block main_content %}
-              {% endblock %}
-              
-              {% block pincode_content %}
-              {% endblock %}
-          </div>
-      </div>
-      
-      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script> 
-      <script type="text/javascript" src="{{ STATIC_URL }}js/contact-form.js"></script>  
-      <script type="text/javascript" src="{{ STATIC_URL }}js/custom.js"></script>  
-      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.nivo.slider.pack.js"></script> 
-      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.prettyPhoto.js"></script>
-      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-personalized-1.5.2.packed.js"></script>   
-      <script type="text/javascript" src="{{ STATIC_URL }}js/twitter.js"></script>     
-      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.quicksand.min.js"></script> 
-      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.js"></script>  
-      {% block extra_script %}
-      {% endblock %}
-  </body> 
-</html>      
+</script>
+<footer class="footer">
+	<div class="container">
+		developed by <a href="http://agiliq.com/" target="_blank">AGILIQ </a>
+    </div>
+</footer>
+

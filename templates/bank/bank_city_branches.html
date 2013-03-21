@@ -2,16 +2,27 @@
 {% block title %}
 {{block.super}}&nbsp&nbspBranches for {{bank}} in {{branch_list.0.location.city}}
 {% endblock %}
-{% block main_content %}
+{% block content %}
     {{block.super}}
-    <ul id="breadcrumbs">
-        <li><a href="{% url bank_home %}">Home</a></li>
-        <li><a href="{% url bank_bank_branches bank.slug %}">{{bank}}</a></li>
-        <li>{{branch_list.0.location.city}}</li>
-    </ul>
-    <br/>
-    <br/>
-    {% for branch in branch_list %}
-        {% include "bank/branch_snippet.html" %}
-    {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="span12">
+		    <ul class="breadcrumb">
+		        <li><a href="{% url bank_home %}">Home</a>
+					<span class="divider">/</span></li>
+		        <li><a href="{% url bank_bank_branches bank.slug %}">{{bank}}</a>
+					<span class="divider">/</span></li>
+		        <li>{{branch_list.0.location.city}}</li>
+		    </ul>
+			<table class="table table-bordered table-striped whiteBg">
+		        <tbody>
+				{% for branch in branch_list %}
+					{% include "bank/branch_snippet.html" %}
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+    
 {% endblock %}

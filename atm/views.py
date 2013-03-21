@@ -15,7 +15,7 @@ def bank(request, bank_id=None):
     p = Atm.objects.filter(bank_slug=bank_id)
     if p.count() == 0:
         raise Http404
-    paginator = Paginator(p, 5)#show 5 atms per page
+    paginator = Paginator(p, 10)#show 10 atms per page
     page = request.GET.get('page', 1)
     try:
         contents = paginator.page(page)
@@ -32,7 +32,7 @@ def city(request, city_id=None):
     p = Atm.objects.filter(city_slug__iexact=city_id)
     if p.count() == 0:
         raise Http404
-    paginator = Paginator(p, 5)#show 5 atms per page
+    paginator = Paginator(p, 10)#show 10 atms per page
     page = request.GET.get('page', 1)
     try:
         contents = paginator.page(page)

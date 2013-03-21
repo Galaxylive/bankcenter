@@ -3,54 +3,70 @@
     {{block.super}}&nbsp&nbsp Filter ATMs by city/bank
 {% endblock %}
 
-{% block main_content %}
-        <div class="content">
+{% block content %}
+	<div class="container">
+    	<div class="row">  
+		   <div class="span12">{% if atms.object_list %} 			
+			<table class="table table-bordered table-striped whiteBg">   
+			<thead>
+              <tr>
+                <th colspan="2" class="table_header"><h2>ATM DETAILS:</h2></th>
+              </tr>
+            </thead>         
+            <tbody>
+				{% for atm in atms.object_list %}
+				{% if not forloop.counter|divisibleby:2 %} <tr> {% endif %}
+              		<td><a href="{{atm.get_bank_url }}"><em>{{atm.name_of_bank }} </em></a><br />
+                <a href="{{atm.get_city_url }}"> <em>{{atm.name_of_city }} </em></a> <br />
+                {{ atm.address|slice:":30" }}   
+                <a href="{{ atm.get_detail_url }}"><em>{{"go to details ..."}}</em></a> </td>
+              	{% if forloop.counter|divisibleby:2 %} </tr> {% endif %} 
+			  	{% endfor %}
+			</tbody>
+			</table>
          
-         {% if atms.object_list %} 
-
-            {% for atm in atms.object_list %}
-                <a href="{{atm.get_bank_url }}"><i>{{atm.name_of_bank }} </i></a>
+			
+            <!--{% for atm in atms.object_list %}
+                <a href="{{atm.get_bank_url }}"><em>{{atm.name_of_bank }} </em></a>
                 <br>
-                <a href="{{atm.get_city_url }}"> <i>{{atm.name_of_city }} </i></a>  
+                <a href="{{atm.get_city_url }}"> <em>{{atm.name_of_city }} </em></a>  
                 <br>
                 {{ atm.address|slice:":15" }}   
-                <a href="{{ atm.get_detail_url }}"><i>{{"go to details ..."}}</i></a> 
+                <a href="{{ atm.get_detail_url }}"><em>{{"go to details ..."}}</em></a> 
                 <br><br>
-            {% endfor %}
-           {% else %}
-           <h3> sorry no matching query </h3>     
-         {% endif %}
-         
-        </div>
-        
-        <div class="sidebar">
-            <div class="sidebar_item">
-                <h5>Filter by first letter of Banks</h5> 
-                    <ul> 
-                        {% for letter in letters %}
-                            <strong><a href="?letter={{letter}}">{{letter}}</a></strong>
-                            <br/>
-                        {% endfor %}
-                    </ul> 
-            </div>
-       
-        </div>
-    <!--</div>-->
-    <div class="pagination">
-          <span class="step-links">
-            {% if atms.has_previous %}
-            <a href="?letter={{current_letter}}&page={{ atms.previous_page_number }}">previous</a>
-            {% endif %}
-
-            <span class="current">
-              Page {{ atms.number }} of {{ atms.paginator.num_pages }}.
-            </span>
-
-            {% if atms.has_next %}
-            <a href="?letter={{current_letter}}&page={{ atms.next_page_number }}">next</a>
-            {% endif %}
-          </span>
-        </div>
+				
+            {% endfor %}-->
+			{% else %}
+			<h3> sorry no matching query </h3>     
+			{% endif %} 
+			<div class="pagination pagination-right"><!--pagination Starts-->
+				<ul>
+					<li><a href="#">«</a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">»</a></li>
+				</ul>
+            </div><!--pagination Ends-->
+			<div class="pagination">
+		      	<span class="step-links">
+		        {% if atms.has_previous %}
+		        <a href="?letter={{current_letter}}&page={{ atms.previous_page_number }}">previous</a>
+		        {% endif %}
+		        <span class="current">
+		          Page {{ atms.number }} of {{ atms.paginator.num_pages }}.
+		        </span>
+		        {% if atms.has_next %}
+		        <a href="?letter={{current_letter}}&page={{ atms.next_page_number }}">next</a>
+		        {% endif %}
+		      	</span>
+	    	</div>
+		</div>        
+	</div>                
+</div>
+    
 
 {% endblock %}
 

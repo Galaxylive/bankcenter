@@ -2,13 +2,20 @@
 {% block title %}
     {{block.super}}&nbsp&nbsp Showing ATM Details
 {% endblock %}
-{% block main_content %}
-        <div class="content">
-                <a href="{{ atm.get_bank_url }}"><i>{{ atm.name_of_bank }} </i></a>
-                <br>
-                <a href="{{ atm.get_city_url }}"> <i>{{ atm.name_of_city }} </i></a>  
-                <br>
-                <em> {{ atm.address }} </em>
-                <br><br>
-        </div>
+{% block content %}
+	<div class="container">
+    	<div class="row">  
+		   	<div class="span12">
+				<table class="table table-bordered table-striped whiteBg">		        
+		        <tbody>
+					<tr>
+		          		<td><a href="{{ atm.get_bank_url }}"><em>{{ atm.name_of_bank }} </em></a> <br />
+               				<a href="{{ atm.get_city_url }}"> <em>{{ atm.name_of_city }} </em></a> <br />
+               				<em> {{ atm.address }} </em>
+						</td>
+		          	</tr>
+				</table>
+        	</div>
+		</div>
+	</div>
 {% endblock %}

@@ -1,18 +1,41 @@
 {% extends "base.html" %}
-{% block main_content %}
-{% if no_result %}
-    <h5>No result matches your query</h5>
-{% endif %}
-<h3>Please only enter one of these.</h3>
-<form id="myform"  action="{% url detail %}" method="GET" class="big_form">
-        Entering the name gets you the pin for it
-        <br/>
-        Name of the place: <input type="text" class="text" name ="place">
-        <br><br>
-        Entering the pin gets you all the places with that pin
-        <br/>
-        Pin Code of the place: <input type="text" class="text" name="pincode">
-        <br> <br>
-        <input type="submit" name="submit" value="submit" class="button light">
-    </form>
-{% endblock %}h
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="span12">
+			<table class="table table-bordered table-condensed whiteBg">
+            <thead>
+              <tr>
+                <th class="table_header"><h2>Please only enter one of these. <span></span></h2>	</th>
+              </tr>
+            </thead>
+			<tbody>
+				<tr>
+					<td style="padding:30px 30px 50px 50px;"><p>Enter an Address or Pincode or City and State to begin your search:<br /><br /></p>
+						{% if no_result %}
+						<h4 class="error_txt">No result matches your query</h4>
+						{% endif %}
+						<form id="myform"  action="{% url detail %}" method="GET" class="bs-docs-example form-horizontal">
+							<div class="control-group">
+	                        	<label class="control-label">Name of the place:</label>
+	                        	<div class="controls"><input type="text" id="place" class="text" name="place" placeholder=""></div>
+                          	</div>
+							<div class="control-group">
+		                    	<label class="control-label" for="pincode">Pin Code of the place: </label>
+		                    	<div class="controls"><input type="text" class="text" name="pincode" placeholder=""></div>
+                        	</div>
+							<div class="control-group">
+                          		<div class="controls">
+                            		<button type="submit" name="submit" value="submit" class="btn btn-inverse button light">Submit</button>
+                            		<button type="reset" value="reset" class="btn btn-inverse">Reset</button>
+                          		</div>
+                        	</div>
+					    </form>
+					</td>
+				</tr>				
+			</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}
