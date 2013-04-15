@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.http import Http404
 from django.db.models import Count
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from models import Bank, Branch, Location, State
 from utils import get_letters
@@ -30,6 +31,15 @@ def bank_branches(request, bank_slug):
         evencount = "yes"
     else:
         evencount = "no"
+
+    paginator = Paginator(branch_list, 20)
+    page = request.GET.get('page')
+    try:
+        branch_list = paginator.page(page)
+    except PageNotAnInteger:
+        branch_list = paginator.page(1)
+    except EmptyPage:
+        branch_list = paginator.page(paginator.num_pages)
     return render(request, "bank/bank_branches.html", {'evencount': evencount, 'bank':given_bank, 'branch_list':branch_list})
     
 def branch_info(request, bank_slug, branch_slug, branch_ifsc):

@@ -12,11 +12,26 @@
         <div class="span12">
 			<table class="table table-bordered table-striped whiteBg">		        
 		        <tbody>
-				{% for branch in branch_list %}				 
+				{% for branch in branch_list.object_list %}				 
 					{% include "bank/branch_snippet.html" %}
 				{% endfor %}
 				</tbody>
 			</table>
+	<div class="pagination">
+	    <span class="step-links">
+		{% if branch_list.has_previous %}
+		    <a href="?page={{ branch_list.previous_page_number }}">previous</a>
+		{% endif %}
+
+		<span class="current">
+		    Page {{ branch_list.number }} of {{ branch_list.paginator.num_pages }}.
+		</span>
+
+		{% if branch_list.has_next %}
+		    <a href="?page={{ branch_list.next_page_number }}">next</a>
+		{% endif %}
+	    </span>
+	</div>
 		</div>		
 	</div>
 </div>
