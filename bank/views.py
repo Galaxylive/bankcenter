@@ -34,6 +34,8 @@ def bank_branches(request, bank_slug):
 
     paginator = Paginator(branch_list, 20)
     page = request.GET.get('page')
+    if not page:
+        page = 1
     try:
         branch_list = paginator.page(page)
     except PageNotAnInteger:
