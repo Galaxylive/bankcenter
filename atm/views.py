@@ -16,7 +16,7 @@ def bank(request, bank_id=None):
     if p.count() == 0:
         raise Http404
     paginator = Paginator(p, 10)#show 10 atms per page
-    page = request.GET.get('page', 1)
+    page = int(request.GET.get('page', 1))
     try:
         contents = paginator.page(page)
     except PageNotAnInteger:
@@ -25,7 +25,12 @@ def bank(request, bank_id=None):
     except EmptyPage:
       #If page is out of range, deliver last page of results.
         contents = paginator.page(paginator.num_pages)
-    return render(request, 'atm/atms_by_bank.html', {'banks' : contents, 'name':bank_id})
+    max_range = page+3
+    if max_range > paginator.num_pages:
+        max_range = paginator.num_pages+1
+    pages = range(page-3, max_range)
+    pages = [pagenum for pagenum in pages if pagenum>0]
+    return render(request, 'atm/atms_by_bank.html', {'banks' : contents, 'name':bank_id, 'pages': pages})
 
 
 def city(request, city_id=None):
@@ -33,7 +38,7 @@ def city(request, city_id=None):
     if p.count() == 0:
         raise Http404
     paginator = Paginator(p, 10)#show 10 atms per page
-    page = request.GET.get('page', 1)
+    page = int(request.GET.get('page', 1))
     try:
         contents = paginator.page(page)
     except PageNotAnInteger:
@@ -42,7 +47,13 @@ def city(request, city_id=None):
     except EmptyPage:
       #If page is out of range, deliver last page of results.
         contents = paginator.page(paginator.num_pages)
-    return render(request, 'atm/atms_by_city.html', {'cities' : contents, 'name':city_id})
+	letters=get_letters()
+    max_range = page+3
+    if max_range > paginator.num_pages:
+        max_range = paginator.num_pages+1
+    pages = range(page-3, max_range)
+    pages = [pagenum for pagenum in pages if pagenum>0]
+    return render(request, 'atm/atms_by_city.html', {'cities' : contents, 'name':city_id, 'pages': pages})
 
 
 def atms(request):
@@ -51,8 +62,8 @@ def atms(request):
         obj = Atm.objects.all().order_by("bank_slug")
     else:
         obj = Atm.objects.select_related().filter(name_of_bank__startswith=letter)
-    paginator = Paginator(obj, 10)#show 20 recipes per page
-    page = request.GET.get('page', 1)
+    paginator = Paginator(obj, 20)#show 20 recipes per page
+    page = int(request.GET.get('page', 1))
     try:
         contents = paginator.page(page)
     except PageNotAnInteger:
@@ -62,4 +73,9 @@ def atms(request):
       #If page is out of range, deliver last page of results.
         contents = paginator.page(paginator.num_pages)
     letters=get_letters()
-    return render(request, 'atm/index.html', {'atms':contents, 'letters':letters, 'current_letter':letter})
+    max_range = page+3
+    if max_range > paginator.num_pages:
+        max_range = paginator.num_pages+1
+    pages = range(page-3, max_range)
+    pages = [pagenum for pagenum in pages if pagenum>0]
+    return render(request, 'atm/index.html', {'atms':contents, 'letters':letters, 'current_letter':letter,'pages': pages})

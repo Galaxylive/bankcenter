@@ -25,19 +25,7 @@
 		<!--{% for bank in banks.object_list %}
 		<p> City:  {{bank.name_of_bank }} </p>
 		<a href="{{ bank.get_detail_url }}"><em>{{bank.address}}</em></a> 
-		{% endfor %}-->
-		<div class="pagination pagination-right"><!--pagination Starts-->
-              <ul>
-                <li><a href="#">«</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-              </ul>
-		</div><!--pagination Ends-->
-
+		{% endfor %}
 		<div class="pagination">
 			<span class="step-links">
 			    {% if banks.has_previous %}
@@ -48,6 +36,32 @@
 		        <a href="?page={{ banks.next_page_number }}">next</a>
 			    {% endif %}
 			</span>
+		</div>-->
+		{% load i18n %}
+		<div class="pagination pagination-right">
+			<ul>
+			{% if banks.has_previous %}
+				<li><a href="?page={{ banks.previous_page_number }}{{ getvars }}{{ hashtag }}" class="prev">&lsaquo;&lsaquo; {% trans "Previous" %}</a></li>
+			{% else %}
+				<li class="disabled prev"><a href="#">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+			{% endif %}
+			{% for page in pages %}
+				{% if page %}
+				    {% ifequal page banks.number %}
+				        <li class="current page active"><a href="#">{{ page }}</a></li>
+				    {% else %}
+				        <li><a href="?page={{ page }}{{ getvars }}{{ hashtag }}" class="page">{{ page }}</a></li>
+				    {% endifequal %}
+				{% else %}
+				    ...
+				{% endif %}
+			{% endfor %}
+			{% if banks.has_next %}
+				<li><a href="?page={{ banks.next_page_number }}{{ getvars }}{{ hashtag }}" class="next">{% trans "Next" %} &rsaquo;&rsaquo;</a></li>
+			{% else %}
+				<li class="disabled next"><a href="#">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+			{% endif %}
+			</ul>
 		</div>
 		</div>
 	</div>

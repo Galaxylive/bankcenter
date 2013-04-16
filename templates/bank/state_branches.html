@@ -15,9 +15,9 @@
             </thead>
             <tbody>
 				{% for bank in banks %}
-				{% if not forloop.counter|divisibleby:2 %} <tr> {% endif %}
-              		<td><a href="{% url bank_bank_state_branches state.slug bank.bank__slug %}">{{bank.bank__bank_name}}</a></td>
-              	{% if forloop.counter|divisibleby:2 %} </tr> {% endif %} 
+				{% if forloop.counter|divisibleby:2 == 0 %} <tr> {% endif %}
+              		<td width="50%"><a href="{% url bank_bank_state_branches state.slug bank.bank__slug %}">{{bank.bank__bank_name}}</a></td>
+              	{% if forloop.counter|divisibleby:2 == 1 %} </tr> {% endif %} 
 			  	{% endfor %}
 			</tbody>
 			</table>

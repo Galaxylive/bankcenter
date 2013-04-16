@@ -1,11 +1,11 @@
 
 
-{% if forloop.counter|divisibleby:2 == 0 %} <tr> {% endif %}
+ <tr> 
 <td>
 	<a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a><br />
 	<a href="{% url bank_branch_info branch.bank.slug branch.slug branch.ifsc %}">{{branch.branch_name}}</a><br />
 	{{branch.address}}<br />
 	{{branch.location}}<br />
 </td>
-{% if forloop.counter|divisibleby:2 == 1 %}  </tr> {% endif %}
+ </tr> 
 				

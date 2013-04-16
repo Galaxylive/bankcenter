@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="span12">
-		<table class="table table-bordered table-striped whiteBg">
+		<table class="table table-bordered table-striped whiteBg data-table">
             <thead>
               <tr>
                 <th colspan="2" class="table_header"><h2> Listing all the atms in<span> {{name}}</span></h2></th>
@@ -16,7 +16,7 @@
             <tbody>
 				{% for city in cities.object_list %}
 				{% if not forloop.counter|divisibleby:2 %} <tr> {% endif %}
-              		<td>{{city.post_office_name }}
+              		<td width="50%">{{city.post_office_name }}
 						<p> Bank:  {{city.name_of_bank }} </p>
 						<a href="{{ city.get_detail_url }}"><em>{{city.address}}</em></a> 
 					</td>
@@ -30,18 +30,7 @@
 				<p> Bank:  {{city.name_of_bank }} </p>
 				<a href="{{ city.get_detail_url }}"><i>{{city.address}}</i></a> 
 				<br><br>
-			{% endfor %}-->
-			<div class="pagination pagination-right"><!--pagination Starts-->
-              <ul>
-                <li><a href="#">«</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-              </ul>
-            </div><!--pagination Ends-->
+			{% endfor %}		
 		<div class="pagination">
 			<span class="step-links">
 				{% if cities.has_previous %}
@@ -56,7 +45,33 @@
 				    <a href="?page={{ cities.next_page_number }}">next</a>
 				{% endif %}
 			</span>
-		</div>
+		</div>-->
+		{% load i18n %}
+				<div class="pagination pagination-right">
+					<ul>
+					{% if cities.has_previous %}
+						<li><a href="?page={{ cities.previous_page_number }}{{ getvars }}{{ hashtag }}" class="prev">&lsaquo;&lsaquo; {% trans "Previous" %}</a></li>
+					{% else %}
+						<li class="disabled prev"><a href="#">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+					{% endif %}
+					{% for page in pages %}
+						{% if page %}
+							{% ifequal page cities.number %}
+								<li class="current page active"><a href="#">{{ page }}</a></li>
+							{% else %}
+								<li><a href="?page={{ page }}{{ getvars }}{{ hashtag }}" class="page">{{ page }}</a></li>
+							{% endifequal %}
+						{% else %}
+							...
+						{% endif %}
+					{% endfor %}
+					{% if cities.has_next %}
+						<li><a href="?page={{ cities.next_page_number }}{{ getvars }}{{ hashtag }}" class="next">{% trans "Next" %} &rsaquo;&rsaquo;</a></li>
+					{% else %}
+						<li class="disabled next"><a href="#">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+					{% endif %}
+					</ul>
+				</div>
 		</div>
 	</div>
 </div>

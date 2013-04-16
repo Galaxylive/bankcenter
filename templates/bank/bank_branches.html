@@ -17,7 +17,7 @@
 				{% endfor %}
 				</tbody>
 			</table>
-	<div class="pagination">
+	<!--<div class="pagination">
 	    <span class="step-links">
 		{% if branch_list.has_previous %}
 		    <a href="?page={{ branch_list.previous_page_number }}">previous</a>
@@ -30,7 +30,33 @@
 		{% if branch_list.has_next %}
 		    <a href="?page={{ branch_list.next_page_number }}">next</a>
 		{% endif %}
-	    </span>
+	    </span>-->
+{% load i18n %}
+<div class="pagination pagination-right">
+    <ul>
+    {% if branch_list.has_previous %}
+        <li><a href="?page={{ branch_list.previous_page_number }}{{ getvars }}{{ hashtag }}" class="prev">&lsaquo;&lsaquo; {% trans "Previous" %}</a></li>
+    {% else %}
+        <li class="disabled prev"><a href="#">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+    {% endif %}
+    {% for page in pages %}
+        {% if page %}
+            {% ifequal page branch_list.number %}
+                <li class="current page active"><a href="#">{{ page }}</a></li>
+            {% else %}
+                <li><a href="?page={{ page }}{{ getvars }}{{ hashtag }}" class="page">{{ page }}</a></li>
+            {% endifequal %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    {% if branch_list.has_next %}
+        <li><a href="?page={{ branch_list.next_page_number }}{{ getvars }}{{ hashtag }}" class="next">{% trans "Next" %} &rsaquo;&rsaquo;</a></li>
+    {% else %}
+        <li class="disabled next"><a href="#">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+    {% endif %}
+    </ul>
+</div>
 	</div>
 		</div>		
 	</div>

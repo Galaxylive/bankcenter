@@ -74,16 +74,15 @@
 {% endblock content %}
 <script type='text/javascript' src='{{ STATIC_URL }}js/jquery-1.6.2.min.js' ></script>
 <script type='text/javascript'>
-{% if evencount %}
- {% if evencount == "no" %}
-     $(document).ready(function(){
-     e = document.createElement("td"); 
-     $(".branch-list tr:last-child").append(e);
-});
-{% endif %}
-{% else %}
- {% endif %}     
+  
+$(document).ready(function(){
+	tdcount = $(".data-table td").length;
+    if(tdcount % 2 == 1){
+    var e = document.createElement("td"); 
+     $(".data-table tr:last-child").append(e);
 
+    } 
+});
 </script>
 <footer class="footer">
 	<div class="container">

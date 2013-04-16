@@ -27,22 +27,22 @@ def bank_branches(request, bank_slug):
         raise Http404
     branch_list = Branch.objects.select_related().filter(bank=given_bank)
     count = branch_list.count()
-    if count % 2 == 0:
-        evencount = "yes"
-    else:
-        evencount = "no"
-
+   
     paginator = Paginator(branch_list, 20)
-    page = request.GET.get('page')
-    if not page:
-        page = 1
+    page = int(request.GET.get('page', 1))
+    
     try:
         branch_list = paginator.page(page)
     except PageNotAnInteger:
         branch_list = paginator.page(1)
     except EmptyPage:
         branch_list = paginator.page(paginator.num_pages)
-    return render(request, "bank/bank_branches.html", {'evencount': evencount, 'bank':given_bank, 'branch_list':branch_list})
+    max_range = page+3
+    if max_range > paginator.num_pages:
+        max_range = paginator.num_pages+1
+    pages = range(page-3, max_range)
+    pages = [pagenum for pagenum in pages if pagenum>0]
+    return render(request, "bank/bank_branches.html", {'bank':given_bank, 'branch_list':branch_list, 'pages': pages})
     
 def branch_info(request, bank_slug, branch_slug, branch_ifsc):
     try:
@@ -61,11 +61,8 @@ def branch_info(request, bank_slug, branch_slug, branch_ifsc):
 def city_branches(request, location_slug):
     branch_list = Branch.objects.select_related().filter(location__slug=location_slug)
     count = branch_list.count()
-    if count % 2 == 0:
-        evencount = "yes"
-    else:
-        evencount = "no"
-    return render(request, 'bank/city_branches.html', {'location_slug':location_slug, 'branch_list':branch_list, 'evencount': evencount})
+  
+    return render(request, 'bank/city_branches.html', {'location_slug':location_slug, 'branch_list':branch_list})
     
 def state_branches(request, state_slug):
     state = State.objects.get(slug=state_slug)
@@ -77,6 +74,8 @@ def cities(request):
     location_list = Location.objects.select_related().filter(
         city__startswith=letter)
     letters = get_letters()
+    count = location_list.count()
+    
     return render(
         request, 'bank/cities.html',
         {'location_list': location_list, 'letters': letters})
