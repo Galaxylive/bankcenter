@@ -1,32 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-     <h2>Search for a Branch</h2> 
-
-     <form method="get" action="." class="big_form"> 
-         Search: <input type="text" class="text" name ="q" id="id_q" value="{{query}}">
-        <br> <br>
-        <input type="submit" name="submit" value="submit" class="button light">
-     </form>
-
-     {% if query %}       
-         <h3>Results</h3>          
-         <div id="inner-content">
-             {% for result in page.object_list %}
-                {% with branch=result.object %}
-                    {% include "bank/branch_snippet.html" %}
-                {% endwith %}
-             {% empty %}
-                 <p>No results found.</p>
-             {% endfor %}
-             {% if page.has_previous or page.has_next %}
-                 <div>
-                     {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                     |
-                     {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-                 </div>
-             {% endif %}
-         </div>
-     {% else %}
-     {% endif %}
+<div class="container">
+    <div class="row">
+        <div class="span12">
+			<table class="table table-bordered table-striped whiteBg branch-list">
+				<thead>
+		          <tr>
+		            <th colspan="2" class="table_header"><h2>Enter an Address or Pincode or City and State to begin your search</h2></th>
+		          </tr>
+		        </thead>		        
+		        <tbody>
+					<tr> 
+					<td>
+						<form action="." method="GET" class="bs-docs-example form-horizontal" style="padding-top:50px;">
+							<div class="control-group">
+	                        	<label class="control-label">Search:</label>
+	                        	<div class="controls"><input type="text" id="id_q" value="{{query}}" class="text" name='q' ></div>
+                          	</div>
+							<div class="control-group">
+                          		<div class="controls">
+                            		<button type="submit"  value="submit" class="btn btn-inverse button light">Submit</button>
+                          		</div>
+                        	</div>
+					    </form>
+					</td>
+					</tr>
+					<tr>
+						<td>
+							{% if query %}       
+							 <h3>Results</h3>          
+							 <div id="inner-content">
+								 {% for result in page.object_list %}
+									{% with branch=result.object %}
+										{% include "bank/branch_snippet.html" %}
+									{% endwith %}
+								 	{% empty %}
+									 <p>No results found.</p>
+								 {% endfor %}
+								 {% if page.has_previous or page.has_next %}
+							 </div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			{% endif %}
+			<div>
+				{% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+				|
+				{% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+			</div>
+			{% else %}
+			{% endif %}
+		</div>
+	</div>
+</div>
 {% endblock %}
