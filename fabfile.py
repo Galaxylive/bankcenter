@@ -1,8 +1,6 @@
-from __future__ import with_statement
-
 from fabric.api import *
-from fabric.operations import run, sudo
-from fabric.context_managers import cd, settings
+from fabric.operations import run
+from fabric.context_managers import cd
 from fabric.api import env, prefix
 from fabric.colors import green
 HOST_NAME = ['bankcenter.in']
