@@ -52,12 +52,12 @@
 	<div class="container">
     	<div class="logo"><a href="{% url home %}"><img src="{{STATIC_URL}}img/logo.png" alt="Bank Center"></a> </div>
       	<div class="banner"><h3>Enter an Address or Pincode or City and State to begin your search:</h3>
-        	<p>For example: Axis bank, Begumpet, Hyderabad<br></p>
+        	<p>For example, Banjara Hills Plot No.9, J R House, Road No.2, or 5000034 or Hyderabad. Andhra Pradesh<br></p>
             <form method="get" action="/search/">
 			<div class="input-append">
                 <input class="span6" name="q" id="appendedInputButtons" type="text" style="height:25px;" value="{{query}}">
               <button class="btn btn-inverse" type="submit">Search</button>
-              <button class="btn btn-inverse" type="reset">Reset</button>
+              <button class="btn btn-inverse" id='reset' type="button">Reset</button>
             </div>
             </form>
         </div>
@@ -78,10 +78,15 @@ $(document).ready(function(){
 
     } 
 
-	// Making nav active - as per older jquery file.
 	var pathname = window.location.pathname;
 	$(".nav li").removeClass("active");
 	$("a[href='"+pathname+"']").parent().addClass("active");
+
+	$("#reset").live({
+		click: function(){
+			$("#appendedInputButtons").val("");
+		}
+	})
 	
 	
 	
