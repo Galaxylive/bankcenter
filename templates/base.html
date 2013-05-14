@@ -86,6 +86,14 @@ $(document).ready(function(){
      $(".data-table tr:last-child").append(e);
 
     } 
+
+	// Making nav active - as per older jquery file.
+	var pathname = window.location.pathname;
+	$(".nav li").removeClass("active");
+	$("a[href='"+pathname+"']").parent().addClass("active");
+	
+	
+	
 });
 </script>
 <footer class="footer">
