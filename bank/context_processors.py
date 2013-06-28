@@ -1,4 +1,4 @@
-from models import Bank, Location
+from .models import Bank, Location
 
 
 def required_context(request):
