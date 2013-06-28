@@ -1,4 +1,5 @@
-letters=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+A_ASCII = 65
+Z_ASCII = 90
 
 def get_letters():
-    return letters
+    return [chr(each) for each in range(A_ASCII, Z_ASCII+1)]
