@@ -5,8 +5,8 @@ from django.http import Http404
 from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from models import Bank, Branch, Location, State
-from utils import get_letters
+from .models import Bank, Branch, Location, State
+from .utils import get_letters
 
 
 def home(request):
@@ -26,7 +26,6 @@ def bank_branches(request, bank_slug):
     except Bank.DoesNotExist:
         raise Http404
     branch_list = Branch.objects.select_related().filter(bank=given_bank)
-    count = branch_list.count()
    
     paginator = Paginator(branch_list, 20)
     page = int(request.GET.get('page', 1))
@@ -60,8 +59,6 @@ def branch_info(request, bank_slug, branch_slug, branch_ifsc):
     
 def city_branches(request, location_slug):
     branch_list = Branch.objects.select_related().filter(location__slug=location_slug)
-    count = branch_list.count()
-  
     return render(request, 'bank/city_branches.html', {'location_slug':location_slug, 'branch_list':branch_list})
     
 def state_branches(request, state_slug):
@@ -74,8 +71,6 @@ def cities(request):
     location_list = Location.objects.select_related().filter(
         city__startswith=letter)
     letters = get_letters()
-    count = location_list.count()
-    
     return render(
         request, 'bank/cities.html',
         {'location_list': location_list, 'letters': letters})
