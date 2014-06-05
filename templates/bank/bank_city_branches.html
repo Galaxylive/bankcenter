@@ -8,9 +8,9 @@
     <div class="row">
         <div class="span12">
 		    <ul class="breadcrumb">
-		        <li><a href="{% url bank_home %}">Home</a>
+		        <li><a href="{% url 'bank_home' %}">Home</a>
 					<span class="divider">/</span></li>
-		        <li><a href="{% url bank_bank_branches bank.slug %}">{{bank}}</a>
+		        <li><a href="{% url 'bank_bank_branches' bank.slug %}">{{bank}}</a>
 					<span class="divider">/</span></li>
 		        <li>{{branch_list.0.location.city}}</li>
 		    </ul>
@@ -24,5 +24,5 @@
 		</div>
 	</div>
 </div>
-    
+
 {% endblock %}

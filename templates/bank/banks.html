@@ -13,11 +13,11 @@
 		        <tbody>
 				  	{% for bank in bank_list %}
 		          	{% if not forloop.counter|divisibleby:2 %} <tr> {% endif %}
-		            <td><a href="{% url bank_bank_branches bank.slug %}">{{bank}}</a> </td>
-		          	{% if forloop.counter|divisibleby:2 %} </tr> {% endif %} 
+		            <td><a href="{% url 'bank_bank_branches' bank.slug %}">{{bank}}</a> </td>
+		          	{% if forloop.counter|divisibleby:2 %} </tr> {% endif %}
 				  	{% endfor %}
 				</tbody>
-			</table>			
+			</table>
 		</div>
 	</div>
 </div>

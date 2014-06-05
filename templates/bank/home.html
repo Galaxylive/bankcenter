@@ -18,14 +18,14 @@
             <tbody>
 				{% for branch in branch_list %}
            		<tr>
-					<td><a href="{% url bank_branch_info branch.bank.slug branch.slug branch.ifsc %}">{{branch.bank}}</a>
+					<td><a href="{% url 'bank_branch_info' branch.bank.slug branch.slug branch.ifsc %}">{{branch.bank}}</a>
                 		<br/>
                 		{{branch.branch_name}}
                 		<br/>
                 		{{branch.location.city}}, {{branch.location.state}}
 					</td>
 				</tr>
-        		{% endfor %}               
+        		{% endfor %}
             </tbody>
           </table>
         </div>
@@ -41,11 +41,11 @@
             <tbody>
 			{% for bank in bank_list %}
               <tr>
-                <td><a href="{% url bank_bank_branches bank.slug %}">{{bank.bank_name}}</a></td>
+                <td><a href="{% url 'bank_bank_branches' bank.slug %}">{{bank.bank_name}}</a></td>
               </tr>
 			{% endfor %}
               <tr>
-                <td><a href="{% url bank_banks %}" class="moreInfo">More Banks...</a></td>
+                <td><a href="{% url 'bank_banks' %}" class="moreInfo">More Banks...</a></td>
               </tr>
 
             </tbody>
@@ -63,11 +63,11 @@
             <tbody>
 			{% for loc in location_list %}
               <tr>
-                <td><a href="{% url bank_city_branches loc.slug %}">{{loc.city}}, {{loc.district}}, {{loc.state}}</td>
+                <td><a href="{% url 'bank_city_branches' loc.slug %}">{{loc.city}}, {{loc.district}}, {{loc.state}}</td>
               </tr>
 			{% endfor %}
               <tr>
-                <td><a href="{% url bank_cities %}" class="moreInfo">More Cities...</a></td>
+                <td><a href="{% url 'bank_cities' %}" class="moreInfo">More Cities...</a></td>
               </tr>
             </tbody>
           </table>

@@ -10,15 +10,15 @@
     <div class="row">
 		<div class="span12">
 			<ul class="breadcrumb">
-				<li><a href="{% url bank_home %}">Home</a> <span class="divider">/</span></li>
-				<li><a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a> <span class="divider">/</span></li>
+				<li><a href="{% url 'bank_home' %}">Home</a> <span class="divider">/</span></li>
+				<li><a href="{% url 'bank_bank_branches' branch.bank.slug %}">{{branch.bank}}</a> <span class="divider">/</span></li>
 				{% if branch.location.city %}
-				<li><a href="{% url bank_bank_city_branches branch.bank.slug branch.location.slug %}">{{branch.location.city}}</a></li>
+				<li><a href="{% url 'bank_bank_city_branches' branch.bank.slug branch.location.slug %}">{{branch.location.city}}</a></li>
 				{% endif %}
 				<li><span class="divider">/</span> {{branch.branch_name}}</li>
 			</ul>
 		</div>
-        <div class="span12">			
+        <div class="span12">
 			<table class="table table-bordered table-condensed whiteBg">
             <thead>
               <tr>
@@ -28,7 +28,7 @@
             <tbody>
               <tr>
                 <td width="30%">Bank name </td>
-                <td class="noleft_border">: <a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a></td>
+                <td class="noleft_border">: <a href="{% url 'bank_bank_branches' branch.bank.slug %}">{{branch.bank}}</a></td>
               </tr>
               <tr>
                 <td>Branch</td>
@@ -36,12 +36,12 @@
               </tr>
               <tr>
                 <td>IFSC Code</td>
-                <td class="noleft_border">: <a href="{% url bank_branch_with_ifsc branch.ifsc %}">{{branch.ifsc}}</a></td>
+                <td class="noleft_border">: <a href="{% url 'bank_branch_with_ifsc' branch.ifsc %}">{{branch.ifsc}}</a></td>
               </tr>
               <tr>
                 <td>MICR Code</td>
                 {% if branch.micr %}
-		        <td class="noleft_border">: <a href="{% url bank_branch_with_micr branch.micr %}">{{branch.micr}}</a> </td>
+		        <td class="noleft_border">: <a href="{% url 'bank_branch_with_micr' branch.micr %}">{{branch.micr}}</a> </td>
 		        {% else %}
 		        <td class="noleft_border">: MICR code does not exist </td>
 		        {% endif %}
@@ -56,7 +56,7 @@
               </tr>
               <tr>
                 <td>City</td>
-                <td class="noleft_border">: <a href="{% if branch.location.city %}{% url bank_city_branches branch.location.slug %}{% endif %}">{{branch.location.city}}</a></td>
+                <td class="noleft_border">: <a href="{% if branch.location.city %}{% url 'bank_city_branches' branch.location.slug %}{% endif %}">{{branch.location.city}}</a></td>
               </tr>
               <tr>
                 <td>District</td>
@@ -65,8 +65,8 @@
               <tr>
                 <td>State</td>
                 <td class="noleft_border">
-					{% if branch.location.state %}: 
-		            <a href="{% url bank_state_branches branch.location.state_fk.slug %}">{{branch.location.state}}</a>
+					{% if branch.location.state %}:
+		            <a href="{% url 'bank_state_branches' branch.location.state_fk.slug %}">{{branch.location.state}}</a>
 		            {% endif %}</td>
               </tr>
             </tbody>
