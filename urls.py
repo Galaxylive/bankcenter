@@ -5,6 +5,7 @@ from django.contrib.sitemaps import GenericSitemap
 from django.contrib import admin
 admin.autodiscover()
 
+from bank.views import HomeView
 from bank.models import Branch
 branch_dict = {
     'queryset': Branch.objects.all(),
@@ -16,7 +17,7 @@ sitemaps = {
 }
 
 urlpatterns = patterns('',
-     url(r'^$', 'bank.views.home', name='home'),
+     url(r'^$', HomeView.as_view(), name='home'),
      # url(r'^robots\.txt$', direct_to_template, {'template': 'robots.txt', 'mimetype': 'text/plain'}),
      url(r'^admin/', include(admin.site.urls)),
      url(r'^atms/', include('atm.urls')),

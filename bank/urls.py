@@ -4,8 +4,8 @@ from bank import views
 
 
 urlpatterns = patterns('',
-    url(r'^$', views.home, name = 'bank_home'),
-    url(r'^banks/$', views.banks, name = 'bank_banks'),
+    url(r'^$', views.HomeView.as_view(), name = 'bank_home'),
+    url(r'^banks/$', views.BanksView.as_view(), name = 'bank_banks'),
     url(r'^cities/$', views.cities, name = 'bank_cities'),
     url(r'^ifsc/(?P<branch_ifsc>[A-Z0-9]+)/$', views.branch_with_ifsc, name = 'bank_branch_with_ifsc'),
     url(r'^micr/(?P<branch_micr>[0-9]+)/$', views.branch_with_micr, name = 'bank_branch_with_micr'),

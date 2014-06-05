@@ -11,13 +11,13 @@ class Command(NoArgsCommand):
     def handle_noargs(self,**options):
         #fill_database()
         load_database()
-    
+
 def load_database():
     file1='/home/agiliq/recipehq/bank_center/data/bank-info.csv'
     file2='/home/agiliq/recipehq/bank_center/bank-info-2.csv'
     fill_database(file1)
     fill_database(file2)
-    
+
 def fill_database(file_name):
     try:
         #bank_reader=open('/home/akshar/bank_center/data/bank-info-2.csv')

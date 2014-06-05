@@ -10,13 +10,13 @@ class Command(NoArgsCommand):
     def handle_noargs(self,**options):
         #fill_database()
         load_database()
-    
+
 def load_database():
     file1='/home/agiliq/recipehq/bank_center/data/bank-info.csv'
     file2='/home/agiliq/recipehq/bank_center/bank-info-2.csv'
     fill_database(file1)
     fill_database(file2)
-    
+
 def fill_database(file_name):
     try:
         #bank_reader=open('/home/akshar/bank_center/data/bank-info-2.csv')
@@ -45,16 +45,16 @@ def fill_database(file_name):
             branch_location,location_created=Location.objects.get_or_create(city=branch_city,district=branch_district,state=branch_state)
             branch_bank,bank_created=Bank.objects.get_or_create(bank_name=branch_bank_name)
             branch,branch_created=Branch.objects.get_or_create(branch_name=branch_branch_name,ifsc=branch_ifsc_code,micr=branch_micr_code,address=branch_address,contact=branch_contact,bank=branch_bank,location=branch_location)
-            
+
     except IOError:
         print "IO Error occured"
     finally:
         if bank_reader in locals():
             bank_reader.close()
-            
+
 def encode_decode(value):
     value=value.strip()
     value=value.decode('utf-8')
     value=value.encode('ascii','ignore')
     return value
-    
+
