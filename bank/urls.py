@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 
 from bank import views
 
@@ -15,5 +15,5 @@ urlpatterns = patterns('',
     url(r'^(?P<bank_slug>[a-zA-Z0-9_-]+)/$', views.bank_branches, name = 'bank_bank_branches'),
     url(r'^(?P<bank_slug>[a-zA-Z0-9_-]+)/(?P<location_slug>[a-zA-Z0-9_-]+)/$', views.bank_city_branches, name = 'bank_bank_city_branches'),
     # The regex below catches everything, come here in case of doubt.
-    url(r'^(?P<bank_slug>[a-zA-Z0-9_-]+)/(?P<branch_slug>[a-zA-Z0-9_-]+)/(?P<branch_ifsc>[A-Z0-9]+)/$', views.branch_info, name = 'bank_branch_info'),                       
+    url(r'^(?P<bank_slug>[a-zA-Z0-9_-]+)/(?P<branch_slug>[a-zA-Z0-9_-]+)/(?P<branch_ifsc>[A-Z0-9]+)/$', views.branch_info, name = 'bank_branch_info'),
 )
