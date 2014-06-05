@@ -83,7 +83,7 @@
                 Bank name
             </td>
             <td>
-                <a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a>
+                <a href="{% url 'bank_bank_branches' branch.bank.slug %}">{{branch.bank}}</a>
             </td>
         </tr>
         <tr>
@@ -99,7 +99,7 @@
                 Ifsc Code
             </td>
             <td>
-                <a href="{% url bank_branch_with_ifsc branch.ifsc %}">{{branch.ifsc}}</a>
+                <a href="{% url 'bank_branch_with_ifsc' branch.ifsc %}">{{branch.ifsc}}</a>
             </td>
         </tr>
         <tr>
@@ -108,7 +108,7 @@
             </td>
             {% if branch.micr %}
             <td>
-                <a href="{% url bank_branch_with_micr branch.micr %}">{{branch.micr}}</a>
+                <a href="{% url 'bank_branch_with_micr' branch.micr %}">{{branch.micr}}</a>
             </td>
             {% else %}
             <td>
@@ -137,7 +137,7 @@
                 City
             </td>
             <td>
-                <a href="{% if branch.location.city %}{% url bank_city_branches branch.location.slug %}{% endif %}">{{branch.location.city}}</a>
+                <a href="{% if branch.location.city %}{% url 'bank_city_branches' branch.location.slug %}{% endif %}">{{branch.location.city}}</a>
             </td>
         </tr>
         <tr>
@@ -154,7 +154,7 @@
             </td>
             <td>
                 {% if branch.location.state %}
-                <a href="{% url bank_state_branches branch.location.state_fk.slug %}">{{branch.location.state}}</a>
+                <a href="{% url 'bank_state_branches' branch.location.state_fk.slug %}">{{branch.location.state}}</a>
                 {% endif %}
             </td>
         </tr>
