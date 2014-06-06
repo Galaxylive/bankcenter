@@ -9,7 +9,7 @@ from .models import Bank, Branch, Location, State
 from .utils import get_letters
 
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView
 
 
 class HomeView(TemplateView):
@@ -27,14 +27,82 @@ class HomeView(TemplateView):
         return context
 
 
-class BanksView(TemplateView):
+class BanksView(ListView):
     template_name = "bank/banks.html"
+    queryset = Bank.objects.select_related().all()
+    context_object_name = 'bank_list'
+
+
+class CitiesView(ListView):
+    template_name = 'bank/cities.html'
+    context_object_name = 'location_list'
 
     def get_context_data(self, **kwargs):
-        context = super(BanksView, self).get_context_data(**kwargs)
-        banks = Bank.objects.select_related().all()
-        context['bank_list'] = banks
+        context = super(CitiesView, self).get_context_data(**kwargs)
+        context['letters'] = get_letters()
         return context
+
+    def get_queryset(self):
+        letter = self.request.GET.get('letter', 'A')
+        location_list = Location.objects.select_related().filter(
+                        city__startswith=letter)
+        return location_list
+
+
+class BranchIfscView(DetailView):
+    template_name = 'bank/branch_info.html'
+    context_object_name = 'branch'
+
+    def get_object(self, queryset=None):
+        branch_ifsc = self.kwargs.get('branch_ifsc', None)
+        try:
+            branch = Branch.objects.select_related().get(ifsc=branch_ifsc)
+            bank = branch.bank
+            bank.num_times_accessed += 1
+            bank.save()
+            loc = branch.location
+            loc.num_times_accessed += 1
+            loc.save()
+            branch.save()
+        except Branch.DoesNotExist:
+            raise Http404
+        return branch
+
+
+class BranchMicrView(DetailView):
+    template_name = 'bank/branch_info.html'
+    context_object_name = 'branch'
+
+    def get_object(self, queryset=None):
+        branch_micr = self.kwargs.get('branch_micr', None)
+        try:
+            branch = Branch.objects.select_related().get(micr=branch_micr)
+            bank = branch.bank
+            bank.num_times_accessed += 1
+            bank.save()
+            loc = branch.location
+            loc.num_times_accessed += 1
+            loc.save()
+            branch.save()
+        except Branch.DoesNotExist:
+            raise Http404
+        return branch
+
+
+class CityBranchesView(ListView):
+    template_name = 'bank/city_branches.html'
+    context_object_name = 'branch_list'
+
+    def get_queryset(self):
+        location_slug = self.kwargs.get('location_slug', '')
+        branch_list = Branch.objects.select_related().filter(location__slug=location_slug)
+        return branch_list
+
+    def get_context_data(self, **kwargs):
+        context = super(CityBranchesView, self).get_context_data(**kwargs)
+        context['location_slug'] = self.kwargs.get('location_slug', '')
+        return context
+
 
 # def home(request):
 #     branches = Branch.objects.all()[:10]
@@ -84,55 +152,55 @@ def branch_info(request, bank_slug, branch_slug, branch_ifsc):
         raise Http404
     return render_to_response("bank/branch_info.html",{'branch':branch},context_instance=RequestContext(request))
 
-def city_branches(request, location_slug):
-    branch_list = Branch.objects.select_related().filter(location__slug=location_slug)
-    return render(request, 'bank/city_branches.html', {'location_slug':location_slug, 'branch_list':branch_list})
+# def city_branches(request, location_slug):
+#     branch_list = Branch.objects.select_related().filter(location__slug=location_slug)
+#     return render(request, 'bank/city_branches.html', {'location_slug':location_slug, 'branch_list':branch_list})
 
 def state_branches(request, state_slug):
     state = State.objects.get(slug=state_slug)
     banks = Branch.objects.filter(location__state_fk=state).values('bank__bank_name', 'bank__slug').annotate(dcount=Count('bank__bank_name'))
     return render(request, 'bank/state_branches.html', {'banks':banks, 'state':state})
 
-def cities(request):
-    letter = request.GET.get('letter', 'A')
-    location_list = Location.objects.select_related().filter(
-        city__startswith=letter)
-    letters = get_letters()
-    return render(
-        request, 'bank/cities.html',
-        {'location_list': location_list, 'letters': letters})
+# def cities(request):
+#     letter = request.GET.get('letter', 'A')
+#     location_list = Location.objects.select_related().filter(
+#         city__startswith=letter)
+#     letters = get_letters()
+#     return render(
+#         request, 'bank/cities.html',
+#         {'location_list': location_list, 'letters': letters})
 
 # def banks(request):
 #     banks = Bank.objects.select_related().all()
 #     return render(request, "bank/banks.html", {'bank_list': banks})
 
-def branch_with_ifsc(request, branch_ifsc):
-    try:
-        branch = Branch.objects.select_related().get(ifsc=branch_ifsc)
-        bank = branch.bank
-        bank.num_times_accessed += 1
-        bank.save()
-        loc = branch.location
-        loc.num_times_accessed += 1
-        loc.save()
-        branch.save()
-    except Branch.DoesNotExist:
-        raise Http404
-    return render(request, 'bank/branch_info.html', {'branch': branch})
+# def branch_with_ifsc(request, branch_ifsc):
+#     try:
+#         branch = Branch.objects.select_related().get(ifsc=branch_ifsc)
+#         bank = branch.bank
+#         bank.num_times_accessed += 1
+#         bank.save()
+#         loc = branch.location
+#         loc.num_times_accessed += 1
+#         loc.save()
+#         branch.save()
+#     except Branch.DoesNotExist:
+#         raise Http404
+#     return render(request, 'bank/branch_info.html', {'branch': branch})
 
-def branch_with_micr(request, branch_micr):
-    try:
-        branch = Branch.objects.select_related().get(micr=branch_micr)
-        bank = branch.bank
-        bank.num_times_accessed += 1
-        bank.save()
-        loc = branch.location
-        loc.num_times_accessed += 1
-        loc.save()
-        branch.save()
-    except Branch.DoesNotExist:
-        raise Http404
-    return render(request, 'bank/branch_info.html', {'branch': branch})
+# def branch_with_micr(request, branch_micr):
+#     try:
+#         branch = Branch.objects.select_related().get(micr=branch_micr)
+#         bank = branch.bank
+#         bank.num_times_accessed += 1
+#         bank.save()
+#         loc = branch.location
+#         loc.num_times_accessed += 1
+#         loc.save()
+#         branch.save()
+#     except Branch.DoesNotExist:
+#         raise Http404
+#     return render(request, 'bank/branch_info.html', {'branch': branch})
 
 def bank_city_branches(request, bank_slug, location_slug):
     try:
