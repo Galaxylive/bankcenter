@@ -14,7 +14,7 @@
 					 <a href="{{ city.get_absolute_url }}"><i>{{city.city_name }} </i></a> <br />
 					{{city.state }}
 				</td>
-              	{% if forloop.counter|divisibleby:2 %} </tr> {% endif %} 
+              	{% if forloop.counter|divisibleby:2 %} </tr> {% endif %}
 			  	{% endfor %}
 				{% else %}
     			<h5 class="error_txt"> No matching Query </h5>
@@ -26,14 +26,14 @@
 	</div>
 </div>
 <!--{% if cities %}
-    {% for city  in cities %} 
+    {% for city  in cities %}
         {{city.post_office_name }}
         <br>
         {{city.pin_code }}
         <br>
         {{city.district_name }}
         <br>
-         <a href="{{ city.get_absolute_url }}"><i>{{city.city_name }} </i></a>       
+         <a href="{{ city.get_absolute_url }}"><i>{{city.city_name }} </i></a>
         <br>
         {{city.state }}
         <hr/>

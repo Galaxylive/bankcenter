@@ -12,7 +12,7 @@ class AtmView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         self.context_data = {}
-        letter = self.request.GET.get('letter', None)
+        letter = request.GET.get('letter', None)
         if not letter:
             obj = Atm.objects.all().order_by("bank_slug")
         else:
