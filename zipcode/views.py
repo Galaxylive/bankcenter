@@ -46,7 +46,7 @@ class CityView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         self.context_data = {}
-        city_slug = request.GET.get('city_slug', None)
+        city_slug = kwargs.get('city_slug', '')
         p = Zip_code.objects.filter(city_slug__iexact=city_slug)
         if not p.count():
             raise Http404
@@ -58,7 +58,7 @@ class CityView(TemplateView):
             # If page is not an integer, deliver first page.
             contents = paginator.page(1)
         except EmptyPage:
-          #If page is out of range, deliver last page of results.
+            #If page is out of range, deliver last page of results.
             contents = paginator.page(paginator.num_pages)
         self.context_data['cities'] = contents
         return super(CityView, self).get(request, *args, **kwargs)

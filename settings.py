@@ -106,7 +106,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'bank_center.urls'
+# ROOT_URLCONF = 'bank_center.urls'
+ROOT_URLCONF = 'urls'
+
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -159,5 +161,14 @@ DEFAULT_FROM_EMAIL = 'Agiliq.com <webmaster@agiliq.com>'
 # HAYSTACK_SITECONF = 'bank_center.search_sites'
 # HAYSTACK_SEARCH_ENGINE = 'whoosh'
 # HAYSTACK_WHOOSH_PATH = os.path.join(os.path.dirname(__file__), 'mysite_index')
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'mysite_index'),
+    },
+}
+
+
 from local_settings import *
 TEMPLATE_DEBUG = DEBUG
