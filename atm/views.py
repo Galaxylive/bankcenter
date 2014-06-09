@@ -7,7 +7,16 @@ from atm.models import Atm
 from atm.utils import get_letters
 
 
-class AtmView(TemplateView):
+class AtmBaseView(TemplateView):
+    context_data = {}
+
+    def get_context_data(self, **kwargs):
+        context = super(AtmBaseView, self).get_context_data(**kwargs)
+        context.update(self.context_data)
+        return context
+
+
+class AtmView(AtmBaseView):
     template_name = 'atm/index.html'
 
     def get(self, request, *args, **kwargs):
@@ -41,13 +50,8 @@ class AtmView(TemplateView):
         })
         return super(AtmView, self).get(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super(AtmView, self).get_context_data(**kwargs)
-        context.update(self.context_data)
-        return context
 
-
-class CityView(TemplateView):
+class CityView(AtmBaseView):
     template_name = 'atm/atms_by_city.html'
 
     def get(self, request, *args, **kwargs):
@@ -78,13 +82,8 @@ class CityView(TemplateView):
         })
         return super(CityView, self).get(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super(CityView, self).get_context_data(**kwargs)
-        context.update(self.context_data)
-        return context
 
-
-class BankView(TemplateView):
+class BankView(AtmBaseView):
     template_name = 'atm/atms_by_bank.html'
 
     def get(self, request, *args, **kwargs):
@@ -115,11 +114,6 @@ class BankView(TemplateView):
         })
         return super(BankView, self).get(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super(BankView, self).get_context_data(**kwargs)
-        context.update(self.context_data)
-        return context
-
 
 class AtmDetailView(DetailView):
     template_name = 'atm/atm_detail.html'
@@ -134,7 +128,6 @@ class AtmDetailView(DetailView):
         return atm
 
 
-# Todo: create a base class to include common features
 
 # def detail(request, city_id, bank_id, detail_id=None):
 #     atm = get_object_or_404(Atm, city_slug=city_id,
