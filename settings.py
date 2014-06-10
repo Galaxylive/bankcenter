@@ -3,11 +3,11 @@
 import os
 
 ADMINS = (
-     ('shabda raaj', 'shabda@agiliq.com'),
-     ('akshar raaj', 'akshar@agiliq.com' ),
+    ('shabda raaj', 'shabda@agiliq.com'),
+    ('akshar raaj', 'akshar@agiliq.com'),
 )
 
-PROJECT_DIR=os.path.dirname(__file__)
+PROJECT_DIR = os.path.dirname(__file__)
 
 MANAGERS = ADMINS
 
@@ -49,7 +49,7 @@ MEDIA_ROOT = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT=os.path.join(PROJECT_DIR, 'static_media/')
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static_media/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -73,7 +73,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -83,7 +83,7 @@ SECRET_KEY = 'xuf8twokfy+0sb&%m9o@2imyp%w=^dyrhd*0$*d^#wsk9jhy2%'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 #TEMPLATE_CONTEXT_PROCESSORS=('bank.context_processors.required_context','django.contrib.auth.context_processors.auth')
@@ -114,7 +114,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_DIR,'templates')
+    os.path.join(PROJECT_DIR, 'templates')
 )
 
 INSTALLED_APPS = (
