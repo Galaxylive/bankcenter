@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.views.generic import TemplateView, DetailView
@@ -25,7 +25,8 @@ class AtmView(AtmBaseView):
         if not letter:
             obj = Atm.objects.all().order_by("bank_slug")
         else:
-            obj = Atm.objects.select_related().filter(name_of_bank__startswith=letter)
+            obj = Atm.objects.select_related().filter(
+                name_of_bank__startswith=letter)
         paginator = Paginator(obj, 20)  # show 20 recipes per page
         page = int(request.GET.get('page', 1))
         try:
@@ -34,13 +35,13 @@ class AtmView(AtmBaseView):
             # If page is not an integer, deliver first page.
             contents = paginator.page(1)
         except EmptyPage:
-          #If page is out of range, deliver last page of results.
+          # If page is out of range, deliver last page of results.
             contents = paginator.page(paginator.num_pages)
         letters = get_letters()
-        max_range = page+3
+        max_range = page + 3
         if max_range > paginator.num_pages:
-            max_range = paginator.num_pages+1
-        pages = range(page-3, max_range)
+            max_range = paginator.num_pages + 1
+        pages = range(page - 3, max_range)
         pages = [pagenum for pagenum in pages if pagenum > 0]
         self.context_data.update({
             'atms': contents,
@@ -68,12 +69,12 @@ class CityView(AtmBaseView):
             # If page is not an integer, deliver first page.
             contents = paginator.page(1)
         except EmptyPage:
-          #If page is out of range, deliver last page of results.
+          # If page is out of range, deliver last page of results.
             contents = paginator.page(paginator.num_pages)
-        max_range = page+3
+        max_range = page + 3
         if max_range > paginator.num_pages:
-            max_range = paginator.num_pages+1
-        pages = range(page-3, max_range)
+            max_range = paginator.num_pages + 1
+        pages = range(page - 3, max_range)
         pages = [pagenum for pagenum in pages if pagenum > 0]
         self.context_data.update({
             'cities': contents,
@@ -100,12 +101,12 @@ class BankView(AtmBaseView):
             # If page is not an integer, deliver first page.
             contents = paginator.page(1)
         except EmptyPage:
-          #If page is out of range, deliver last page of results.
+          # If page is out of range, deliver last page of results.
             contents = paginator.page(paginator.num_pages)
-        max_range = page+3
+        max_range = page + 3
         if max_range > paginator.num_pages:
-            max_range = paginator.num_pages+1
-        pages = range(page-3, max_range)
+            max_range = paginator.num_pages + 1
+        pages = range(page - 3, max_range)
         pages = [pagenum for pagenum in pages if pagenum > 0]
         self.context_data.update({
             'banks': contents,
@@ -138,45 +139,47 @@ class AtmDetailView(DetailView):
 #     p = Atm.objects.filter(bank_slug=bank_id)
 #     if p.count() == 0:
 #         raise Http404
-#     paginator = Paginator(p, 10)#show 10 atms per page
+# paginator = Paginator(p, 10)#show 10 atms per page
 #     page = int(request.GET.get('page', 1))
 #     try:
 #         contents = paginator.page(page)
 #     except PageNotAnInteger:
-#         # If page is not an integer, deliver first page.
+# If page is not an integer, deliver first page.
 #         contents = paginator.page(1)
 #     except EmptyPage:
-#       #If page is out of range, deliver last page of results.
+# If page is out of range, deliver last page of results.
 #         contents = paginator.page(paginator.num_pages)
 #     max_range = page+3
 #     if max_range > paginator.num_pages:
 #         max_range = paginator.num_pages+1
 #     pages = range(page-3, max_range)
 #     pages = [pagenum for pagenum in pages if pagenum>0]
-#     return render(request, 'atm/atms_by_bank.html', {'banks' : contents, 'name':bank_id, 'pages': pages})
+# return render(request, 'atm/atms_by_bank.html', {'banks' : contents,
+# 'name':bank_id, 'pages': pages})
 
 
 # def city(request, city_id=None):
 #     p = Atm.objects.filter(city_slug__iexact=city_id)
 #     if p.count() == 0:
 #         raise Http404
-#     paginator = Paginator(p, 10)#show 10 atms per page
+# paginator = Paginator(p, 10)#show 10 atms per page
 #     page = int(request.GET.get('page', 1))
 #     try:
 #         contents = paginator.page(page)
 #     except PageNotAnInteger:
-#         # If page is not an integer, deliver first page.
+# If page is not an integer, deliver first page.
 #         contents = paginator.page(1)
 #     except EmptyPage:
-#       #If page is out of range, deliver last page of results.
+# If page is out of range, deliver last page of results.
 #         contents = paginator.page(paginator.num_pages)
-# 	letters=get_letters()
+#   letters=get_letters()
 #     max_range = page+3
 #     if max_range > paginator.num_pages:
 #         max_range = paginator.num_pages+1
 #     pages = range(page-3, max_range)
 #     pages = [pagenum for pagenum in pages if pagenum>0]
-#     return render(request, 'atm/atms_by_city.html', {'cities' : contents, 'name':city_id, 'pages': pages})
+# return render(request, 'atm/atms_by_city.html', {'cities' : contents,
+# 'name':city_id, 'pages': pages})
 
 
 # def atms(request):
@@ -185,15 +188,15 @@ class AtmDetailView(DetailView):
 #         obj = Atm.objects.all().order_by("bank_slug")
 #     else:
 #         obj = Atm.objects.select_related().filter(name_of_bank__startswith=letter)
-#     paginator = Paginator(obj, 20)#show 20 recipes per page
+# paginator = Paginator(obj, 20)#show 20 recipes per page
 #     page = int(request.GET.get('page', 1))
 #     try:
 #         contents = paginator.page(page)
 #     except PageNotAnInteger:
-#         # If page is not an integer, deliver first page.
+# If page is not an integer, deliver first page.
 #         contents = paginator.page(1)
 #     except EmptyPage:
-#       #If page is out of range, deliver last page of results.
+# If page is out of range, deliver last page of results.
 #         contents = paginator.page(paginator.num_pages)
 #     letters=get_letters()
 #     max_range = page+3
@@ -201,4 +204,5 @@ class AtmDetailView(DetailView):
 #         max_range = paginator.num_pages+1
 #     pages = range(page-3, max_range)
 #     pages = [pagenum for pagenum in pages if pagenum>0]
-#     return render(request, 'atm/index.html', {'atms':contents, 'letters':letters, 'current_letter':letter,'pages': pages})
+# return render(request, 'atm/index.html', {'atms':contents,
+# 'letters':letters, 'current_letter':letter,'pages': pages})

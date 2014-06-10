@@ -90,7 +90,9 @@ class CityBranchesView(ListView):
 
     def get_queryset(self):
         location_slug = self.kwargs.get('location_slug', '')
-        branch_list = Branch.objects.select_related().filter(location__slug=location_slug)
+        branch_list = Branch.objects.select_related().filter(
+            location__slug=location_slug
+        )
         return branch_list
 
     def get_context_data(self, **kwargs):
@@ -105,7 +107,10 @@ class StateBranchesView(TemplateView):
     def get_context_data(self, **kwargs):
         state_slug = self.kwargs.get('state_slug', '')
         state = State.objects.get(slug=state_slug)
-        banks = Branch.objects.filter(location__state_fk=state).values('bank__bank_name', 'bank__slug').annotate(dcount=Count('bank__bank_name'))
+        banks = Branch.objects.filter(location__state_fk=state).values(
+            'bank__bank_name',
+            'bank__slug'
+        ).annotate(dcount=Count('bank__bank_name'))
         context = super(StateBranchesView, self).get_context_data(**kwargs)
         context['banks'] = banks
         context['state'] = state
@@ -120,7 +125,10 @@ class BankStateBranchesView(TemplateView):
         bank_slug = self.kwargs.get('bank_slug', '')
         context = super(BankStateBranchesView, self).get_context_data(**kwargs)
         try:
-            branch_list = Branch.objects.select_related().filter(bank__slug=bank_slug, location__state_fk__slug=state_slug)
+            branch_list = Branch.objects.select_related().filter(
+                bank__slug=bank_slug,
+                location__state_fk__slug=state_slug
+            )
             bank = Bank.objects.get(slug=bank_slug)
             bank.num_times_accessed += 1
             bank.save()
@@ -176,7 +184,10 @@ class BankCityBranchesView(ListView):
         bank_slug = self.kwargs.get('bank_slug', '')
         location_slug = self.kwargs.get('location_slug', '')
         try:
-            branch_list = Branch.objects.select_related().filter(bank__slug=bank_slug, location__slug=location_slug)
+            branch_list = Branch.objects.select_related().filter(
+                bank__slug=bank_slug,
+                location__slug=location_slug
+            )
             self.bank = Bank.objects.get(slug=bank_slug)
             self.bank.num_times_accessed += 1
             self.bank.save()
@@ -199,7 +210,11 @@ class BranchInfoView(DetailView):
         bank_slug = self.kwargs.get('bank_slug', '')
         branch_ifsc = self.kwargs.get('branch_ifsc', '')
         try:
-            branch = Branch.objects.select_related().get(slug=branch_slug, bank__slug=bank_slug, ifsc=branch_ifsc)
+            branch = Branch.objects.select_related().get(
+                slug=branch_slug,
+                bank__slug=bank_slug,
+                ifsc=branch_ifsc
+            )
             bank = Bank.objects.get(slug=bank_slug)
             bank.num_times_accessed += 1
             bank.save()
