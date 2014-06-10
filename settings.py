@@ -1,6 +1,15 @@
 # Django settings for bank_center project.
 
 import os
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set %s environment variable" % (var_name,)
+        raise ImproperlyConfigured(error_msg)
 
 ADMINS = (
     ('shabda raaj', 'shabda@agiliq.com'),
@@ -10,6 +19,7 @@ ADMINS = (
 PROJECT_DIR = os.path.dirname(__file__)
 
 MANAGERS = ADMINS
+
 
 
 # Local time zone for this installation. Choices can be found here:
@@ -77,7 +87,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'xuf8twokfy+0sb&%m9o@2imyp%w=^dyrhd*0$*d^#wsk9jhy2%'
+SECRET_KEY = get_env_variable('SECRET_KEY')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -168,6 +178,9 @@ HAYSTACK_CONNECTIONS = {
         'PATH': os.path.join(os.path.dirname(__file__), 'mysite_index'),
     },
 }
+
+
+
 
 
 from local_settings import *
