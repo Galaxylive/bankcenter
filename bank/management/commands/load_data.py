@@ -1,6 +1,9 @@
-from django.core.management.base import NoArgsCommand
+import os
 
-from bank.models import Location, Bank, Branch
+from django.core.management.base import NoArgsCommand
+from django.conf import settings
+
+from bank.models import Location, Bank, Branch, State
 
 import csv
 
@@ -17,18 +20,15 @@ class Command(NoArgsCommand):
 
 
 def load_database():
-    file1 = '/home/ashik/venvs/bankcenter/bankcenter/data/bank-info.csv'
-    file2 = '/home/ashik/venvs/bankcenter/bankcenter/data/bank-info-2.csv'
-
-    # file1='/home/agiliq/recipehq/bank_center/data/bank-info.csv'
-    # file2='/home/agiliq/recipehq/bank_center/bank-info-2.csv'
+    base_path = settings.PROJECT_DIR
+    file1 = os.path.join(base_path, 'data/bank-info.csv')
+    file2 = os.path.join(base_path, 'data/bank-info-2.csv')
     fill_database(file1)
     fill_database(file2)
 
 
 def fill_database(file_name):
     try:
-        # bank_reader=open('/home/akshar/bank_center/data/bank-info-2.csv')
         bank_reader = open(file_name)
         line_reader = csv.reader(bank_reader)
         """
@@ -43,7 +43,7 @@ def fill_database(file_name):
             branch_ifsc_code = encode_decode(row[1])
             branch_micr_code = encode_decode(row[2])
             branch_micr_code = branch_micr_code.replace(' ', '')
-            if not len(branch_micr_code) == 11:
+            if not len(branch_micr_code) == 9:
                 branch_micr_code = None
             try:
                 int(branch_micr_code)
@@ -55,9 +55,11 @@ def fill_database(file_name):
             branch_city = encode_decode(row[6]).title()
             branch_district = encode_decode(row[7]).title()
             branch_state = encode_decode(row[8]).title()
+            state, state_created = State.objects.get_or_create(
+                state=branch_state)
             branch_location, location_created = Location.objects.get_or_create(
                 city=branch_city, district=branch_district,
-                state=branch_state)
+                state=branch_state, state_fk=state)
             branch_bank, bank_created = Bank.objects.get_or_create(
                 bank_name=branch_bank_name)
             branch, branch_created = Branch.objects.get_or_create(
