@@ -120,8 +120,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-# ROOT_URLCONF = 'bank_center.urls'
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'bank_center.urls'
 
 
 TEMPLATE_DIRS = (
