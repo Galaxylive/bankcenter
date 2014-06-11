@@ -1,6 +1,7 @@
 # Django settings for bank_center project.
 
 import os
+from unipath import Path
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -11,15 +12,17 @@ def get_env_variable(var_name):
         error_msg = "Set %s environment variable" % (var_name,)
         raise ImproperlyConfigured(error_msg)
 
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+
 ADMINS = (
     ('shabda raaj', 'shabda@agiliq.com'),
     ('akshar raaj', 'akshar@agiliq.com'),
 )
 
-PROJECT_DIR = os.path.dirname(__file__)
+PROJECT_DIR = Path(__file__).ancestor(3)
 
 MANAGERS = ADMINS
-
 
 
 # Local time zone for this installation. Choices can be found here:
@@ -88,6 +91,7 @@ STATICFILES_FINDERS = (
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = get_env_variable('SECRET_KEY')
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -168,20 +172,10 @@ LOGGING = {
 
 DEFAULT_FROM_EMAIL = 'Agiliq.com <webmaster@agiliq.com>'
 
-# HAYSTACK_SITECONF = 'bank_center.search_sites'
-# HAYSTACK_SEARCH_ENGINE = 'whoosh'
-# HAYSTACK_WHOOSH_PATH = os.path.join(os.path.dirname(__file__), 'mysite_index')
 
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(os.path.dirname(__file__), 'mysite_index'),
+        'PATH': os.path.join(PROJECT_DIR, 'mysite_index'),
     },
 }
-
-
-
-
-
-from local_settings import *
-TEMPLATE_DEBUG = DEBUG

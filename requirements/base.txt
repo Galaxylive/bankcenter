@@ -2,5 +2,6 @@ Django==1.6.5
 South==0.8.4
 Whoosh==2.6.0
 django-haystack==2.1.0
-gunicorn
-
+gunicorn==18.0
+Unipath==1.0
+wsgiref==0.1.2

@@ -7,6 +7,7 @@ admin.autodiscover()
 
 from bank.views import HomeView
 from bank.models import Branch
+
 branch_dict = {
     'queryset': Branch.objects.all(),
     'date_field': 'last_accessed'
