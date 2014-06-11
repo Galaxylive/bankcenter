@@ -1,7 +1,9 @@
 # Django settings for bank_center project.
 
 import os
+
 from unipath import Path
+
 from django.core.exceptions import ImproperlyConfigured
 
 
