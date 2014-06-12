@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 
 
 class Atm(models.Model):
@@ -8,6 +9,13 @@ class Atm(models.Model):
     bank_slug = models.SlugField(max_length=100)
     city_slug = models.SlugField(max_length=100)
     address = models.CharField(max_length=500)
+
+    def save(self, *args, **kwargs):
+        if not self.bank_slug:
+            self.bank_slug = slugify(self.name_of_bank)
+        if not self.city_slug:
+            self.city_slug = slugify(self.name_of_city)
+        super(Atm, self).save(*args, **kwargs)
 
     def get_city_url(self):
         return reverse("atms_in_city", args=[self.city_slug])
