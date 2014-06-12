@@ -13,5 +13,4 @@ A django powered site to find the details about banks in India.
 5. Set enviornment variable 'SECRET_KEY' with django secret key.
 6. Run management command "load_data". (Loads data from csv files in data directory to database)
   `python manage.py load_data`
-7. Run server
-  `python manage.py runserver --settings=bank_center.settings.local`
+
