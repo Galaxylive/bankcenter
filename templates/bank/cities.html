@@ -11,7 +11,7 @@
                 	{% for letter in letters %}
                         <li><a href="?letter={{letter}}">{{letter}}</a></li>
                     {% endfor %}
-                
+
               </ul>
             </div><!--pagination Ends-->
         <div class="span12">
@@ -24,12 +24,12 @@
 		        <tbody>
 					{% for loc in location_list %}
 					{% if forloop.counter|divisibleby:2 == 0 %} <tr> {% endif %}
-		          	<td width="50%"><a href="{% url bank_city_branches loc.slug %}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a> </td>
-		          	{% if forloop.counter|divisibleby:2 == 1 %} </tr> {% endif %} 
+		          	<td width="50%"><a href="{% url 'bank_city_branches' loc.slug %}">{{loc.city}}, {{loc.district}}, {{loc.state}}</a> </td>
+		          	{% if forloop.counter|divisibleby:2 == 1 %} </tr> {% endif %}
 				  	{% endfor %}
 				</tbody>
 			</table>
 		</div>
 	</div>
-</div>        
+</div>
 {% endblock %}

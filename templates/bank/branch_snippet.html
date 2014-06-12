@@ -1,11 +1,11 @@
 
 
- <tr> 
+ <tr>
 <td>
-	<a href="{% url bank_bank_branches branch.bank.slug %}">{{branch.bank}}</a><br />
-	<a href="{% url bank_branch_info branch.bank.slug branch.slug branch.ifsc %}">{{branch.branch_name}}</a><br />
+	<a href="{% url 'bank_bank_branches' branch.bank.slug %}">{{branch.bank}}</a><br />
+	<a href="{% url 'bank_branch_info' branch.bank.slug branch.slug branch.ifsc %}">{{branch.branch_name}}</a><br />
 	{{branch.address}}<br />
 	{{branch.location}}<br />
 </td>
- </tr> 
-				
+ </tr>
+

@@ -2,12 +2,27 @@
 
 import os
 
+from unipath import Path
+
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set %s environment variable" % (var_name,)
+        raise ImproperlyConfigured(error_msg)
+
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+
 ADMINS = (
-     ('shabda raaj', 'shabda@agiliq.com'),
-     ('akshar raaj', 'akshar@agiliq.com' ),
+    ('shabda raaj', 'shabda@agiliq.com'),
+    ('akshar raaj', 'akshar@agiliq.com'),
 )
 
-PROJECT_DIR=os.path.dirname(__file__)
+PROJECT_DIR = Path(__file__).ancestor(3)
 
 MANAGERS = ADMINS
 
@@ -40,16 +55,11 @@ USE_L10N = True
 MEDIA_ROOT = ''
 
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-
-
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT=os.path.join(PROJECT_DIR, 'static_media/')
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static_media/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -73,24 +83,23 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'xuf8twokfy+0sb&%m9o@2imyp%w=^dyrhd*0$*d^#wsk9jhy2%'
+SECRET_KEY = get_env_variable('SECRET_KEY')
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
-
-#TEMPLATE_CONTEXT_PROCESSORS=('bank.context_processors.required_context','django.contrib.auth.context_processors.auth')
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
-    "django.core.context_processors.auth",
+    "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
@@ -108,11 +117,12 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'bank_center.urls'
 
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_DIR,'templates')
+    os.path.join(PROJECT_DIR, 'templates')
 )
 
 INSTALLED_APPS = (
@@ -156,8 +166,10 @@ LOGGING = {
 
 DEFAULT_FROM_EMAIL = 'Agiliq.com <webmaster@agiliq.com>'
 
-HAYSTACK_SITECONF = 'bank_center.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
-HAYSTACK_WHOOSH_PATH = os.path.join(os.path.dirname(__file__), 'mysite_index')
-from local_settings import *
-TEMPLATE_DEBUG = DEBUG
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(PROJECT_DIR, 'mysite_index'),
+    },
+}

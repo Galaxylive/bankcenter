@@ -1,8 +1,8 @@
-from django.db import models
-from django.template.defaultfilters import slugify
-from django.core.urlresolvers import reverse
-
 import datetime
+
+from django.db import models
+from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 
 
 class State(models.Model):
@@ -85,7 +85,8 @@ class Branch(models.Model):
             format(self.bank, self.branch_name, self.location)
 
     def get_absolute_url(self):
-        return reverse('bank_branch_info', args=[self.bank.slug, self.slug, self.ifsc])
+        return reverse('bank_branch_info',
+                       args=[self.bank.slug, self.slug, self.ifsc])
 
     class Meta:
         verbose_name_plural = 'Branches'

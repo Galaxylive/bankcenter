@@ -1,10 +1,12 @@
-from haystack.indexes import *
-from haystack import site
+from haystack import indexes
 
-from bank.models import Branch
+from .models import Branch
 
-class BranchIndex(SearchIndex):
-    branch_name = CharField(document=True, use_template=True)
-    address = CharField(model_attr='address')
 
-site.register(Branch, BranchIndex)
+class BranchIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.CharField(document=True, use_template=True)
+    # branch_name = indexes.CharField(model_attr='branch_name')
+    address = indexes.CharField(model_attr='address')
+
+    def get_model(self):
+        return Branch

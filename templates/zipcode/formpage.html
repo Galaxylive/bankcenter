@@ -15,7 +15,7 @@
 						{% if no_result %}
 						<h4 class="error_txt">No result matches your query</h4>
 						{% endif %}
-						<form id="myform"  action="{% url detail %}" method="GET" class="bs-docs-example form-horizontal">
+						<form id="myform"  action="{% url 'detail' %}" method="GET" class="bs-docs-example form-horizontal">
 							<div class="control-group">
 	                        	<label class="control-label">Name of the place:</label>
 	                        	<div class="controls"><input type="text" id="place" class="text" name="place" placeholder=""></div>
@@ -32,7 +32,7 @@
                         	</div>
 					    </form>
 					</td>
-				</tr>				
+				</tr>
 			</tbody>
 			</table>
 		</div>

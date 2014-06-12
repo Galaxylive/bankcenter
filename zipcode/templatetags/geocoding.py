@@ -1,10 +1,12 @@
+import urllib
+import json
+
 from django import template
 from django.utils.safestring import mark_safe
 
 #from zipcode.models import Ziop_code
-import urllib
-import json
 from pprint import pprint
+
 register = template.Library()
 #ref : http://code.google.com/apis/maps/documentation/geocoding/#GeocodingRequests
 
@@ -18,9 +20,10 @@ url += address + "&sensor=true"
 raw = urllib.urlopen(url)
 json_object = json.load(raw)
 #pprint(json_object)
-lat =  json_object['results'][0]['geometry']['location']['lat']
+lat = json_object['results'][0]['geometry']['location']['lat']
 lng = json_object['results'][0]['geometry']['location']['lng']
 print lat, lng
+
 
 @register.filter
 def get_lat_lng(, autoescape=None):

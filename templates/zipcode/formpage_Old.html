@@ -4,7 +4,7 @@
     <h5>No result matches your query</h5>
 {% endif %}
 <h3>Please only enter one of these.</h3>
-<form id="myform"  action="{% url detail %}" method="GET" class="big_form">
+<form id="myform"  action="{% url 'detail' %}" method="GET" class="big_form">
         Entering the name gets you the pin for it
         <br/>
         Name of the place: <input type="text" class="text" name ="place">

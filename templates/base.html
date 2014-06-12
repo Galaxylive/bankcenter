@@ -1,16 +1,16 @@
-<head> 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width">
     {% block meta %}
     {% endblock %}
-    
+
 <title>
       {% block title %}
       bankcenter.in
       {% endblock %}
 </title>
-    
-    
+
+
 <link rel="SHORTCUT ICON" href="{{ STATIC_URL }}img/favicon.ico"  media="screen">
 
 <!--[if IE 7]>
@@ -20,11 +20,11 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css" type="text/css" media="screen">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bankcenter.css" type="text/css" media="screen">
 {% block extra_css %}
-    
+
 {% endblock %}
 
-</head> 
-  
+</head>
+
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top"><!--Top Navigation-->
 	<div class="navbar-inner">
@@ -36,21 +36,21 @@
           	</button>
 		<div class="nav-collapse collapse">
         	<ul class="nav">
-            	<li class="active"><a href="{% url bank_home %}">Home </a></li>
-				<li><a href="{% url pincode_home %}">pincode </a></li>
-				<li><a href="{% url atm_home %}">ATMS </a></li>
-                <li><a href="{% url bank_cities %}">Filter by City </a></li>
-                <li><a href="{% url bank_banks %}">Filter by Bank</a></li>
+            	<li class="active"><a href="{% url 'bank_home' %}">Home </a></li>
+				<li><a href="{% url 'pincode_home' %}">pincode </a></li>
+				<li><a href="{% url 'atm_home' %}">ATMS </a></li>
+                <li><a href="{% url 'bank_cities' %}">Filter by City </a></li>
+                <li><a href="{% url 'bank_banks' %}">Filter by Bank</a></li>
 			</ul>
 		</div>
 		</div>
 	</div>
 </div><!--Top Navigation Ends-->
-    
+
 
 <header class="header"><!--Header Starts-->
 	<div class="container">
-    	<div class="logo"><a href="{% url home %}"><img src="{{STATIC_URL}}img/logo.png" alt="Bank Center"></a> </div>
+    	<div class="logo"><a href="{% url 'home' %}"><img src="{{STATIC_URL}}img/logo.png" alt="Bank Center"></a> </div>
       	<div class="banner"><h3>Enter an Address or Pincode or City and State to begin your search:</h3>
                 <p>For example: Axis bank, Begumpet, Hyderabad</p>
             <form method="get" action="/search/">
@@ -69,14 +69,14 @@
 <script type='text/javascript' src='{{ STATIC_URL }}js/jquery-1.7.1.min.js' ></script>
 <script type='text/javascript' src='{{ STATIC_URL }}js/bootstrap-collapse.js' ></script>
 <script type='text/javascript'>
-  
+
 $(document).ready(function(){
 	tdcount = $(".data-table td").length;
     if(tdcount % 2 == 1){
-    var e = document.createElement("td"); 
+    var e = document.createElement("td");
      $(".data-table tr:last-child").append(e);
 
-    } 
+    }
 
 	var pathname = window.location.pathname;
 	$(".nav li").removeClass("active");
@@ -87,9 +87,9 @@ $(document).ready(function(){
 			$("#appendedInputButtons").val("");
 		}
 	})
-	
-	
-	
+
+
+
 });
 </script>
 <footer class="footer">
