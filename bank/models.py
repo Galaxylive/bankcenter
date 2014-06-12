@@ -1,8 +1,8 @@
-from django.db import models
-from django.template.defaultfilters import slugify
-from django.core.urlresolvers import reverse
-
 import datetime
+
+from django.db import models
+from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 
 
 class State(models.Model):

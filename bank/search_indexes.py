@@ -1,6 +1,6 @@
 from haystack import indexes
 
-from bank.models import Branch
+from .models import Branch
 
 
 class BranchIndex(indexes.SearchIndex, indexes.Indexable):

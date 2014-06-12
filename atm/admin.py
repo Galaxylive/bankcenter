@@ -1,5 +1,6 @@
-from atm.models import Atm
 from django.contrib import admin
+
+from .models import Atm
 
 
 class AtmAdmin(admin.ModelAdmin):

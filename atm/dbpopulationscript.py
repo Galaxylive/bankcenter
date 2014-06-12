@@ -1,6 +1,6 @@
 import csv
 
-from atm.models import Atm
+from .models import Atm
 
 
 def get_digit_or_chars(address):

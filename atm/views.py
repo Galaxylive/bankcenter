@@ -1,10 +1,10 @@
-from django.shortcuts import get_object_or_404
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, DetailView
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-from atm.models import Atm
-from atm.utils import get_letters
+from .models import Atm
+from .utils import get_letters
 
 
 class AtmBaseView(TemplateView):

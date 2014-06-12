@@ -1,8 +1,7 @@
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.db.models import Q
 from django.views.generic import TemplateView, ListView
-
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from models import Zip_code
 

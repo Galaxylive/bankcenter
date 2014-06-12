@@ -1,10 +1,12 @@
+import urllib
+import json
+
 from django import template
 from django.utils.safestring import mark_safe
 
 #from zipcode.models import Ziop_code
-import urllib
-import json
 from pprint import pprint
+
 register = template.Library()
 #ref : http://code.google.com/apis/maps/documentation/geocoding/#GeocodingRequests
 

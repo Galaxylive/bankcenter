@@ -1,13 +1,13 @@
+from django.contrib import admin
+from django.views.generic import TemplateView
 from django.conf.urls import patterns, include, url
 from django.contrib.sitemaps import GenericSitemap
-from django.views.generic import TemplateView
 
-from django.contrib import admin
-admin.autodiscover()
-
-from bank.views import HomeView
 from bank.models import Branch
+from bank.views import HomeView
 
+
+admin.autodiscover()
 branch_dict = {
     'queryset': Branch.objects.all(),
     'date_field': 'last_accessed'

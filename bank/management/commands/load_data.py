@@ -1,11 +1,10 @@
 import os
+import csv
 
-from django.core.management.base import NoArgsCommand
 from django.conf import settings
+from django.core.management.base import NoArgsCommand
 
 from bank.models import Location, Bank, Branch, State
-
-import csv
 
 
 class Command(NoArgsCommand):
