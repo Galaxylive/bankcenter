@@ -44,14 +44,13 @@ class CitiesView(ListView):
         return location_list
 
 
-class BranchIfscView(DetailView):
+class BranchBaseView(DetailView):
     template_name = 'bank/branch_info.html'
     context_object_name = 'branch'
 
-    def get_object(self, queryset=None):
-        branch_ifsc = self.kwargs.get('branch_ifsc', None)
+    def get_obj(self, key, value):
         try:
-            branch = Branch.objects.select_related().get(ifsc=branch_ifsc)
+            branch = Branch.objects.select_related().get(**{key: value})
             bank = branch.bank
             bank.num_times_accessed += 1
             bank.save()
@@ -64,24 +63,18 @@ class BranchIfscView(DetailView):
         return branch
 
 
-class BranchMicrView(DetailView):
-    template_name = 'bank/branch_info.html'
-    context_object_name = 'branch'
+class BranchIfscView(BranchBaseView):
 
     def get_object(self, queryset=None):
-        branch_micr = self.kwargs.get('branch_micr', None)
-        try:
-            branch = Branch.objects.select_related().get(micr=branch_micr)
-            bank = branch.bank
-            bank.num_times_accessed += 1
-            bank.save()
-            loc = branch.location
-            loc.num_times_accessed += 1
-            loc.save()
-            branch.save()
-        except Branch.DoesNotExist:
-            raise Http404
-        return branch
+        branch_ifsc = self.kwargs.get('branch_ifsc', '')
+        return self.get_obj('ifsc', branch_ifsc)
+
+
+class BranchMicrView(BranchBaseView):
+
+    def get_object(self, queryset=None):
+        branch_micr = self.kwargs.get('branch_micr', '')
+        return self.get_obj('micr', branch_micr)
 
 
 class CityBranchesView(ListView):
@@ -161,10 +154,10 @@ class BankBranchesView(TemplateView):
         except EmptyPage:
             branch_list = paginator.page(paginator.num_pages)
 
-        max_range = page+3
+        max_range = page + 3
         if max_range > paginator.num_pages:
-            max_range = paginator.num_pages+1
-        pages = range(page-3, max_range)
+            max_range = paginator.num_pages + 1
+        pages = range(page - 3, max_range)
         pages = [pagenum for pagenum in pages if pagenum > 0]
         self.context_data['branch_list'] = branch_list
         self.context_data['bank'] = given_bank
@@ -221,7 +214,9 @@ class BranchInfoView(DetailView):
             loc = branch.location
             loc.num_times_accessed += 1
             loc.save()
-            branch.save()  # Each time this branch gets accessed, we call save() so that last_accessed field gets updated for this branch.
+            # Each time this branch gets accessed, we call save() so that
+            # last_accessed field gets updated for this branch.
+            branch.save()
         except Branch.DoesNotExist, Bank.DoesNotExist:
             raise Http404
         return branch
