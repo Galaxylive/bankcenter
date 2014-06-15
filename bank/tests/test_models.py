@@ -65,8 +65,8 @@ def create_branch():
     location = create_location()
     branch = Branch.objects.create(
         branch_name='test',
-        ifsc='12345678911',
-        micr='ABCDE1234',
+        ifsc='RNSB0000001',
+        micr='360217002',
         address='address',
         contact='1234567890',
         bank=bank,
