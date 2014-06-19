@@ -34,6 +34,9 @@ def load_database():
             latitude = 0
             longitude = 0
 
+            if not post_office_name or not pin_code or not city_name:
+                continue
+
             pin, pin_created = Zip_code.objects.get_or_create(
                 post_office_name=post_office_name,
                 pin_code=pin_code,
