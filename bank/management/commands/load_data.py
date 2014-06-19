@@ -66,6 +66,10 @@ def fill_database(file_name):
                 micr=branch_micr_code, address=branch_address,
                 contact=branch_contact, bank=branch_bank,
                 location=branch_location)
+            branch_bank.num_branches += 1
+            branch_location.num_branches += 1
+            branch_bank.save()
+            branch_location.save()
 
     except IOError:
         print "IO Error occured"
