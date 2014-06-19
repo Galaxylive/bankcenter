@@ -29,6 +29,9 @@ def load_database():
             atm_bank = get_bank_name(get_digit_or_chars(line[2]))
             atm_address = get_digit_or_chars(line[3])
 
+            if not atm_bank or not atm_city:
+                continue
+
             atm, atm_created = Atm.objects.get_or_create(
                 name_of_city=atm_city,
                 name_of_bank=atm_bank,
