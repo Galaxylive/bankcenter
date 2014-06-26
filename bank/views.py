@@ -13,9 +13,9 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         branches = Branch.objects.all()[:10]
-        banks = Bank.objects.select_related().all().order_by(
+        banks = Bank.objects.select_related().order_by(
             '-num_branches')[:21]
-        locations = Location.objects.select_related().all().\
+        locations = Location.objects.select_related().\
             order_by('-num_branches')[:21]
         context.update({'branch_list': branches, 'bank_list': banks,
                        'location_list': locations})
