@@ -23,3 +23,10 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+INSTALLED_APPS += (
+    'debug_toolbar',
+    'django_extensions'
+)
+
+STATIC_URL = '/static/'
