@@ -25,7 +25,7 @@ class AtmView(AtmBaseView):
         if not letter:
             obj = Atm.objects.order_by("bank_slug")
         else:
-            obj = Atm.objects.select_related().filter(
+            obj = Atm.objects.filter(
                 name_of_bank__startswith=letter)
         paginator = Paginator(obj, 20)  # show 20 recipes per page
         page = int(request.GET.get('page', 1))

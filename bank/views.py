@@ -13,10 +13,8 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         branches = Branch.objects.all()[:10]
-        banks = Bank.objects.select_related().order_by(
-            '-num_branches')[:21]
-        locations = Location.objects.select_related().\
-            order_by('-num_branches')[:21]
+        banks = Bank.objects.order_by('-num_branches')[:21]
+        locations = Location.objects.order_by('-num_branches')[:21]
         context.update({'branch_list': branches, 'bank_list': banks,
                        'location_list': locations})
         return context
@@ -24,7 +22,7 @@ class HomeView(TemplateView):
 
 class BanksView(ListView):
     template_name = "bank/banks.html"
-    queryset = Bank.objects.select_related().all()
+    queryset = Bank.objects.all()
     context_object_name = 'bank_list'
 
 
@@ -39,7 +37,7 @@ class CitiesView(ListView):
 
     def get_queryset(self):
         letter = self.request.GET.get('letter', 'A')
-        location_list = Location.objects.select_related().filter(
+        location_list = Location.objects.filter(
             city__startswith=letter)
         return location_list
 
@@ -138,7 +136,7 @@ class BankBranchesView(TemplateView):
         self.context_data = {}
         bank_slug = kwargs.get('bank_slug', '')
         try:
-            given_bank = Bank.objects.select_related().get(slug=bank_slug)
+            given_bank = Bank.objects.get(slug=bank_slug)
         except Bank.DoesNotExist:
             raise Http404
 
