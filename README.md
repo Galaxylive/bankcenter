@@ -1,7 +1,7 @@
 BANKCENTER
 ----------
 
-A django powered site to find the details about banks in India.
+A django powered site to find the details about banks in India. [bankcenter.in](http://bankcenter.in/)
 
 
 #### How to Get Started
